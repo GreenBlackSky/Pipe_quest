@@ -4,14 +4,15 @@ using UnityEngine;
 
 public class GameplayManager : MonoBehaviour
 {
-    public GameObject GameplayUIPanel;
+    public GameObject GameplayUI;
     public GameObject PauseMenuPanel;
     public GameObject InventoryPanel;
     public GameObject DialogPanel;
     public GameObject SkillMenuPanel;
     public GameObject MapMenuPanel;
+    public GameObject CombatUI;
 
-    public enum State { GAMEPLAY, PAUSE_MENU, INVENTORY, DIALOG_MENU, SKILL_MENU, MAP_MENU }
+    public enum State { GAMEPLAY, COMBAT, PAUSE_MENU, INVENTORY, DIALOG_MENU, SKILL_MENU, MAP_MENU }
     State _state;
 
     void SwitchState(State state)
@@ -39,7 +40,7 @@ public class GameplayManager : MonoBehaviour
         switch (_state)
         {
             case State.GAMEPLAY:
-                GameplayUIPanel.SetActive(false);
+                GameplayUI.SetActive(false);
                 break;
             case State.PAUSE_MENU:
                 PauseMenuPanel.SetActive(false);
@@ -56,6 +57,9 @@ public class GameplayManager : MonoBehaviour
             case State.DIALOG_MENU:
                 DialogPanel.SetActive(false);
                 break;
+            case State.COMBAT:
+                CombatUI.SetActive(false);
+                break;
         }
     }
 
@@ -64,7 +68,7 @@ public class GameplayManager : MonoBehaviour
         switch (_state)
         {
             case State.GAMEPLAY:
-                GameplayUIPanel.SetActive(true);
+                GameplayUI.SetActive(true);
                 break;
             case State.PAUSE_MENU:
                 PauseMenuPanel.SetActive(true);
@@ -80,6 +84,9 @@ public class GameplayManager : MonoBehaviour
                 break;
             case State.DIALOG_MENU:
                 DialogPanel.SetActive(true);
+                break;
+            case State.COMBAT:
+                CombatUI.SetActive(true);
                 break;
         }
     }
