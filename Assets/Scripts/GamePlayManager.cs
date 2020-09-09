@@ -2,34 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GamePlayManager : MonoBehaviour
+public class GameplayManager : MonoBehaviour
 {
     public GameObject GameplayUIPanel;
     public GameObject PauseMenuPanel;
     public GameObject InventoryPanel;
+    public GameObject DialogPanel;
     public GameObject SkillMenuPanel;
     public GameObject MapMenuPanel;
 
-
-    public enum State { GAMEPLAY, PAUSE_MENU, INVENTORY, SKILL_MENU, MAP_MENU }
-    State _state = State.GAMEPLAY;
+    public enum State { GAMEPLAY, PAUSE_MENU, INVENTORY, DIALOG_MENU, SKILL_MENU, MAP_MENU }
+    State _state;
 
     void SwitchState(State state)
     {
         LeaveState(_state);
         _state = state;
-        EnterState(_state);
+        EnterState();
     }
 
     void Start()
     {
-
+        SwitchState(State.GAMEPLAY);
     }
 
     void Update()
     {
-
-    }
+        if(Input.GetKeyDown(KeyCode.Tab))
+        {
+            SwitchState((State)(((int)_state + 1) % 6));
+        }
+    } 
 
     void LeaveState(State state)
     {
@@ -50,15 +53,18 @@ public class GamePlayManager : MonoBehaviour
             case State.MAP_MENU:
                 MapMenuPanel.SetActive(false);
                 break;
+            case State.DIALOG_MENU:
+                DialogPanel.SetActive(false);
+                break;
         }
     }
 
-    void EnterState(State state)
+    void EnterState()
     {
         switch (_state)
         {
             case State.GAMEPLAY:
-                GameplayUIPanel.SetActive(true); 
+                GameplayUIPanel.SetActive(true);
                 break;
             case State.PAUSE_MENU:
                 PauseMenuPanel.SetActive(true);
@@ -71,6 +77,9 @@ public class GamePlayManager : MonoBehaviour
                 break;
             case State.MAP_MENU:
                 MapMenuPanel.SetActive(true);
+                break;
+            case State.DIALOG_MENU:
+                DialogPanel.SetActive(true);
                 break;
         }
     }
