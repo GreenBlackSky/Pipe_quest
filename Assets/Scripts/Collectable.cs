@@ -2,7 +2,9 @@
 
 public class Collectable : MonoBehaviour, Interactable
 {
-    public void Interact(GameObject hero)
+    public GameObject icon;
+
+    public void interact(GameObject hero)
     {
         Destroy(gameObject);
     }

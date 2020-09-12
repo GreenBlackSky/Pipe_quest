@@ -11,11 +11,14 @@ public class GameplayManager : MonoBehaviour
     public GameObject SkillMenuPanel;
     public GameObject MapMenuPanel;
     public GameObject CombatUI;
+    public GameObject QuestsPanel;
 
-    public enum State { GAMEPLAY, COMBAT, PAUSE_MENU, INVENTORY, DIALOG_MENU, SKILL_MENU, MAP_MENU }
+    public static GameplayManager Instance { get; private set; }
+
+    public enum State { GAMEPLAY, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, QUESTS }
     State _state;
 
-    void SwitchState(State state)
+    public void SwitchState(State state)
     {
         LeaveState(_state);
         _state = state;
@@ -24,6 +27,7 @@ public class GameplayManager : MonoBehaviour
 
     void Start()
     {
+        Instance = this;
         SwitchState(State.GAMEPLAY);
     }
 
@@ -31,7 +35,14 @@ public class GameplayManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Tab))
         {
-            SwitchState((State)(((int)_state + 1) % 6));
+            if (_state == State.GAMEPLAY)
+            {
+                SwitchState(State.INVENTORY);
+            } else
+            {
+                SwitchState(State.GAMEPLAY);
+            }
+
         }
     } 
 
@@ -40,6 +51,7 @@ public class GameplayManager : MonoBehaviour
         switch (_state)
         {
             case State.GAMEPLAY:
+                Time.timeScale = 0;
                 GameplayUI.SetActive(false);
                 break;
             case State.PAUSE_MENU:
@@ -54,11 +66,14 @@ public class GameplayManager : MonoBehaviour
             case State.MAP_MENU:
                 MapMenuPanel.SetActive(false);
                 break;
-            case State.DIALOG_MENU:
+            case State.DIALOG:
                 DialogPanel.SetActive(false);
                 break;
             case State.COMBAT:
                 CombatUI.SetActive(false);
+                break;
+            case State.QUESTS:
+                QuestsPanel.SetActive(false);
                 break;
         }
     }
@@ -68,6 +83,7 @@ public class GameplayManager : MonoBehaviour
         switch (_state)
         {
             case State.GAMEPLAY:
+                Time.timeScale = 1;
                 GameplayUI.SetActive(true);
                 break;
             case State.PAUSE_MENU:
@@ -82,11 +98,14 @@ public class GameplayManager : MonoBehaviour
             case State.MAP_MENU:
                 MapMenuPanel.SetActive(true);
                 break;
-            case State.DIALOG_MENU:
+            case State.DIALOG:
                 DialogPanel.SetActive(true);
                 break;
             case State.COMBAT:
                 CombatUI.SetActive(true);
+                break;
+            case State.QUESTS:
+                QuestsPanel.SetActive(true);
                 break;
         }
     }
