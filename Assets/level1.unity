@@ -4888,6 +4888,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55eb66932e49bbb4a84e0a05b7b9c776, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speed: 4
 --- !u!114 &1202852736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6915,6 +6916,22 @@ MonoBehaviour:
   quest:
     name: Magic mushrooms
     description: Get Doctor 5 mushrooms
+--- !u!54 &1819137081
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819137075}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!224 &1865353689 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 5263613956315989521, guid: fb7771b5a54c6d84d918b2f49b20468d, type: 3}

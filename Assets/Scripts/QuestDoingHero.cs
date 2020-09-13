@@ -14,7 +14,6 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener
             return;
         }
         _activeQuests.Add(questGiver.quest);
-        Debug.Log(_activeQuests);
     }
 
     void Start()

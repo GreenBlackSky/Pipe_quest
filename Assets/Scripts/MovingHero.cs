@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class MovingHero : MonoBehaviour
 {
-    private readonly float speed = 10;
+     public float speed;
 
     void Update()
     {
