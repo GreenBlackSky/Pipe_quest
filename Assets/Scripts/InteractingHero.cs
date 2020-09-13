@@ -39,7 +39,6 @@ public class InteractingHero : MonoBehaviour
             {
                 listener.interact(_interactable);
             }
-            _interactable.gameObject.GetComponent<Interactable>().interact(gameObject);
             _interactable = null;
             interactionButton.SetActive(false);
         }

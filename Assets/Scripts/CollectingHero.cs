@@ -23,6 +23,7 @@ public class CollectingHero : MonoBehaviour, InteractionListener
             {
                 Instantiate(collectable.icon, slots[i].transform, false);
                 isFull[i] = true;
+                Destroy(interactable);
                 break;
             }
         }

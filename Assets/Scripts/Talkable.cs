@@ -6,7 +6,6 @@ using UnityEngine.UI;
 
 public class Talkable : MonoBehaviour, Interactable
 {
+    public String NPCName;
     public String[] lines;
-
-    public void interact(GameObject hero) {}
 }

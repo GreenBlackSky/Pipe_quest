@@ -29,10 +29,15 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         {
             return;
         }
+
+        Text[] textFields = DialogPanel.GetComponentsInChildren<Text>();
+        textFields[1].text = talkable.NPCName;
+
         foreach(String line in talkable.lines)
         {
             _lines.Enqueue(line);
         }
+
         nextLine();
         GameplayManager.Instance.SwitchState(State.DIALOG);
     }
