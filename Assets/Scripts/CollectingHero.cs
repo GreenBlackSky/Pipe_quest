@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.UI;
+﻿using UnityEngine;
 
 public class CollectingHero : MonoBehaviour, InteractionListener
 {
@@ -24,18 +21,10 @@ public class CollectingHero : MonoBehaviour, InteractionListener
                 Instantiate(collectable.icon, slots[i].transform, false);
                 isFull[i] = true;
                 Destroy(interactable);
+                // TODO pass info about collected item
+                EventManager.TriggerEvent("Collect");
                 break;
             }
         }
-    }
-
-    void Start()
-    {
-
-    }
-
-    void Update()
-    {
-        
     }
 }
