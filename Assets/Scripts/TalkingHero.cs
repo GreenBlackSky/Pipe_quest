@@ -38,6 +38,8 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             _lines.Enqueue(line);
         }
 
+        EventManager.TriggerEvent("Talking");
+
         nextLine();
         GameplayManager.Instance.SwitchState(State.DIALOG);
     }

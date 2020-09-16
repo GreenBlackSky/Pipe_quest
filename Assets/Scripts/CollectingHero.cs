@@ -21,7 +21,7 @@ public class CollectingHero : MonoBehaviour, InteractionListener
                 Instantiate(collectable.icon, slots[i].transform, false);
                 isFull[i] = true;
                 Destroy(interactable);
-                // TODO pass info about collected item
+                // TODO pass info about collected item (use subscriptable item)
                 EventManager.TriggerEvent("Collect");
                 break;
             }
