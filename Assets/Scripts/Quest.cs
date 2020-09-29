@@ -14,7 +14,7 @@ public class QuestNode {
     public string type;
     public int targetItem;
     public int targetAmount;
-    public int progress = 0;
+    public int progress = 0;    
 
     // TODO init more nodes (after json)
     // TODO reward

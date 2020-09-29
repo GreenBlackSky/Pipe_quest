@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameplayManager : MonoBehaviour
+public class UIManager : MonoBehaviour
 {
     public GameObject GameplayUI;
     public GameObject PauseMenuPanel;
@@ -13,7 +13,7 @@ public class GameplayManager : MonoBehaviour
     public GameObject CombatUI;
     public GameObject QuestsPanel;
 
-    public static GameplayManager Instance { get; private set; }
+    public static UIManager Instance { get; private set; }
 
     public enum State { GAMEPLAY, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, QUESTS }
     State _state;
@@ -33,16 +33,12 @@ public class GameplayManager : MonoBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Tab))
-        {
-            if (_state == State.GAMEPLAY)
-            {
-                SwitchState(State.INVENTORY);
-            } else
-            {
-                SwitchState(State.GAMEPLAY);
-            }
-
+        if(Input.GetKeyDown(KeyCode.I)) {
+            SwitchState(State.INVENTORY);
+        } else if (Input.GetKeyDown(KeyCode.J)) {
+            SwitchState(State.QUESTS);
+        } else if (Input.GetKeyDown(KeyCode.Tab)) {
+            SwitchState(State.GAMEPLAY);
         }
     } 
 

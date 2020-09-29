@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using static GameplayManager;
+using static UIManager;
 
 public class TalkingHero : MonoBehaviour, InteractionListener
 {
@@ -18,7 +17,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             DialogPanel.GetComponentInChildren<Text>().text = _lines.Dequeue();
         } else
         {
-            GameplayManager.Instance.SwitchState(State.GAMEPLAY);
+            UIManager.Instance.SwitchState(State.GAMEPLAY);
         }
     }
 
@@ -38,10 +37,10 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             _lines.Enqueue(line);
         }
 
-        EventManager.TriggerEvent("Talking");
+        EventManager.TriggerEvent("Talk");
 
         nextLine();
-        GameplayManager.Instance.SwitchState(State.DIALOG);
+        UIManager.Instance.SwitchState(State.DIALOG);
     }
 
     void Start()

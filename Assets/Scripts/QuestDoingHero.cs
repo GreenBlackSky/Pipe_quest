@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using UnityEngine.Events;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class QuestDoingHero : MonoBehaviour, InteractionListener {
     // TODO pass description and name to ui
@@ -22,6 +24,10 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
             EventManager.StartListening(quest.type, _callbacks[quest.type]);
         }
         _activeQuests[quest.type].Add(quest);
+        Text[] textFields = QuestsUI.GetComponentsInChildren<Text>();
+        textFields[0].text = questGiver.quest.name;
+        textFields[1].text = questGiver.quest.description;
+
     }
 
     void Callback(string Action) {
@@ -34,6 +40,11 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
                 if(!(quest.nextNode is null)) {
                     NewQuests.Add(quest.nextNode);
                 }
+                Text[] textFields = QuestsUI.GetComponentsInChildren<Text>();
+                textFields[0].text = "";
+                textFields[1].text = "";
+                // TODO notifications
+                // TODO completed quests
             }
         }
 
@@ -56,13 +67,18 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
         Callback("Collect");
     }
 
-    // TODO new reach event
+    void Talked() {
+        Callback("Talk");
+    }
+
     void Start() {
         _callbacks = new Dictionary<string, UnityAction>() {
-            {"Collect", Collected}
+            {"Collect", Collected},
+            {"Talk", Talked}
         };
         _activeQuests = new Dictionary<string, HashSet<QuestNode>>() {
-            {"Collect", new HashSet<QuestNode>()}
+            {"Collect", new HashSet<QuestNode>()},
+            {"Talk", new HashSet<QuestNode>()}
         };
     }
 }
