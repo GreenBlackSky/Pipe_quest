@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogNode : MonoBehaviour
+public struct Reply {
+    string text;
+    int nodeUID;
+}
+
+public class DialogNode : ScriptableObject
 {
-    int NodeUID;
-    int speakerUID;
+    public int nodeUID;
+    public int speakerUID;
     public string text;
-    public Dictionary<int, string> reples;
-    public Dictionary<int, int> children;
+    public Dictionary<int, Reply> replies;
 }
