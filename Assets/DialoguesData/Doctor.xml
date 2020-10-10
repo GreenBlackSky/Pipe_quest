@@ -1,0 +1,72 @@
+<conversation>
+    <initialLineUID>1</initialLineUID>
+    <lines>
+        <line>
+            <uid>1</uid>
+            <speakerUID>1</speakerUID>
+            <text>GREETINGS, KNIGHT!</text>
+            <replies>
+                <reply>
+                    <text>Greetings, Doctor!</text>
+                    <nextLineUID>2</nextLineUID>
+                </reply>
+                <reply>
+                    <text>Yo! Sup?</text>
+                    <nextLineUID>2</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>2</uid>
+            <speakerUID>1</speakerUID>
+            <text>COULD YOU BRING ME 3 MUSHROOMS?</text>
+            <replies>
+                <reply>
+                    <text>I would!</text>
+                    <nextLineUID>3</nextLineUID>
+                </reply>
+                <reply>
+                    <text>I don't think so.</text>
+                    <nextLineUID>4</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>3</uid>
+            <speakerUID>1</speakerUID>
+            <text>GOOD!</text>
+            <replies>
+                <reply>
+                    <text>See you soon!</text>
+                    <nextLineUID>-1</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>4</uid>
+            <speakerUID>1</speakerUID>
+            <text>WHY NOT?</text>
+            <replies>
+                <reply>
+                    <text>I don't have time!</text>
+                    <nextLineUID>5</nextLineUID>
+                </reply>
+                <reply>
+                    <text>I don't want to.</text>
+                    <nextLineUID>5</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>3</uid>
+            <speakerUID>1</speakerUID>
+            <text>SO BE ON YOUR WAY!</text>
+            <replies>            
+                <reply>
+                    <text>What a creep..</text>
+                    <nextLineUID>-1</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+    </lines>
+</conversation>
