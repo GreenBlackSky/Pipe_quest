@@ -66,6 +66,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
     public void nextLine(int nodeID)
     {
+        // TODO add events
         Debug.Log(nodeID);
         DialogueNode node = talkable.lines[nodeID];
         setSpeaker(node);

@@ -14,5 +14,3 @@ public class DialogueNode : ScriptableObject
     public string text;
     public List<Reply> replies;
 }
-
-// TODO Editor
