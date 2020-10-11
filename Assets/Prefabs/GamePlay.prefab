@@ -278,7 +278,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 8373760840843442287}
   m_Direction: 2
   m_Value: 1
-  m_Size: 0.61
+  m_Size: 0.378882
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5588,7 +5588,7 @@ GameObject:
   - component: {fileID: 2062547476774539538}
   - component: {fileID: 6916751682404576782}
   m_Layer: 5
-  m_Name: Viewport
+  m_Name: RepliesViewport
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5846,7 +5846,7 @@ RectTransform:
   m_Father: {fileID: 8262838885313367671}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 300}
@@ -5883,7 +5883,7 @@ RectTransform:
   m_Father: {fileID: 8836371871486079103}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.39}
+  m_AnchorMin: {x: 0, y: 0.621118}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 20, y: 20}

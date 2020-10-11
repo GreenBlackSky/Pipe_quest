@@ -11,6 +11,8 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     public GameObject heroIcon;
     public GameObject replyButton;
 
+    public int replyButtonDistance = 10;
+
     Text speakerNameArea;
     Image iconSlot;
     Text textPanel;
@@ -20,9 +22,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     Talkable talkable;
     int currentSpeakerUID = -1;
 
-    public void nextLine(int nodeId)
-    {
-        DialogueNode node = talkable.lines[nodeId];
+    void setSpeaker(DialogueNode node) {
         if(currentSpeakerUID != node.speakerUID) {
             // TODO allow more speakers
             if(currentSpeakerUID == heroSpeakerUID) {
@@ -33,16 +33,44 @@ public class TalkingHero : MonoBehaviour, InteractionListener
                 GameObject icon = Instantiate(talkable.icon, iconSlot.transform, false);
             }
         }
-        textPanel.text = node.text;
-        int verticalShift = 0; // TODO position reply
+    }
+
+    void setReplies(DialogueNode node) {
+        foreach(Transform child in repliesArea.transform) {
+            Destroy(child.gameObject);
+        }
+
+        int i = 0;
+        float buttonWidth = replyButton.GetComponent<RectTransform>().sizeDelta.y;
         foreach(Reply reply in node.replies) {
             GameObject replayButtonInstance = Instantiate(replyButton, repliesArea.transform, false);
+            Vector3 position = replayButtonInstance.GetComponent<Transform>().localPosition;
+            replayButtonInstance.GetComponent<Transform>().localPosition = new Vector3(
+                position.x, 
+                position.y - i * (buttonWidth + replyButtonDistance),
+                position.z
+            );
             replayButtonInstance.GetComponentInChildren<Text>().text = reply.text;
-            // replayButtonInstance.GetComponent<Button>().onClick.AddListener(nextLine); 
-            // TODO callback on reply
-            replayButtonInstance.GetComponent<Transform>().localPosition = new Vector3(0, verticalShift, 0);
-            verticalShift += 50;
+            if(reply.nextLineUID == -1) {
+                replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
+                    UIManager.Instance.SwitchState(State.GAMEPLAY);
+                }); 
+            } else {
+                replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
+                    nextLine(reply.nextLineUID);
+                }); 
+            }
+            i++;
         }
+    }
+
+    public void nextLine(int nodeID)
+    {
+        Debug.Log(nodeID);
+        DialogueNode node = talkable.lines[nodeID];
+        setSpeaker(node);
+        textPanel.text = node.text;
+        setReplies(node);
     }
 
     public void interact(GameObject interactable)
