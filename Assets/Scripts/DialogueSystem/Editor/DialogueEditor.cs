@@ -3,7 +3,6 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
-    // TODO drag connections
     // TODO Lines Nodes
     // TODO serialize and deserialize
 
@@ -54,6 +53,7 @@ public class DialogueEditor : EditorWindow {
 
         DrawNodes();
         DrawConnections();
+        DrawConnectionLine(Event.current);
         ProcessNodeEvents(Event.current);
         ProcessEvents(Event.current);
         if (GUI.changed) {
@@ -71,9 +71,38 @@ public class DialogueEditor : EditorWindow {
  
     private void DrawConnections() {
         if (connections != null) {
-            for (int i = 0; i < connections.Count; i++) {
-                connections[i].Draw();
+            foreach (Connection connection in connections) {
+                connection.Draw();
             } 
+        }
+    }
+
+    private void DrawConnectionLine(Event e) {
+        if (selectedInPoint != null && selectedOutPoint == null) {
+            Handles.DrawBezier(
+                selectedInPoint.rect.center,
+                e.mousePosition,
+                selectedInPoint.rect.center + Vector2.left * 50f,
+                e.mousePosition - Vector2.left * 50f,
+                Color.white,
+                null,
+                2f
+            );
+            GUI.changed = true;
+        }
+ 
+        if (selectedOutPoint != null && selectedInPoint == null) {
+            Handles.DrawBezier(
+                selectedOutPoint.rect.center,
+                e.mousePosition,
+                selectedOutPoint.rect.center - Vector2.left * 50f,
+                e.mousePosition + Vector2.left * 50f,
+                Color.white,
+                null,
+                2f
+            );
+ 
+            GUI.changed = true;
         }
     }
 
