@@ -15,13 +15,22 @@ public class Node
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
     public GUIStyle selectedNodeStyle;
+
+    public Action<Node> OnRemoveNode;
  
-    public Node(Vector2 position, float width, float height, GUIStyle nodeStyle, GUIStyle selectedStyle, GUIStyle inPointStyle, GUIStyle outPointStyle, Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint) {   rect = new Rect(position.x, position.y, width, height);
+    public Node(
+        Vector2 position, float width, float height, 
+        GUIStyle nodeStyle, GUIStyle selectedStyle, 
+        GUIStyle inPointStyle, GUIStyle outPointStyle, 
+        Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode
+    ) {   
+        rect = new Rect(position.x, position.y, width, height);
         style = nodeStyle;
         inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, OnClickInPoint);
         outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
+        OnRemoveNode = OnClickRemoveNode;
     }
  
     public void Drag(Vector2 delta) {
@@ -49,6 +58,10 @@ public class Node
                         style = defaultNodeStyle;
                     }
                 }
+                if (e.button == 1 && isSelected && rect.Contains(e.mousePosition)) {
+                    ProcessContextMenu();
+                    e.Use();
+                }
                 break;
  
             case EventType.MouseUp:
@@ -64,5 +77,17 @@ public class Node
                 break;
         }
         return false;
+    }
+        
+    private void ProcessContextMenu() {
+        GenericMenu genericMenu = new GenericMenu();
+        genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
+        genericMenu.ShowAsContext();
+    }
+ 
+    private void OnClickRemoveNode() {
+        if (OnRemoveNode != null) {
+            OnRemoveNode(this);
+        }
     }
 }
