@@ -24,20 +24,17 @@ public class Node
         selectedNodeStyle = selectedStyle;
     }
  
-    public void Drag(Vector2 delta)
-    {
+    public void Drag(Vector2 delta) {
         rect.position += delta;
     }
  
-    public void Draw()
-    {
+    public void Draw() {
         inPoint.Draw();
         outPoint.Draw();
         GUI.Box(rect, title, style);
     }
  
-    public bool ProcessEvents(Event e)
-    {
+    public bool ProcessEvents(Event e) {
         switch (e.type) {
             case EventType.MouseDown:
                 if (e.button == 0) {

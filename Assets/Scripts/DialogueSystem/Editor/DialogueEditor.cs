@@ -3,6 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
+    // TODO remove Nodes
+    // TODO drag connections
+    // TODO Lines Nodes
+    // TODO serialize and deserialize
 
     private List<Node> nodes;
     private List<Connection> connections;
@@ -69,8 +73,7 @@ public class DialogueEditor : EditorWindow {
     }
 
     private void ProcessEvents(Event e) {
-        switch (e.type)
-        {
+        switch (e.type) {
             case EventType.MouseDown:
                 if (e.button == 1) {
                     ProcessContextMenu(e.mousePosition);

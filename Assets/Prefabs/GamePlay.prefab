@@ -27,7 +27,7 @@ RectTransform:
   m_GameObject: {fileID: 1236946355522052204}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 3771821755705757464}
   - {fileID: 3771821757029172352}
@@ -38,8 +38,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 881.19995, y: 417.20026}
+  m_AnchoredPosition: {x: 0, y: -100}
+  m_SizeDelta: {x: 800, y: 400}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2993307312278331112
 CanvasRenderer:
@@ -2129,6 +2129,7 @@ MonoBehaviour:
   heroSpeakerName: Knight
   heroIcon: {fileID: 2670213973085029324}
   replyButton: {fileID: 1761771813440359819, guid: b5d991517427f024da8c6c147e02ace5, type: 3}
+  replyButtonDistance: 10
 --- !u!114 &3771821756157678272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5848,7 +5849,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: -0.000015258789}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &6702765583314571412
