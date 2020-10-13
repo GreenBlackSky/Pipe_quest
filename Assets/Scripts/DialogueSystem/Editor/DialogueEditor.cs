@@ -3,8 +3,10 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
-    // TODO Lines Nodes
     // TODO serialize and deserialize
+    // TODO Duplicate connections
+    // TODO undo connection by right clicks
+    // TODO Lines Nodes
 
     private List<Node> nodes;
     private List<Connection> connections;
@@ -71,7 +73,7 @@ public class DialogueEditor : EditorWindow {
  
     private void DrawConnections() {
         if (connections != null) {
-            foreach (Connection connection in connections) {
+            foreach (Connection connection in connections.ToArray()) {
                 connection.Draw();
             } 
         }

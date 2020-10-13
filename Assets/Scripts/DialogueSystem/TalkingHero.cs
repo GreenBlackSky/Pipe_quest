@@ -39,10 +39,10 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         foreach(Transform child in repliesArea.transform) {
             Destroy(child.gameObject);
         }
-
+        // TODO restrict number of replies
         int i = 0;
         float buttonWidth = replyButton.GetComponent<RectTransform>().sizeDelta.y;
-        foreach(Reply reply in node.replies) {
+        foreach(DialogueReply reply in node.replies) {
             GameObject replayButtonInstance = Instantiate(replyButton, repliesArea.transform, false);
             Vector3 position = replayButtonInstance.GetComponent<Transform>().localPosition;
             replayButtonInstance.GetComponent<Transform>().localPosition = new Vector3(
@@ -67,7 +67,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     public void nextLine(int nodeID)
     {
         // TODO add events
-        Debug.Log(nodeID);
         DialogueNode node = talkable.lines[nodeID];
         setSpeaker(node);
         textPanel.text = node.text;

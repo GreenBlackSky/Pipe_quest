@@ -1,16 +1,29 @@
-﻿using System.Collections;
+﻿using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct Reply {
+
+[XmlRoot("reply")]
+public class DialogueReply : ScriptableObject {
+    [XmlElement("text")]
     public string text;
+
+    [XmlElement("nextLineUID")]
     public int nextLineUID;
 }
 
-public class DialogueNode : ScriptableObject
-{
+[XmlRoot("line")]
+public class DialogueNode : ScriptableObject {
+    [XmlElement("uid")]
     public int lineUID;
+
+    [XmlElement("speakerUID")]
     public int speakerUID;
+
+    [XmlElement("text")]
     public string text;
-    public List<Reply> replies;
+
+    [XmlArray("replies")]
+    [XmlArrayItem("reply")]
+    public List<DialogueReply> replies;
 }
