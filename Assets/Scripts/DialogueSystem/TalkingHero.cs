@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using static UIManager;
 
 public class TalkingHero : MonoBehaviour, InteractionListener
 {
-    public int heroSpeakerUID;
     public string heroSpeakerName;
     public GameObject heroIcon;
     public GameObject replyButton;
@@ -20,12 +17,12 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     
     
     Talkable talkable;
-    int currentSpeakerUID = -1;
+    string currentSpeakerName = "";
 
     void setSpeaker(DialogueNode node) {
-        if(currentSpeakerUID != node.speakerUID) {
+        if(currentSpeakerName != node.speakerName) {
             // TODO allow more speakers
-            if(currentSpeakerUID == heroSpeakerUID) {
+            if(currentSpeakerName == heroSpeakerName) {
                 speakerNameArea.text = heroSpeakerName;
                 GameObject icon = Instantiate(heroIcon, iconSlot.transform, false);
             } else {
@@ -39,7 +36,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         foreach(Transform child in repliesArea.transform) {
             Destroy(child.gameObject);
         }
-        // TODO restrict number of replies
+        // FIXME resize replies area
         int i = 0;
         float buttonWidth = replyButton.GetComponent<RectTransform>().sizeDelta.y;
         foreach(DialogueReply reply in node.replies) {

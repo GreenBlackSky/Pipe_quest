@@ -4,7 +4,7 @@ using UnityEngine;
 
 
 [XmlRoot("reply")]
-public class DialogueReply : ScriptableObject {
+public class DialogueReply {
     [XmlElement("text")]
     public string text;
 
@@ -13,12 +13,12 @@ public class DialogueReply : ScriptableObject {
 }
 
 [XmlRoot("line")]
-public class DialogueNode : ScriptableObject {
+public class DialogueNode {
     [XmlElement("uid")]
     public int lineUID;
 
-    [XmlElement("speakerUID")]
-    public int speakerUID;
+    [XmlElement("speakerName")]
+    public string speakerName;
 
     [XmlElement("text")]
     public string text;

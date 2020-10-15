@@ -3,10 +3,12 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
-    // TODO serialize and deserialize
-    // TODO Duplicate connections
+    // FIXME Duplicate connections
     // TODO undo connection by right clicks
-    // TODO Lines Nodes
+    // TODO add connection button
+    // TODO text inputs
+    // TODO speaker name
+    // TODO serialize and deserialize
 
     private List<Node> nodes;
     private List<Connection> connections;

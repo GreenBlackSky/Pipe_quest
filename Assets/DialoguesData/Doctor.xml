@@ -1,39 +1,39 @@
 <conversation>
-    <initialLineUID>1</initialLineUID>
+    <initialLineUID>0</initialLineUID>
     <lines>
         <line>
-            <uid>1</uid>
-            <speakerUID>1</speakerUID>
+            <uid>0</uid>
+            <speakerUID>Doctor</speakerUID>
             <text>GREETINGS, KNIGHT!</text>
             <replies>
                 <reply>
                     <text>Greetings, Doctor!</text>
-                    <nextLineUID>2</nextLineUID>
+                    <nextLineUID>1</nextLineUID>
                 </reply>
                 <reply>
                     <text>Yo! Sup?</text>
+                    <nextLineUID>1</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>1</uid>
+            <speakerUID>Doctor</speakerUID>
+            <text>COULD YOU BRING ME 3 MUSHROOMS?</text>
+            <replies>
+                <reply>
+                    <text>I would!</text>
                     <nextLineUID>2</nextLineUID>
+                </reply>
+                <reply>
+                    <text>I don't think so.</text>
+                    <nextLineUID>3</nextLineUID>
                 </reply>
             </replies>
         </line>
         <line>
             <uid>2</uid>
-            <speakerUID>1</speakerUID>
-            <text>COULD YOU BRING ME 3 MUSHROOMS?</text>
-            <replies>
-                <reply>
-                    <text>I would!</text>
-                    <nextLineUID>3</nextLineUID>
-                </reply>
-                <reply>
-                    <text>I don't think so.</text>
-                    <nextLineUID>4</nextLineUID>
-                </reply>
-            </replies>
-        </line>
-        <line>
-            <uid>3</uid>
-            <speakerUID>1</speakerUID>
+            <speakerUID>Doctor</speakerUID>
             <text>GOOD!</text>
             <replies>
                 <reply>
@@ -43,23 +43,23 @@
             </replies>
         </line>
         <line>
-            <uid>4</uid>
-            <speakerUID>1</speakerUID>
+            <uid>3</uid>
+            <speakerUID>Doctor</speakerUID>
             <text>WHY NOT?</text>
             <replies>
                 <reply>
                     <text>I don't have time!</text>
-                    <nextLineUID>5</nextLineUID>
+                    <nextLineUID>4</nextLineUID>
                 </reply>
                 <reply>
                     <text>I don't want to.</text>
-                    <nextLineUID>5</nextLineUID>
+                    <nextLineUID>4</nextLineUID>
                 </reply>
             </replies>
         </line>
         <line>
-            <uid>5</uid>
-            <speakerUID>1</speakerUID>
+            <uid>4</uid>
+            <speakerUID>Doctor</speakerUID>
             <text>SO BE ON YOUR WAY!</text>
             <replies>            
                 <reply>
