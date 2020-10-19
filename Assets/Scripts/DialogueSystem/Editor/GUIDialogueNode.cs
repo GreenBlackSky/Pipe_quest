@@ -7,13 +7,18 @@ public class GUIDialogueNode
 {
     public Rect rect;
     public Rect textRect;
+    public float yPadding;
     public float heightStep;
     public string title;
     public bool isDragged;
     public bool isSelected;
  
     public ConnectionPoint inPoint;
+    // TODO unite all this into a class
     public List<ConnectionPoint> outPoints;
+    public List<Rect> replyRects;
+    // TODO use texts
+    public List<string> replyTexts;
 
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
@@ -39,20 +44,30 @@ public class GUIDialogueNode
         );
 
         heightStep = height;
+        this.yPadding = yPadding;
+
         style = nodeStyle;
         this.outPointStyle = outPointStyle;
-        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, 0, OnClickInPoint);
-        outPoints = new List<ConnectionPoint>();
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
+
+        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, 0, 0, OnClickInPoint);
+        outPoints = new List<ConnectionPoint>();
+        replyRects = new List<Rect>();
+        replyTexts = new List<string>();
+
         OnRemoveNode = OnClickRemoveNode;
-        this.OnClickOutPoint = OnClickOutPoint;
-        
+        this.OnClickOutPoint = OnClickOutPoint;        
     }
  
     public void Drag(Vector2 delta) {
         rect.position += delta;
         textRect.position += delta;
+        for(int i = 0; i < replyRects.Count; i++) {
+            Rect rect = replyRects[i];
+            rect.position += delta;
+            replyRects[i] = rect;
+        }
     }
  
     public void Draw() {
@@ -61,6 +76,9 @@ public class GUIDialogueNode
             outPoint.Draw();
         }
         GUI.Box(rect, title, style);
+        foreach(Rect rect in replyRects) {
+            EditorGUI.TextArea(rect, "");
+        }
         EditorGUI.TextArea(textRect, "");
     }
  
@@ -114,9 +132,14 @@ public class GUIDialogueNode
             ConnectionPointType.Out, 
             outPointStyle, 
             outPoints.Count,
+            yPadding,
             OnClickOutPoint
         );
         outPoints.Add(outPoint);
+
+        Rect replyRect = new Rect(textRect);
+        replyRect.y += replyRects.Count * heightStep + yPadding * 2;
+        replyRects.Add(replyRect);
     }
 
     private void OnClickRemoveNode() {

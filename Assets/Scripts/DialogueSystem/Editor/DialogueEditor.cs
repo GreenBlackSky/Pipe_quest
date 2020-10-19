@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
-    // TODO text inputs for replies
+    // TODO resize text inputs and node itself
     // TODO speaker name
     // TODO serialize and deserialize
 

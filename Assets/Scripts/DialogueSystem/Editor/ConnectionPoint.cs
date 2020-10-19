@@ -17,13 +17,15 @@ public class ConnectionPoint {
         ConnectionPointType type, 
         GUIStyle style,
         float verticalPos,
+        float yPadding,
         Action<ConnectionPoint> OnClickConnectionPoint
     ) {
         this.node = node;
         this.type = type;
         this.style = style;
+        // TODO place point in master
         rect = new Rect(0, 0, 10f, 20f);
-        this.verticalPos = (node.rect.height - rect.height + verticalPos * node.heightStep) * 0.5f;
+        this.verticalPos = (node.rect.height - rect.height + verticalPos * node.heightStep + yPadding) * 0.5f;
         this.OnClickConnectionPoint = OnClickConnectionPoint;
     }
  
