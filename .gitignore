@@ -1,36 +1,3 @@
-
-Skip to content
-Pull requests
-Issues
-Marketplace
-Explore
-@GreenBlackSky
-GreenBlackSky /
-Pipe_quest
-
-1
-0
-
-    0
-
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-
-    Settings
-
-Pipe_quest/.gitignore
-@GreenBlackSky
-GreenBlackSky Initial commit
-Latest commit 4603c27 now
-History
-1 contributor
-60 lines (49 sloc) 1020 Bytes
 # This .gitignore file should be placed at the root of your Unity project directory
 #
 # Get latest from https://github.com/github/gitignore/blob/master/Unity.gitignore

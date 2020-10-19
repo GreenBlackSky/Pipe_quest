@@ -10,7 +10,7 @@ public class DialogueEditor : EditorWindow {
     // TODO speaker name
     // TODO serialize and deserialize
 
-    private List<Node> nodes;
+    private List<GUIDialogueNode> nodes;
     private List<Connection> connections;
     
     private ConnectionPoint selectedInPoint;
@@ -67,7 +67,7 @@ public class DialogueEditor : EditorWindow {
     }
     private void DrawNodes() {
         if (nodes != null) {
-            foreach (Node node in nodes) {
+            foreach (GUIDialogueNode node in nodes) {
                 node.Draw();
             }
         }
@@ -177,7 +177,7 @@ public class DialogueEditor : EditorWindow {
         drag = delta;
  
         if (nodes != null) {
-            foreach (Node node in nodes) {
+            foreach (GUIDialogueNode node in nodes) {
                 node.Drag(delta);
             }
         }
@@ -187,10 +187,10 @@ public class DialogueEditor : EditorWindow {
 
     private void OnClickAddNode(Vector2 mousePosition) {
         if (nodes == null) {
-            nodes = new List<Node>();
+            nodes = new List<GUIDialogueNode>();
         }
  
-        nodes.Add(new Node(
+        nodes.Add(new GUIDialogueNode(
             mousePosition, 200, 50, 
             nodeStyle, selectedNodeStyle, 
             inPointStyle, outPointStyle, 
@@ -224,11 +224,12 @@ public class DialogueEditor : EditorWindow {
         }
     }
 
-    private void OnClickRemoveNode(Node node) {
+    private void OnClickRemoveNode(GUIDialogueNode node) {
         if (connections != null) {
             List<Connection> connectionsToRemove = new List<Connection>();
             foreach (Connection connection in connections) {
-                if (connection.inPoint == node.inPoint || connection.outPoint == node.outPoint) {
+                // if (connection.inPoint == node.inPoint || connection.outPoint == node.outPoint) {
+                if (connection.inPoint == node.inPoint || node.outPoints.Contains(connection.outPoint)) {
                     connectionsToRemove.Add(connection);
                 }
             }

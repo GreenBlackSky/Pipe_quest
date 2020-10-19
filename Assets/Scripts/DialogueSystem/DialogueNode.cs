@@ -10,6 +10,11 @@ public class DialogueReply {
 
     [XmlElement("nextLineUID")]
     public int nextLineUID;
+
+    public DialogueReply() {
+        text = "";
+        nextLineUID = -1;
+    }
 }
 
 [XmlRoot("line")]
@@ -26,4 +31,10 @@ public class DialogueNode {
     [XmlArray("replies")]
     [XmlArrayItem("reply")]
     public List<DialogueReply> replies;
+
+    public DialogueReply AddReply() {
+        DialogueReply reply = new DialogueReply();
+        replies.Add(reply);
+        return reply;
+    }
 }

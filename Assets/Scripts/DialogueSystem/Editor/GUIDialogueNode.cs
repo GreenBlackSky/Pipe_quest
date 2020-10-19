@@ -1,36 +1,46 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
  
-public class Node
+public class GUIDialogueNode
 {
     public Rect rect;
+    public float heightStep;
     public string title;
     public bool isDragged;
     public bool isSelected;
  
     public ConnectionPoint inPoint;
-    public ConnectionPoint outPoint;
+    // public ConnectionPoint outPoint;
+    public List<ConnectionPoint> outPoints;
 
     public GUIStyle style;
     public GUIStyle defaultNodeStyle;
     public GUIStyle selectedNodeStyle;
 
-    public Action<Node> OnRemoveNode;
- 
-    public Node(
+    public GUIStyle outPointStyle;
+
+    public Action<GUIDialogueNode> OnRemoveNode;
+    public Action<ConnectionPoint> OnClickOutPoint;
+
+    public GUIDialogueNode(
         Vector2 position, float width, float height, 
         GUIStyle nodeStyle, GUIStyle selectedStyle, 
         GUIStyle inPointStyle, GUIStyle outPointStyle, 
-        Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<Node> OnClickRemoveNode
+        Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<GUIDialogueNode> OnClickRemoveNode
     ) {   
         rect = new Rect(position.x, position.y, width, height);
+        heightStep = height;
         style = nodeStyle;
-        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, OnClickInPoint);
-        outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
+        this.outPointStyle = outPointStyle;
+        inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, 0, OnClickInPoint);
+        // outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
+        outPoints = new List<ConnectionPoint>();
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         OnRemoveNode = OnClickRemoveNode;
+        this.OnClickOutPoint = OnClickOutPoint;
     }
  
     public void Drag(Vector2 delta) {
@@ -39,7 +49,10 @@ public class Node
  
     public void Draw() {
         inPoint.Draw();
-        outPoint.Draw();
+        // outPoint.Draw();
+        foreach(ConnectionPoint outPoint in outPoints) {
+            outPoint.Draw();
+        }
         GUI.Box(rect, title, style);
     }
  
@@ -82,9 +95,22 @@ public class Node
     private void ProcessContextMenu() {
         GenericMenu genericMenu = new GenericMenu();
         genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
+        genericMenu.AddItem(new GUIContent("Add reply"), false, AddReply);
         genericMenu.ShowAsContext();
     }
  
+    private void AddReply() {
+        rect.height += heightStep;
+        ConnectionPoint outPoint = new ConnectionPoint(
+            this, 
+            ConnectionPointType.Out, 
+            outPointStyle, 
+            outPoints.Count,
+            OnClickOutPoint
+        );
+        outPoints.Add(outPoint);
+    }
+
     private void OnClickRemoveNode() {
         if (OnRemoveNode != null) {
             OnRemoveNode(this);

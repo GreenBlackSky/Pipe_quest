@@ -6,15 +6,23 @@ public enum ConnectionPointType { In, Out }
 public class ConnectionPoint {
 
     public Rect rect;
+    public float verticalPos;
     public ConnectionPointType type;
-    public Node node;
+    public GUIDialogueNode node;
     public GUIStyle style;
     public Action<ConnectionPoint> OnClickConnectionPoint;
     
-    public ConnectionPoint(Node node, ConnectionPointType type, GUIStyle style, Action<ConnectionPoint> OnClickConnectionPoint) {
+    public ConnectionPoint(
+        GUIDialogueNode node, 
+        ConnectionPointType type, 
+        GUIStyle style,
+        float verticalPos,
+        Action<ConnectionPoint> OnClickConnectionPoint
+    ) {
         this.node = node;
         this.type = type;
         this.style = style;
+        this.verticalPos = verticalPos;
         this.OnClickConnectionPoint = OnClickConnectionPoint;
         rect = new Rect(0, 0, 10f, 20f);
     }
@@ -29,6 +37,7 @@ public class ConnectionPoint {
  
             case ConnectionPointType.Out:
                 rect.x = node.rect.x + node.rect.width - 8f;
+                rect.y += verticalPos * node.heightStep;
                 break;
         }
         
