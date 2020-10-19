@@ -6,13 +6,13 @@ using UnityEngine;
 public class GUIDialogueNode
 {
     public Rect rect;
+    public Rect textRect;
     public float heightStep;
     public string title;
     public bool isDragged;
     public bool isSelected;
  
     public ConnectionPoint inPoint;
-    // public ConnectionPoint outPoint;
     public List<ConnectionPoint> outPoints;
 
     public GUIStyle style;
@@ -25,35 +25,43 @@ public class GUIDialogueNode
     public Action<ConnectionPoint> OnClickOutPoint;
 
     public GUIDialogueNode(
-        Vector2 position, float width, float height, 
+        Vector2 position, float width, float height, float xPadding, float yPadding,
         GUIStyle nodeStyle, GUIStyle selectedStyle, 
         GUIStyle inPointStyle, GUIStyle outPointStyle, 
         Action<ConnectionPoint> OnClickInPoint, Action<ConnectionPoint> OnClickOutPoint, Action<GUIDialogueNode> OnClickRemoveNode
     ) {   
         rect = new Rect(position.x, position.y, width, height);
+        textRect = new Rect(
+            position.x + xPadding,
+            position.y + yPadding,
+            width - 2 * xPadding,
+            height - 2 * yPadding
+        );
+
         heightStep = height;
         style = nodeStyle;
         this.outPointStyle = outPointStyle;
         inPoint = new ConnectionPoint(this, ConnectionPointType.In, inPointStyle, 0, OnClickInPoint);
-        // outPoint = new ConnectionPoint(this, ConnectionPointType.Out, outPointStyle, OnClickOutPoint);
         outPoints = new List<ConnectionPoint>();
         defaultNodeStyle = nodeStyle;
         selectedNodeStyle = selectedStyle;
         OnRemoveNode = OnClickRemoveNode;
         this.OnClickOutPoint = OnClickOutPoint;
+        
     }
  
     public void Drag(Vector2 delta) {
         rect.position += delta;
+        textRect.position += delta;
     }
  
     public void Draw() {
         inPoint.Draw();
-        // outPoint.Draw();
         foreach(ConnectionPoint outPoint in outPoints) {
             outPoint.Draw();
         }
         GUI.Box(rect, title, style);
+        EditorGUI.TextArea(textRect, "");
     }
  
     public bool ProcessEvents(Event e) {

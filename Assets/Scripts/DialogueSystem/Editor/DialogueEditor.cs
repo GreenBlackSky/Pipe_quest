@@ -3,10 +3,7 @@ using UnityEngine;
 using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
-    // FIXME Duplicate connections
-    // TODO undo connection by right clicks
-    // TODO add connection button
-    // TODO text inputs
+    // TODO text inputs for replies
     // TODO speaker name
     // TODO serialize and deserialize
 
@@ -65,6 +62,7 @@ public class DialogueEditor : EditorWindow {
         }
         
     }
+
     private void DrawNodes() {
         if (nodes != null) {
             foreach (GUIDialogueNode node in nodes) {
@@ -143,7 +141,11 @@ public class DialogueEditor : EditorWindow {
         switch (e.type) {
             case EventType.MouseDown:
                 if (e.button == 1) {
-                    ProcessContextMenu(e.mousePosition);
+                    if (selectedInPoint != null || selectedOutPoint != null) {
+                        ClearConnectionSelection();
+                    } else {
+                        ProcessContextMenu(e.mousePosition);
+                    }
                 }
                 break;
 
@@ -191,7 +193,7 @@ public class DialogueEditor : EditorWindow {
         }
  
         nodes.Add(new GUIDialogueNode(
-            mousePosition, 200, 50, 
+            mousePosition, 200, 50, 10, 15,
             nodeStyle, selectedNodeStyle, 
             inPointStyle, outPointStyle, 
             OnClickInPoint, OnClickOutPoint, OnClickRemoveNode
@@ -227,8 +229,8 @@ public class DialogueEditor : EditorWindow {
     private void OnClickRemoveNode(GUIDialogueNode node) {
         if (connections != null) {
             List<Connection> connectionsToRemove = new List<Connection>();
+            // TODO optimize removing connections
             foreach (Connection connection in connections) {
-                // if (connection.inPoint == node.inPoint || connection.outPoint == node.outPoint) {
                 if (connection.inPoint == node.inPoint || node.outPoints.Contains(connection.outPoint)) {
                     connectionsToRemove.Add(connection);
                 }
@@ -249,7 +251,13 @@ public class DialogueEditor : EditorWindow {
         if (connections == null) {
             connections = new List<Connection>();
         }
- 
+        // TODO optimize checking connections
+        foreach(Connection connection in connections) {
+            if (connection.outPoint == selectedOutPoint) {
+                ClearConnectionSelection();
+                return;
+            }
+        }
         connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
     }
  
