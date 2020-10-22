@@ -22,8 +22,8 @@ public class DialogueNode {
     [XmlElement("uid")]
     public int lineUID;
 
-    [XmlElement("speakerName")]
-    public string speakerName;
+    [XmlElement("speakerUID")]
+    public string speakerUID;
 
     [XmlElement("text")]
     public string text;

@@ -1,0 +1,17 @@
+<conversation>
+    <initialLineUID>0</initialLineUID>
+    <fullName>Professor</fullName>
+    <lines>
+        <line>
+            <uid>0</uid>
+            <speakerUID>Priest</speakerUID>
+            <text>GO FUN YOURSEKF!</text>
+            <replies>            
+                <reply>
+                    <text>Ok..</text>
+                    <nextLineUID>-1</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+    </lines>
+</conversation>

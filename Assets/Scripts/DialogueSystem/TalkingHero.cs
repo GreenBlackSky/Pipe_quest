@@ -4,7 +4,6 @@ using static UIManager;
 
 public class TalkingHero : MonoBehaviour, InteractionListener
 {
-    public string heroSpeakerName;
     public GameObject heroIcon;
     public GameObject replyButton;
 
@@ -20,15 +19,12 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     string currentSpeakerName = "";
 
     void setSpeaker(DialogueNode node) {
-        if(currentSpeakerName != node.speakerName) {
-            // TODO allow more speakers
-            if(currentSpeakerName == heroSpeakerName) {
-                speakerNameArea.text = heroSpeakerName;
-                GameObject icon = Instantiate(heroIcon, iconSlot.transform, false);
-            } else {
-                speakerNameArea .text = talkable.speakerName;
-                GameObject icon = Instantiate(talkable.icon, iconSlot.transform, false);
-            }
+        if(currentSpeakerName != node.speakerUID) {
+            Talkable speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
+            Debug.Log(speaker.speakerFullName);
+            speakerNameArea.text = talkable.speakerFullName;
+            GameObject icon = Instantiate(speaker.icon, iconSlot.transform, false);
+            currentSpeakerName = node.speakerUID;
         }
     }
 
@@ -36,7 +32,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         foreach(Transform child in repliesArea.transform) {
             Destroy(child.gameObject);
         }
-        // FIXME resize replies area
         int i = 0;
         float buttonWidth = replyButton.GetComponent<RectTransform>().sizeDelta.y;
         foreach(DialogueReply reply in node.replies) {
@@ -63,9 +58,11 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
     public void nextLine(int nodeID)
     {
-        // TODO add events
+        // TODO events
         // TODO phasing
         // TODO scrolling
+        // TODO Sounds
+        // TODO resize replies area
         DialogueNode node = talkable.lines[nodeID];
         setSpeaker(node);
         textPanel.text = node.text;

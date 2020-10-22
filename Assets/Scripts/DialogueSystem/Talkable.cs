@@ -6,19 +6,21 @@ using UnityEngine;
 
 public class Talkable : MonoBehaviour, Interactable
 {
-    public string speakerName;
+    public string speakerUID;
+    public string speakerFullName;
     public GameObject icon;
 
     public DialogueNode[] lines;
     public int initialNodeUID;
 
     void Start() {
-        string path = "Assets/DialoguesData/" + speakerName + ".xml";        
+        string path = "Assets/DialoguesData/" + speakerUID + ".xml";        
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
         XmlNode root = doc.DocumentElement.SelectSingleNode("/conversation");
 
         initialNodeUID = Int32.Parse(root.SelectSingleNode("initialLineUID").InnerText);
+        speakerFullName = root.SelectSingleNode("fullName").InnerText;
 
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
         XmlNode xmlLines = root.SelectSingleNode("lines");

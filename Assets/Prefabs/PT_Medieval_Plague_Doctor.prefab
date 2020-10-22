@@ -917,7 +917,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ceb12e4d717d8d14db216cccd8385249, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lines: []
+  speakerUID: Doctor
+  speakerFullName: Professor
+  icon: {fileID: 0}
+  initialNodeUID: 0
 --- !u!136 &8100672913081009616
 CapsuleCollider:
   m_ObjectHideFlags: 0

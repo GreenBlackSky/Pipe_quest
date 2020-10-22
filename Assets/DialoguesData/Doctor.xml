@@ -1,5 +1,6 @@
 <conversation>
     <initialLineUID>0</initialLineUID>
+    <fullName>Professor</fullName>
     <lines>
         <line>
             <uid>0</uid>
@@ -53,7 +54,7 @@
                 </reply>
                 <reply>
                     <text>I don't want to.</text>
-                    <nextLineUID>4</nextLineUID>
+                    <nextLineUID>5</nextLineUID>
                 </reply>
             </replies>
         </line>
@@ -64,6 +65,17 @@
             <replies>            
                 <reply>
                     <text>What a creep..</text>
+                    <nextLineUID>-1</nextLineUID>
+                </reply>
+            </replies>
+        </line>
+        <line>
+            <uid>5</uid>
+            <speakerUID>Priest</speakerUID>
+            <text>WHAT A RUDE YOUNG MAN!</text>
+            <replies>            
+                <reply>
+                    <text>Whatev..</text>
                     <nextLineUID>-1</nextLineUID>
                 </reply>
             </replies>
