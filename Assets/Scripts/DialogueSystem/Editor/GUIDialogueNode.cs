@@ -2,14 +2,33 @@
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
- 
-public class GUIDialogueNode
-{
+
+// TODO inherit Node and reply
+public class GUIDialogueReply {
+    public ConnectionPoint outPoint;
+    public Rect rect;
+    public string text;
+    public int replyID;
+
+    public GUIDialogueReply(GUIDialogueNode parent, int verticalPos, int replyID) {
+        rect = new Rect(
+            parent.rect.x + GUIDialogueNode.padding,
+            parent.rect.y + GUIDialogueNode.mainBlockHeight + (GUIDialogueNode.textHeight + GUIDialogueNode.padding) * verticalPos,
+            GUIDialogueNode.textWidth,
+            GUIDialogueNode.textHeight
+        );
+        outPoint = new ConnectionPoint(parent, ConnectionPointType.Out, verticalPos);
+        text = "";
+        this.replyID = replyID;
+    }
+}
+
+public class GUIDialogueNode {
     private static GUIStyle defaultNodeStyle;
     private static GUIStyle selectedNodeStyle;
 
-    private static float nameHeight;
-    private static float textWidth;
+    public static float nameHeight;
+    public static float textWidth;
     public static float textHeight;
     public static float padding;
     public static float mainBlockHeight;
@@ -23,16 +42,15 @@ public class GUIDialogueNode
 
     public bool isDragged;
     public bool isSelected;
+    public int selectedReplyText;
+
+    public int lineID;
+    public string speakerUID;
+    public string text;
+    public List<GUIDialogueReply> replies;
 
     public ConnectionPoint inPoint;
-
-    // TODO unite all this into a class
-    public List<ConnectionPoint> outPoints;
-    public List<Rect> replyRects;
-    public List<string> replyTexts;
-
-    public Action<GUIDialogueNode> OnRemoveNode;
-    public Action<ConnectionPoint> OnClickOutPoint;
+    public DialogueEditor editor;
 
     public static void initStylesAndSizes() {
         defaultNodeStyle = new GUIStyle();
@@ -50,53 +68,35 @@ public class GUIDialogueNode
         mainBlockHeight = padding * 4.0f + nameHeight * 3.0f + textHeight;
     }
 
-    public GUIDialogueNode(
-        Vector2 position,
-        Action<ConnectionPoint> OnClickInPoint,
-        Action<ConnectionPoint> OnClickOutPoint,
-        Action<GUIDialogueNode> OnClickRemoveNode
-    ) {
+    public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineID) {
+        this.lineID = lineID;
         nameLabelRect = new Rect(
-            position.x + padding,
-            position.y + padding,
-            textWidth,
-            nameHeight
+            position.x + padding, position.y + padding,
+            textWidth, nameHeight
         );
         nameRect = new Rect(
-            position.x + padding,
-            position.y + padding + nameHeight,
-            textWidth,
-            nameHeight
+            position.x + padding, position.y + padding + nameHeight,
+            textWidth, nameHeight
         );
         textLabelRect = new Rect(
-            position.x + padding,
-            position.y + padding + nameHeight * 2.0f,
-            textWidth,
-            textHeight
+            position.x + padding, position.y + padding + nameHeight * 2.0f,
+            textWidth, textHeight
         );
         textRect = new Rect(
-            position.x + padding,
-            position.y + padding * 2.0f + nameHeight * 3.0f,
-            textWidth,
-            textHeight
+            position.x + padding, position.y + padding * 2.0f + nameHeight * 3.0f,
+            textWidth, textHeight
         );
         rect = new Rect(
-            position.x,
-            position.y,
-            textWidth + padding * 2.0f, 
-            mainBlockHeight
+            position.x, position.y,
+            textWidth + padding * 2.0f, mainBlockHeight
         );
 
         style = defaultNodeStyle;
 
-        inPoint = new ConnectionPoint(this, ConnectionPointType.In, OnClickInPoint);
-
-        outPoints = new List<ConnectionPoint>();
-        replyRects = new List<Rect>();
-        replyTexts = new List<string>();
-
-        OnRemoveNode = OnClickRemoveNode;
-        this.OnClickOutPoint = OnClickOutPoint;
+        inPoint = new ConnectionPoint(this, ConnectionPointType.In);
+        replies = new List<GUIDialogueReply>();
+        editor = parentEditor;
+        selectedReplyText = -1;
     }
  
     public void Drag(Vector2 delta) {
@@ -105,25 +105,23 @@ public class GUIDialogueNode
         nameRect.position += delta;
         textLabelRect.position += delta;
         textRect.position += delta;
-        for(int i = 0; i < replyRects.Count; i++) {
-            Rect rect = replyRects[i];
-            rect.position += delta;
-            replyRects[i] = rect;
+        foreach(GUIDialogueReply reply in replies) {
+            reply.rect.position += delta;
         }
     }
  
     public void Draw() {
         inPoint.Draw();
-        foreach(ConnectionPoint outPoint in outPoints) {
-            outPoint.Draw();
+        foreach(GUIDialogueReply reply in replies) {
+            reply.outPoint.Draw();
         }
         GUI.Box(rect, "", style);
         EditorGUI.LabelField(nameLabelRect, "Name:");
+        speakerUID = EditorGUI.TextArea(nameRect, speakerUID);
         EditorGUI.LabelField(textLabelRect, "Text:");
-        EditorGUI.TextArea(nameRect, "");
-        EditorGUI.TextArea(textRect, "");
-        foreach(Rect rect in replyRects) {
-            EditorGUI.TextArea(rect, "");
+        text = EditorGUI.TextArea(textRect, text);
+        foreach(GUIDialogueReply reply in replies) {
+            reply.text = EditorGUI.TextArea(reply.rect, reply.text);
         }
     }
  
@@ -167,7 +165,7 @@ public class GUIDialogueNode
         GenericMenu genericMenu = new GenericMenu();
         genericMenu.AddItem(new GUIContent("Remove node"), false, OnClickRemoveNode);
         genericMenu.AddItem(new GUIContent("Add reply"), false, AddReply);
-        if(replyRects.Count > 0) {
+        if(replies.Count > 0) {
             genericMenu.AddItem(new GUIContent("Remove reply"), false, RemoveReply);
         }
         genericMenu.ShowAsContext();
@@ -175,26 +173,26 @@ public class GUIDialogueNode
  
     private void AddReply() {
         rect.height += textHeight + padding;
-
-        Rect replyRect = new Rect(
-            rect.x + padding,
-            rect.y + mainBlockHeight + (textHeight + padding) * replyRects.Count,
-            textWidth,
-            textHeight
-        );
-        replyRects.Add(replyRect);
-
-        ConnectionPoint outPoint = new ConnectionPoint(this, ConnectionPointType.Out, OnClickOutPoint, outPoints.Count);
-        outPoints.Add(outPoint);
+        replies.Add(new GUIDialogueReply(this, replies.Count, replies.Count));
     }
 
     private void RemoveReply() {
-
+        // TODO implement remove reply
     }
 
     private void OnClickRemoveNode() {
-        if (OnRemoveNode != null) {
-            OnRemoveNode(this);
+        editor.OnClickRemoveNode(this);
+    }
+
+    public bool ConnectedTo(Connection connection) {
+        if(connection.inPoint == inPoint) {
+            return true;
         }
+        foreach(GUIDialogueReply reply in replies) {
+            if(reply.outPoint == connection.outPoint) {
+                return true;
+            }
+        }
+        return false;
     }
 }

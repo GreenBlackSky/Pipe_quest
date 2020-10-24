@@ -4,7 +4,6 @@ using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
-    // TODO speaker name
     // TODO serialize and deserialize
 
     private Rect menuBar;
@@ -186,21 +185,19 @@ public class DialogueEditor : EditorWindow {
         GUI.changed = true;
     }
 
-    private void OnClickAddNode(Vector2 mousePosition) {
+    public void OnClickAddNode(Vector2 mousePosition) {
         if (nodes == null) {
             nodes = new List<GUIDialogueNode>();
         }
  
-        nodes.Add(new GUIDialogueNode(mousePosition, 
-            OnClickInPoint, OnClickOutPoint, OnClickRemoveNode
-        ));
+        nodes.Add(new GUIDialogueNode(this, mousePosition, nodes.Count));
     }
 
-    private void OnClickInPoint(ConnectionPoint inPoint) {
+    public void OnClickInPoint(ConnectionPoint inPoint) {
         selectedInPoint = inPoint;
  
         if (selectedOutPoint != null) {
-            if (selectedOutPoint.node != selectedInPoint.node) {
+            if (selectedOutPoint.parent != selectedInPoint.parent) {
                 CreateConnection();
                 ClearConnectionSelection(); 
             } else {
@@ -209,11 +206,11 @@ public class DialogueEditor : EditorWindow {
         }
     }
  
-    private void OnClickOutPoint(ConnectionPoint outPoint) {
+    public void OnClickOutPoint(ConnectionPoint outPoint) {
         selectedOutPoint = outPoint;
  
         if (selectedInPoint != null) {
-            if (selectedOutPoint.node != selectedInPoint.node) {
+            if (selectedOutPoint.parent != selectedInPoint.parent) {
                 CreateConnection();
                 ClearConnectionSelection();
             } else {
@@ -222,12 +219,12 @@ public class DialogueEditor : EditorWindow {
         }
     }
 
-    private void OnClickRemoveNode(GUIDialogueNode node) {
+    public void OnClickRemoveNode(GUIDialogueNode node) {
         if (connections != null) {
             List<Connection> connectionsToRemove = new List<Connection>();
             // TODO optimize removing connections
             foreach (Connection connection in connections) {
-                if (connection.inPoint == node.inPoint || node.outPoints.Contains(connection.outPoint)) {
+                if (node.ConnectedTo(connection)) {
                     connectionsToRemove.Add(connection);
                 }
             }
