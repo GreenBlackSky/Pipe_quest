@@ -21,7 +21,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     void setSpeaker(DialogueNode node) {
         if(currentSpeakerName != node.speakerUID) {
             Talkable speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
-            Debug.Log(speaker.speakerFullName);
             speakerNameArea.text = talkable.speakerFullName;
             GameObject icon = Instantiate(speaker.icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;
