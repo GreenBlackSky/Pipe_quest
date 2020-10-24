@@ -15,6 +15,7 @@ public class DialogueReply {
         text = "";
         nextLineUID = -1;
     }
+    // TODO connect reply, disconnect reply
 }
 
 [XmlRoot("line")]
@@ -37,4 +38,5 @@ public class DialogueNode {
         replies.Add(reply);
         return reply;
     }
+    // TODO Remove reply, connect, diconnect
 }

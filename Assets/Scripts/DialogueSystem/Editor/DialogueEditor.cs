@@ -236,8 +236,9 @@ public class DialogueEditor : EditorWindow {
         nodes.Remove(node);
     }
 
-    private void OnClickRemoveConnection(Connection connection) {
+    public void OnClickRemoveConnection(Connection connection) {
         connections.Remove(connection);
+        connection.Destroy();
     }
  
     private void CreateConnection() {

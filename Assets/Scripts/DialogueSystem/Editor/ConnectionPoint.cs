@@ -1,4 +1,4 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -10,10 +10,11 @@ public class ConnectionPoint {
     private static GUIStyle outPointStyle;
 
     public Rect rect;
-    private int verticalPos;
+    public int verticalPos;
     public ConnectionPointType type;
     public GUIDialogueNode parent;
     public GUIStyle style;
+    public HashSet<Connection> connections;
     
     public static void initStyles() {
         inPointStyle = new GUIStyle();
@@ -34,6 +35,7 @@ public class ConnectionPoint {
     ) {
         this.parent = parent;
         this.type = type;
+        connections = new HashSet<Connection>();
         if(type == ConnectionPointType.In) {
             style = inPointStyle;
         } else {

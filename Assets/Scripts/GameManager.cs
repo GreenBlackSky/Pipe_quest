@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-
-    public enum State {MAIN_MENU, PLAYING, INVENTORY_OPEN}
+    // TODO menu and levels
+    public enum State {MAIN_MENU, PLAYING}
     State _state;
 
     void Start()

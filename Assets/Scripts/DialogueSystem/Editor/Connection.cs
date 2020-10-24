@@ -9,7 +9,9 @@ public class Connection {
  
     public Connection(ConnectionPoint inPoint, ConnectionPoint outPoint, Action<Connection> OnClickRemoveConnection) {
         this.inPoint = inPoint;
+        inPoint.connections.Add(this);
         this.outPoint = outPoint;
+        outPoint.connections.Add(this);
         this.OnClickRemoveConnection = OnClickRemoveConnection;
     }
  
@@ -29,5 +31,10 @@ public class Connection {
                 OnClickRemoveConnection(this);
             }
         }
+    }
+
+    public void Destroy() {
+        inPoint.connections.Remove(this);
+        outPoint.connections.Remove(this);
     }
 }
