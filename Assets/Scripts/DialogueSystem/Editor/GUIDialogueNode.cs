@@ -145,9 +145,13 @@ public class GUIDialogueNode : DialogueNode {
             reply.outPoint.Draw();
         }
         GUI.Box(rect, "", style);
+
         EditorGUI.LabelField(nameLabelRect, "Name:");
-        // TODO check speaker uid
-        speakerUID = EditorGUI.TextArea(nameRect, speakerUID);
+        string newSpeakerUID = EditorGUI.TextArea(nameRect, speakerUID);
+        if(editor.allSpeakersUIDs.Contains(newSpeakerUID)) {
+            speakerUID = newSpeakerUID;
+        }
+
         EditorGUI.LabelField(textLabelRect, "Text:");
         text = EditorGUI.TextArea(textRect, text);
 

@@ -1,6 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 using System.Collections.Generic;
+using System.IO;
 
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
@@ -8,6 +9,7 @@ public class DialogueEditor : EditorWindow {
 
     public string speakerUID = "new speaker";
     public string speakerName = "";
+    public List<string> allSpeakersUIDs;
 
     private Rect menuBar;
     private float menuBarHeight = 20f;
@@ -21,6 +23,10 @@ public class DialogueEditor : EditorWindow {
     private Vector2 drag;
     private Vector2 offset;
 
+    public DialogueEditor() {
+        allSpeakersUIDs = new List<string>();
+    }
+
     [MenuItem("Window/Dialogue")]
     private static void ShowWindow() {
         var window = GetWindow<DialogueEditor>();
@@ -31,6 +37,14 @@ public class DialogueEditor : EditorWindow {
     private void OnEnable() {
         GUIDialogueNode.initStylesAndSizes();
         ConnectionPoint.initStyles();
+        InitEditor();
+        ReadSpeakers();
+    }
+
+    private void InitEditor() {
+        allSpeakersUIDs = new List<string>();
+        nodes = new List<GUIDialogueNode>();
+        connections = new List<Connection>();
     }
 
     private void OnGUI() {
@@ -51,6 +65,7 @@ public class DialogueEditor : EditorWindow {
 
     private void DrawMenuBar()
     {
+        EditorStyles.textField.wordWrap = true;
         menuBar = new Rect(0, 0, position.width, menuBarHeight);
  
         GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
@@ -63,24 +78,30 @@ public class DialogueEditor : EditorWindow {
         }
         GUILayout.Space(10);
 
-        // TODO check from created users
-        // TODO load dialogue
-        GUILayout.Button(new GUIContent("Open"), EditorStyles.toolbarButton, GUILayout.Width(60));
+        if(GUILayout.Button(new GUIContent("Open"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+            GenericMenu toolsMenu = new GenericMenu();
+            foreach(string uid in allSpeakersUIDs) {
+                toolsMenu.AddItem(new GUIContent(uid), false, () => LoadDialogue(uid));
+            }
+            toolsMenu.DropDown(new Rect(0, 0, 0, 16));
+            EditorGUIUtility.ExitGUI();
+        }
         GUILayout.Space(10);
 
         // TODO prompt user to enter uid
-        // TODO save dialogue
-        GUILayout.Button(new GUIContent("Save as"), EditorStyles.toolbarButton, GUILayout.Width(60));
+        if(GUILayout.Button(new GUIContent("Save as"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+            SaveDialogue();
+        }
         GUILayout.Space(10);
 
         if (speakerUID == "new speaker") {
             GUI.enabled = false;
-            // TODO save dialogue
             GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60));
             GUI.enabled = true;
         } else {
-            // TODO save dialogue
-            GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60));
+            if(GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+                SaveDialogue();
+            }
         }
 
         GUILayout.EndHorizontal();
@@ -116,19 +137,15 @@ public class DialogueEditor : EditorWindow {
     }
 
     private void DrawNodes() {
-        if (nodes != null) {
-            foreach (GUIDialogueNode node in nodes) {
-                node.Draw();
-            }
+        foreach (GUIDialogueNode node in nodes) {
+            node.Draw();
         }
     }
  
     private void DrawConnections() {
-        if (connections != null) {
-            foreach (Connection connection in connections.ToArray()) {
-                connection.Draw();
-            } 
-        }
+        foreach (Connection connection in connections.ToArray()) {
+            connection.Draw();
+        } 
     }
 
     private void DrawConnectionLine(Event e) {
@@ -155,7 +172,6 @@ public class DialogueEditor : EditorWindow {
                 null,
                 2f
             );
- 
             GUI.changed = true;
         }
     }
@@ -182,9 +198,6 @@ public class DialogueEditor : EditorWindow {
     }
  
     private void ProcessNodeEvents(Event e) {
-        if (nodes == null) {
-            return;
-        }
         for (int i = nodes.Count - 1; i >= 0; i--) {
             bool guiChanged = nodes[i].ProcessEvents(e);
             if (guiChanged) {
@@ -246,19 +259,17 @@ public class DialogueEditor : EditorWindow {
     }
 
     public void OnClickRemoveNode(GUIDialogueNode node) {
-        if (connections != null) {
-            List<Connection> connectionsToRemove = new List<Connection>();
-            // TODO optimize removing connections
-            foreach (Connection connection in connections) {
-                if (node.ConnectedTo(connection)) {
-                    connectionsToRemove.Add(connection);
-                }
+        List<Connection> connectionsToRemove = new List<Connection>();
+        // TODO optimize removing connections
+        foreach (Connection connection in connections) {
+            if (node.ConnectedTo(connection)) {
+                connectionsToRemove.Add(connection);
             }
-            foreach (Connection connection in connectionsToRemove) {
-                connections.Remove(connection);
-            }
-            connectionsToRemove = null;
         }
+        foreach (Connection connection in connectionsToRemove) {
+            connections.Remove(connection);
+        }
+        connectionsToRemove = null;
         nodes.Remove(node);
     }
 
@@ -268,9 +279,6 @@ public class DialogueEditor : EditorWindow {
     }
  
     private void CreateConnection() {
-        if (connections == null) {
-            connections = new List<Connection>();
-        }
         // TODO optimize checking connections
         foreach(Connection connection in connections) {
             if (connection.outPoint == selectedOutPoint) {
@@ -295,5 +303,26 @@ public class DialogueEditor : EditorWindow {
         nodes.Clear();
         speakerName = "";
         speakerUID = "new speaker";
+    }
+
+    void ReadSpeakers() {
+        string path = @"" + "Assets/DialoguesData/";
+        List<string> fileNames = new List<string>(Directory.GetFiles(path));
+        foreach(string name in fileNames) {
+            if(name.EndsWith(".xml")) {
+                string[] parts = name.Split('/');
+                string fileName = parts[parts.Length - 1].Split('.')[0];
+                allSpeakersUIDs.Add(fileName);
+            }
+        }
+    }
+
+    void LoadDialogue(string UID) {
+            ClearEditor();
+            // TODO load dialogue
+    }
+
+    void SaveDialogue() {
+        // TODO save dialogue
     }
 }
