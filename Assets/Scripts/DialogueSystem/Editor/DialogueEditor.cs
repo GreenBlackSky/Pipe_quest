@@ -3,6 +3,34 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.IO;
 
+public class SpeakerUIDPrompt : EditorWindow {
+    public static string speakerUID;
+
+    public static void ShowSpeakerUIDPrompt() {
+        SpeakerUIDPrompt window = ScriptableObject.CreateInstance(typeof(SpeakerUIDPrompt)) as SpeakerUIDPrompt;
+        window.position = new Rect(0, 0, 300, 40);
+        window.ShowModalUtility();
+    }
+
+    void OnGUI() {
+        EditorGUILayout.LabelField("Enter speaker uid:");
+        string newSpeakerUID = EditorGUILayout.TextArea(speakerUID);
+        GUILayout.BeginHorizontal();
+        if (GUILayout.Button("Save dialogue")) {
+            speakerUID = newSpeakerUID;
+            Close();
+        }
+        if (GUILayout.Button("Cancel")) {
+            Close();
+        }
+        GUILayout.EndHorizontal();
+    }
+
+    void OnInspectorUpdate() {
+        Repaint();
+    }
+}
+
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
     // TODO output panel
@@ -88,9 +116,16 @@ public class DialogueEditor : EditorWindow {
         }
         GUILayout.Space(10);
 
-        // TODO prompt user to enter uid
         if(GUILayout.Button(new GUIContent("Save as"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+            GUILayout.EndHorizontal();
+            GUILayout.EndArea();
+
+            SpeakerUIDPrompt.ShowSpeakerUIDPrompt();
+            speakerName = SpeakerUIDPrompt.speakerUID;
             SaveDialogue();
+
+            GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
+            GUILayout.BeginHorizontal();
         }
         GUILayout.Space(10);
 
@@ -318,8 +353,8 @@ public class DialogueEditor : EditorWindow {
     }
 
     void LoadDialogue(string UID) {
-            ClearEditor();
-            // TODO load dialogue
+        ClearEditor();
+        // TODO load dialogue
     }
 
     void SaveDialogue() {
