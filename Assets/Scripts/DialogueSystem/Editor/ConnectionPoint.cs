@@ -13,6 +13,7 @@ public class ConnectionPoint {
     public int verticalPos;
     public ConnectionPointType type;
     public GUIDialogueNode parent;
+    public GUIDialogueReply replyParent;
     public GUIStyle style;
     public HashSet<Connection> connections;
     
@@ -27,13 +28,16 @@ public class ConnectionPoint {
         outPointStyle.active.background = EditorGUIUtility.Load("builtin skins/darkskin/images/btn right on.png") as Texture2D;
         outPointStyle.border = new RectOffset(4, 4, 12, 12);
     }
-
+    
+    // TODO splint into two classses
     public ConnectionPoint(
         GUIDialogueNode parent, 
         ConnectionPointType type,
+        GUIDialogueReply replyParent=null,
         int verticalPos = 0
     ) {
         this.parent = parent;
+        this.replyParent = replyParent;
         this.type = type;
         connections = new HashSet<Connection>();
         if(type == ConnectionPointType.In) {

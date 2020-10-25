@@ -4,7 +4,10 @@ using System.Collections.Generic;
 
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
-    // TODO serialize and deserialize
+    // TODO output panel
+
+    public string speakerUID = "new speaker";
+    public string speakerName = "";
 
     private Rect menuBar;
     private float menuBarHeight = 20f;
@@ -44,7 +47,6 @@ public class DialogueEditor : EditorWindow {
         if (GUI.changed) {
             Repaint();
         }
-        
     }
 
     private void DrawMenuBar()
@@ -53,10 +55,34 @@ public class DialogueEditor : EditorWindow {
  
         GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
         GUILayout.BeginHorizontal();
-        GUILayout.Label("Speaker name");
-        GUILayout.Button(new GUIContent("Load"), EditorStyles.toolbarButton, GUILayout.Width(35));
-        GUILayout.Space(5);
-        GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(35));
+        GUILayout.Label(speakerUID);
+        speakerName = GUILayout.TextArea(speakerName);
+
+        if(GUILayout.Button(new GUIContent("New"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+            ClearEditor();
+        }
+        GUILayout.Space(10);
+
+        // TODO check from created users
+        // TODO load dialogue
+        GUILayout.Button(new GUIContent("Open"), EditorStyles.toolbarButton, GUILayout.Width(60));
+        GUILayout.Space(10);
+
+        // TODO prompt user to enter uid
+        // TODO save dialogue
+        GUILayout.Button(new GUIContent("Save as"), EditorStyles.toolbarButton, GUILayout.Width(60));
+        GUILayout.Space(10);
+
+        if (speakerUID == "new speaker") {
+            GUI.enabled = false;
+            // TODO save dialogue
+            GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60));
+            GUI.enabled = true;
+        } else {
+            // TODO save dialogue
+            GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60));
+        }
+
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
     }
@@ -258,5 +284,16 @@ public class DialogueEditor : EditorWindow {
     private void ClearConnectionSelection() {
         selectedInPoint = null;
         selectedOutPoint = null;
+    }
+
+    void ClearEditor() {
+        ClearConnectionSelection();
+        foreach(Connection connection in connections) {
+            connection.Destroy();
+        }
+        connections.Clear();
+        nodes.Clear();
+        speakerName = "";
+        speakerUID = "new speaker";
     }
 }

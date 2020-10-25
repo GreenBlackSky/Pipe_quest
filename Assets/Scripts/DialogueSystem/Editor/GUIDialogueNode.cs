@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-// TODO inherit Node and reply
-public class GUIDialogueReply {
+public class GUIDialogueReply : DialogueReply {
     public ConnectionPoint outPoint;
     public Rect rect;
     public Rect removeButtonRect;
-    GUIDialogueNode parent;
-    public string text;
+    public GUIDialogueNode parent;
     public int replyID;
 
     public GUIDialogueReply(GUIDialogueNode parent, int verticalPos, int replyID) {
@@ -25,10 +23,11 @@ public class GUIDialogueReply {
             GUIDialogueNode.buttonWidth,
             GUIDialogueNode.textHeight
         );
-        outPoint = new ConnectionPoint(parent, ConnectionPointType.Out, verticalPos);
+        outPoint = new ConnectionPoint(parent, ConnectionPointType.Out, this, verticalPos);
         this.parent = parent;
-        text = "";
+
         this.replyID = replyID;
+        nextLineUID = -1;
     }
 
     public void UpdateVerticalPos(int verticalPos) {
@@ -54,7 +53,7 @@ public class GUIDialogueReply {
     }
 }
 
-public class GUIDialogueNode {
+public class GUIDialogueNode : DialogueNode {
     private static GUIStyle defaultNodeStyle;
     private static GUIStyle selectedNodeStyle;
 
@@ -74,12 +73,7 @@ public class GUIDialogueNode {
 
     public bool isDragged;
     public bool isSelected;
-    public int selectedReplyText;
 
-    public int lineID;
-    public string speakerUID;
-    public string text;
-    public List<GUIDialogueReply> replies;
     public List<GUIDialogueReply> repliesToRemove;
 
     public ConnectionPoint inPoint;
@@ -102,8 +96,9 @@ public class GUIDialogueNode {
         mainBlockHeight = padding * 4.0f + nameHeight * 3.0f + textHeight;
     }
 
-    public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineID) {
-        this.lineID = lineID;
+    public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineUID) {
+        this.lineUID = lineUID;
+        this.speakerUID = parentEditor.speakerUID;
         nameLabelRect = new Rect(
             position.x + padding, position.y + padding,
             textWidth, nameHeight
@@ -128,10 +123,8 @@ public class GUIDialogueNode {
         style = defaultNodeStyle;
 
         inPoint = new ConnectionPoint(this, ConnectionPointType.In);
-        replies = new List<GUIDialogueReply>();
         repliesToRemove = new List<GUIDialogueReply>();
         editor = parentEditor;
-        selectedReplyText = -1;
     }
  
     public void Drag(Vector2 delta) {
@@ -153,11 +146,12 @@ public class GUIDialogueNode {
         }
         GUI.Box(rect, "", style);
         EditorGUI.LabelField(nameLabelRect, "Name:");
+        // TODO check speaker uid
         speakerUID = EditorGUI.TextArea(nameRect, speakerUID);
         EditorGUI.LabelField(textLabelRect, "Text:");
         text = EditorGUI.TextArea(textRect, text);
 
-        foreach(var reply in replies) {
+        foreach(GUIDialogueReply reply in replies) {
             reply.text = EditorGUI.TextArea(reply.rect, reply.text);
             if(GUI.Button(reply.removeButtonRect, "X")) {
                 repliesToRemove.Add(reply);
@@ -215,12 +209,13 @@ public class GUIDialogueNode {
     }
 
     private void CleanReplies() {
-        foreach(var reply in repliesToRemove) {
+        foreach(GUIDialogueReply reply in repliesToRemove) {
             replies.Remove(reply);
             reply.Destroy();
         }
         for(int i = 0; i < replies.Count; i++) {
-            replies[i].UpdateVerticalPos(i);
+            GUIDialogueReply reply = (GUIDialogueReply)replies[i];
+            reply.UpdateVerticalPos(i);
         }
         rect.height -= (textHeight + padding) * repliesToRemove.Count;
         repliesToRemove.Clear();

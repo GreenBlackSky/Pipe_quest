@@ -10,6 +10,7 @@ public class Talkable : MonoBehaviour, Interactable
     public string speakerFullName;
     public GameObject icon;
 
+    // TODO load in speaker manager
     public DialogueNode[] lines;
     public int initialNodeUID;
 

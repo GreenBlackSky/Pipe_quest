@@ -13,6 +13,7 @@ public class Connection {
         this.outPoint = outPoint;
         outPoint.connections.Add(this);
         this.OnClickRemoveConnection = OnClickRemoveConnection;
+        outPoint.replyParent.nextLineUID = inPoint.parent.lineUID;
     }
  
     public void Draw() {
@@ -35,6 +36,6 @@ public class Connection {
 
     public void Destroy() {
         inPoint.connections.Remove(this);
-        outPoint.connections.Remove(this);
+        outPoint.replyParent.nextLineUID = -1;
     }
 }
