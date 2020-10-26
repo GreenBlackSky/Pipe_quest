@@ -57,8 +57,8 @@ public class GUIDialogueReply : DialogueReply {
 }
 
 public class GUIDialogueNode : DialogueNode {
-    private static GUIStyle defaultNodeStyle;
-    private static GUIStyle selectedNodeStyle;
+    [XmlIgnore] private static GUIStyle defaultNodeStyle;
+    [XmlIgnore] private static GUIStyle selectedNodeStyle;
 
     [XmlIgnore] public static float nameHeight;
     [XmlIgnore] public static float textWidth;

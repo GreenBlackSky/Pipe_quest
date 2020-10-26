@@ -4,6 +4,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// TODO Deserialize with XmlSerializer
 public class Talkable : MonoBehaviour, Interactable
 {
     public string speakerUID;

@@ -7,6 +7,7 @@ using UnityEngine;
 
 public class SpeakerUIDPrompt : EditorWindow {
     public static string speakerUID;
+    private string newSpeakerUID = "";
 
     public static void ShowSpeakerUIDPrompt() {
         SpeakerUIDPrompt window = ScriptableObject.CreateInstance(typeof(SpeakerUIDPrompt)) as SpeakerUIDPrompt;
@@ -16,7 +17,7 @@ public class SpeakerUIDPrompt : EditorWindow {
 
     void OnGUI() {
         EditorGUILayout.LabelField("Enter speaker uid:");
-        string newSpeakerUID = EditorGUILayout.TextArea(speakerUID);
+        newSpeakerUID = EditorGUILayout.TextArea(newSpeakerUID);
         GUILayout.BeginHorizontal();
         if (GUILayout.Button("Save dialogue")) {
             speakerUID = newSpeakerUID;
@@ -36,6 +37,7 @@ public class SpeakerUIDPrompt : EditorWindow {
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
     // TODO output panel
+    // TODO inherit Talkable
 
     public string speakerUID = "new speaker";
     public string speakerName = "";
@@ -361,11 +363,28 @@ public class DialogueEditor : EditorWindow {
     }
 
     void SaveDialogue() {
-        // TODO save dialogue
+        string path = "Assets/DialoguesData/" + speakerUID + ".xml";        
+        XmlDocument doc = new XmlDocument();
+        XmlElement root = doc.CreateElement("conversation");
+        doc.AppendChild(root);
 
+        XmlElement XmlinitialLineUID = doc.CreateElement("initialLineUID");
+        XmlinitialLineUID.InnerText = "0";
+        root.AppendChild(XmlinitialLineUID);
+    
+        XmlElement XmlSpeakerFullName = doc.CreateElement("fullName");
+        XmlSpeakerFullName.InnerText = speakerName;
+        root.AppendChild(XmlSpeakerFullName);
 
-        XmlSerializer serializer = new XmlSerializer(typeof(GUIDialogueNode));
-        StreamWriter writer = new StreamWriter("Assets/DialoguesData/" + this.speakerUID + ".xml");
-        writer.Close();
+        XmlElement XmlLines = doc.CreateElement("lines");
+        var nav = XmlLines.CreateNavigator();
+        using (XmlWriter writer = nav.AppendChild()) {
+            writer.WriteWhitespace("");
+            XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
+            foreach (GUIDialogueNode node in nodes) {
+                nodeSerializer.Serialize(writer, node);
+            }
+        }
+        doc.Save(path);
     }
 }
