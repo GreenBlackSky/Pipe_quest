@@ -5,11 +5,8 @@ using UnityEngine;
 
 [XmlRoot("reply")]
 public class DialogueReply {
-    [XmlElement("text")]
-    public string text;
-
-    [XmlElement("nextLineUID")]
-    public int nextLineUID;
+    [XmlElement("text")]        public string text;
+    [XmlElement("nextLineUID")] public int nextLineUID;
 
     public DialogueReply() {
         text = "";
@@ -19,14 +16,9 @@ public class DialogueReply {
 
 [XmlRoot("line")]
 public class DialogueNode {
-    [XmlElement("uid")]
-    public int lineUID;
-
-    [XmlElement("speakerUID")]
-    public string speakerUID;
-
-    [XmlElement("text")]
-    public string text;
+    [XmlElement("uid")]         public int lineUID;
+    [XmlElement("speakerUID")]  public string speakerUID;
+    [XmlElement("text")]        public string text;
 
     [XmlArray("replies")]
     [XmlArrayItem("reply")]

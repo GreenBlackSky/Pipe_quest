@@ -1,14 +1,17 @@
 ﻿using System;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
 public class GUIDialogueReply : DialogueReply {
-    public ConnectionPoint outPoint;
-    public Rect rect;
-    public Rect removeButtonRect;
-    public GUIDialogueNode parent;
-    public int replyID;
+    [XmlIgnore] public ConnectionPoint outPoint;
+    [XmlIgnore] public Rect removeButtonRect;
+    [XmlIgnore] public GUIDialogueNode parent;
+    [XmlIgnore] public int replyID;
+    [XmlIgnore] public Rect rect;
+
+    public GUIDialogueReply() {}
 
     public GUIDialogueReply(GUIDialogueNode parent, int verticalPos, int replyID) {
         rect = new Rect(
@@ -57,27 +60,27 @@ public class GUIDialogueNode : DialogueNode {
     private static GUIStyle defaultNodeStyle;
     private static GUIStyle selectedNodeStyle;
 
-    public static float nameHeight;
-    public static float textWidth;
-    public static float textHeight;
-    public static float buttonWidth;
-    public static float padding;
-    public static float mainBlockHeight;
+    [XmlIgnore] public static float nameHeight;
+    [XmlIgnore] public static float textWidth;
+    [XmlIgnore] public static float textHeight;
+    [XmlIgnore] public static float buttonWidth;
+    [XmlIgnore] public static float padding;
+    [XmlIgnore] public static float mainBlockHeight;
 
-    public GUIStyle style;
     public Rect rect;
-    public Rect nameLabelRect;
-    public Rect nameRect;
-    public Rect textLabelRect;
-    public Rect textRect;
+    [XmlIgnore] public Rect nameLabelRect;
+    [XmlIgnore] public Rect nameRect;
+    [XmlIgnore] public Rect textLabelRect;
+    [XmlIgnore] public Rect textRect;
+    [XmlIgnore] public GUIStyle style;
 
-    public bool isDragged;
-    public bool isSelected;
+    [XmlIgnore] public bool isDragged;
+    [XmlIgnore] public bool isSelected;
 
-    public List<GUIDialogueReply> repliesToRemove;
+    [XmlIgnore] public List<GUIDialogueReply> repliesToRemove;
 
-    public ConnectionPoint inPoint;
-    public DialogueEditor editor;
+    [XmlIgnore] public ConnectionPoint inPoint;
+    [XmlIgnore] public DialogueEditor editor;
 
     public static void initStylesAndSizes() {
         defaultNodeStyle = new GUIStyle();
@@ -95,6 +98,8 @@ public class GUIDialogueNode : DialogueNode {
         buttonWidth = 20;
         mainBlockHeight = padding * 4.0f + nameHeight * 3.0f + textHeight;
     }
+
+    public GUIDialogueNode() {}
 
     public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineUID) {
         this.lineUID = lineUID;

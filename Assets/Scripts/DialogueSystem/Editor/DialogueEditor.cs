@@ -1,7 +1,9 @@
-﻿using UnityEditor;
-using UnityEngine;
+﻿using System.Xml;
+using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using UnityEditor;
+using UnityEngine;
 
 public class SpeakerUIDPrompt : EditorWindow {
     public static string speakerUID;
@@ -95,12 +97,10 @@ public class DialogueEditor : EditorWindow {
     {
         EditorStyles.textField.wordWrap = true;
         menuBar = new Rect(0, 0, position.width, menuBarHeight);
- 
+
         GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
         GUILayout.BeginHorizontal();
-        GUILayout.Label(speakerUID);
-        speakerName = GUILayout.TextArea(speakerName);
-
+    
         if(GUILayout.Button(new GUIContent("New"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
             ClearEditor();
         }
@@ -121,7 +121,7 @@ public class DialogueEditor : EditorWindow {
             GUILayout.EndArea();
 
             SpeakerUIDPrompt.ShowSpeakerUIDPrompt();
-            speakerName = SpeakerUIDPrompt.speakerUID;
+            speakerUID = SpeakerUIDPrompt.speakerUID;
             SaveDialogue();
 
             GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
@@ -138,6 +138,9 @@ public class DialogueEditor : EditorWindow {
                 SaveDialogue();
             }
         }
+ 
+        GUILayout.Label(speakerUID);
+        speakerName = GUILayout.TextArea(speakerName);
 
         GUILayout.EndHorizontal();
         GUILayout.EndArea();
@@ -359,5 +362,10 @@ public class DialogueEditor : EditorWindow {
 
     void SaveDialogue() {
         // TODO save dialogue
+
+
+        XmlSerializer serializer = new XmlSerializer(typeof(GUIDialogueNode));
+        StreamWriter writer = new StreamWriter("Assets/DialoguesData/" + this.speakerUID + ".xml");
+        writer.Close();
     }
 }

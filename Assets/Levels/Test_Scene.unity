@@ -2249,10 +2249,6 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 617bf2319a459d945beec0548522e40d, type: 2}
     - target: {fileID: 1391598409413523300, guid: ca014879105e38940824f2aeca60623c, type: 3}
-      propertyPath: speakerUID
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 1391598409413523300, guid: ca014879105e38940824f2aeca60623c, type: 3}
       propertyPath: speakerName
       value: Doctor
       objectReference: {fileID: 0}

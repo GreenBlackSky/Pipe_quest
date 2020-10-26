@@ -13,6 +13,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     Image iconSlot;
     Text textPanel;
     GameObject repliesArea;
+    GameObject speakerIcon;
     
     
     Talkable talkable;
@@ -22,7 +23,9 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         if(currentSpeakerName != node.speakerUID) {
             Talkable speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
             speakerNameArea.text = talkable.speakerFullName;
-            GameObject icon = Instantiate(speaker.icon, iconSlot.transform, false);
+
+            Destroy(speakerIcon);
+            speakerIcon = Instantiate(speaker.icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;
         }
     }
