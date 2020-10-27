@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+
 public class GUIDialogueReply : DialogueReply {
     [XmlIgnore] public ConnectionPoint outPoint;
     [XmlIgnore] public Rect removeButtonRect;
@@ -56,6 +57,8 @@ public class GUIDialogueReply : DialogueReply {
     }
 }
 
+[XmlType("line")]
+[XmlInclude(typeof(GUIDialogueReply))]
 public class GUIDialogueNode : DialogueNode {
     [XmlIgnore] private static GUIStyle defaultNodeStyle;
     [XmlIgnore] private static GUIStyle selectedNodeStyle;
@@ -152,9 +155,12 @@ public class GUIDialogueNode : DialogueNode {
         GUI.Box(rect, "", style);
 
         EditorGUI.LabelField(nameLabelRect, "Name:");
-        string newSpeakerUID = EditorGUI.TextArea(nameRect, speakerUID);
-        if(editor.allSpeakersUIDs.Contains(newSpeakerUID)) {
-            speakerUID = newSpeakerUID;
+        if(GUI.Button(nameRect, speakerUID)) {
+            GenericMenu toolsMenu = new GenericMenu();
+            foreach(string uid in editor.allSpeakersUIDs) {
+                toolsMenu.AddItem(new GUIContent(uid), false, () => speakerUID = uid);
+            }
+            toolsMenu.DropDown(new Rect(nameRect.x, nameRect.y, 0, 0));
         }
 
         EditorGUI.LabelField(textLabelRect, "Text:");

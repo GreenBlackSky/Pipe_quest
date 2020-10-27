@@ -24,6 +24,7 @@ public class SpeakerUIDPrompt : EditorWindow {
             Close();
         }
         if (GUILayout.Button("Cancel")) {
+            speakerUID = "";
             Close();
         }
         GUILayout.EndHorizontal();
@@ -37,7 +38,6 @@ public class SpeakerUIDPrompt : EditorWindow {
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
     // TODO output panel
-    // TODO inherit Talkable
 
     public string speakerUID = "new speaker";
     public string speakerName = "";
@@ -114,7 +114,6 @@ public class DialogueEditor : EditorWindow {
                 toolsMenu.AddItem(new GUIContent(uid), false, () => LoadDialogue(uid));
             }
             toolsMenu.DropDown(new Rect(0, 0, 0, 16));
-            EditorGUIUtility.ExitGUI();
         }
         GUILayout.Space(10);
 
@@ -123,8 +122,10 @@ public class DialogueEditor : EditorWindow {
             GUILayout.EndArea();
 
             SpeakerUIDPrompt.ShowSpeakerUIDPrompt();
-            speakerUID = SpeakerUIDPrompt.speakerUID;
-            SaveDialogue();
+            if(SpeakerUIDPrompt.speakerUID != "") {
+                speakerUID = SpeakerUIDPrompt.speakerUID;
+                SaveDialogue();
+            }
 
             GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
             GUILayout.BeginHorizontal();
@@ -346,6 +347,7 @@ public class DialogueEditor : EditorWindow {
     }
 
     void ReadSpeakers() {
+        allSpeakersUIDs.Clear();
         string path = @"" + "Assets/DialoguesData/";
         List<string> fileNames = new List<string>(Directory.GetFiles(path));
         foreach(string name in fileNames) {
@@ -368,23 +370,24 @@ public class DialogueEditor : EditorWindow {
         XmlElement root = doc.CreateElement("conversation");
         doc.AppendChild(root);
 
-        XmlElement XmlinitialLineUID = doc.CreateElement("initialLineUID");
-        XmlinitialLineUID.InnerText = "0";
-        root.AppendChild(XmlinitialLineUID);
+        XmlElement xmlinitialLineUID = doc.CreateElement("initialLineUID");
+        xmlinitialLineUID.InnerText = "0";
+        root.AppendChild(xmlinitialLineUID);
     
-        XmlElement XmlSpeakerFullName = doc.CreateElement("fullName");
-        XmlSpeakerFullName.InnerText = speakerName;
-        root.AppendChild(XmlSpeakerFullName);
+        XmlElement xmlSpeakerFullName = doc.CreateElement("fullName");
+        xmlSpeakerFullName.InnerText = speakerName;
+        root.AppendChild(xmlSpeakerFullName);
 
-        XmlElement XmlLines = doc.CreateElement("lines");
-        var nav = XmlLines.CreateNavigator();
-        using (XmlWriter writer = nav.AppendChild()) {
+        XmlElement xmlLines = doc.CreateElement("lines");
+        using (XmlWriter writer = xmlLines.CreateNavigator().AppendChild()) {
             writer.WriteWhitespace("");
             XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
             foreach (GUIDialogueNode node in nodes) {
                 nodeSerializer.Serialize(writer, node);
             }
         }
+        root.AppendChild(xmlLines);
         doc.Save(path);
+        ReadSpeakers();
     }
 }
