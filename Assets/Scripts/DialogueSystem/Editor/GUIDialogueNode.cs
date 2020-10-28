@@ -70,7 +70,10 @@ public class GUIDialogueNode : DialogueNode {
     [XmlIgnore] public static float padding;
     [XmlIgnore] public static float mainBlockHeight;
 
-    public Rect rect;
+    private bool initialized = false;
+
+    public Vector2 position;
+    [XmlIgnore] public Rect rect;
     [XmlIgnore] public Rect nameLabelRect;
     [XmlIgnore] public Rect nameRect;
     [XmlIgnore] public Rect textLabelRect;
@@ -102,11 +105,21 @@ public class GUIDialogueNode : DialogueNode {
         mainBlockHeight = padding * 4.0f + nameHeight * 3.0f + textHeight;
     }
 
-    public GUIDialogueNode() {}
+    public GUIDialogueNode() {
+
+    }
 
     public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineUID) {
         this.lineUID = lineUID;
         this.speakerUID = parentEditor.speakerUID;
+        this.position = position;
+
+        editor = parentEditor;
+        Init();
+    }
+ 
+    private void Init() {
+        Debug.Log("INIT");
         nameLabelRect = new Rect(
             position.x + padding, position.y + padding,
             textWidth, nameHeight
@@ -132,9 +145,9 @@ public class GUIDialogueNode : DialogueNode {
 
         inPoint = new ConnectionPoint(this, ConnectionPointType.In);
         repliesToRemove = new List<GUIDialogueReply>();
-        editor = parentEditor;
+        initialized = true;
     }
- 
+
     public void Drag(Vector2 delta) {
         rect.position += delta;
         nameLabelRect.position += delta;
@@ -148,6 +161,10 @@ public class GUIDialogueNode : DialogueNode {
     }
  
     public void Draw() {
+        if(!initialized) {
+            Init();
+        }
+
         inPoint.Draw();
         foreach(GUIDialogueReply reply in replies) {
             reply.outPoint.Draw();

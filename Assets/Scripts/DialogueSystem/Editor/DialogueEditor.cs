@@ -46,7 +46,7 @@ public class DialogueEditor : EditorWindow {
     private Rect menuBar;
     private float menuBarHeight = 20f;
 
-    private List<GUIDialogueNode> nodes;
+    private List<GUIDialogueNode> lines;
     private List<Connection> connections;
     
     private ConnectionPoint selectedInPoint;
@@ -75,7 +75,7 @@ public class DialogueEditor : EditorWindow {
 
     private void InitEditor() {
         allSpeakersUIDs = new List<string>();
-        nodes = new List<GUIDialogueNode>();
+        lines = new List<GUIDialogueNode>();
         connections = new List<Connection>();
     }
 
@@ -95,8 +95,8 @@ public class DialogueEditor : EditorWindow {
         }
     }
 
-    private void DrawMenuBar()
-    {
+    private void DrawMenuBar() {
+        // TODO InitialNode
         EditorStyles.textField.wordWrap = true;
         menuBar = new Rect(0, 0, position.width, menuBarHeight);
 
@@ -178,7 +178,7 @@ public class DialogueEditor : EditorWindow {
     }
 
     private void DrawNodes() {
-        foreach (GUIDialogueNode node in nodes) {
+        foreach (GUIDialogueNode node in lines) {
             node.Draw();
         }
     }
@@ -239,8 +239,8 @@ public class DialogueEditor : EditorWindow {
     }
  
     private void ProcessNodeEvents(Event e) {
-        for (int i = nodes.Count - 1; i >= 0; i--) {
-            bool guiChanged = nodes[i].ProcessEvents(e);
+        for (int i = lines.Count - 1; i >= 0; i--) {
+            bool guiChanged = lines[i].ProcessEvents(e);
             if (guiChanged) {
                 GUI.changed = true;
             }
@@ -256,8 +256,8 @@ public class DialogueEditor : EditorWindow {
     private void OnDrag(Vector2 delta) {
         drag = delta;
  
-        if (nodes != null) {
-            foreach (GUIDialogueNode node in nodes) {
+        if (lines != null) {
+            foreach (GUIDialogueNode node in lines) {
                 node.Drag(delta);
             }
         }
@@ -266,11 +266,11 @@ public class DialogueEditor : EditorWindow {
     }
 
     public void OnClickAddNode(Vector2 mousePosition) {
-        if (nodes == null) {
-            nodes = new List<GUIDialogueNode>();
+        if (lines == null) {
+            lines = new List<GUIDialogueNode>();
         }
  
-        nodes.Add(new GUIDialogueNode(this, mousePosition, nodes.Count));
+        lines.Add(new GUIDialogueNode(this, mousePosition, lines.Count));
     }
 
     public void OnClickInPoint(ConnectionPoint inPoint) {
@@ -311,7 +311,7 @@ public class DialogueEditor : EditorWindow {
             connections.Remove(connection);
         }
         connectionsToRemove = null;
-        nodes.Remove(node);
+        lines.Remove(node);
     }
 
     public void OnClickRemoveConnection(Connection connection) {
@@ -341,7 +341,7 @@ public class DialogueEditor : EditorWindow {
             connection.Destroy();
         }
         connections.Clear();
-        nodes.Clear();
+        lines.Clear();
         speakerName = "";
         speakerUID = "new speaker";
     }
@@ -361,11 +361,22 @@ public class DialogueEditor : EditorWindow {
 
     void LoadDialogue(string UID) {
         ClearEditor();
-        // TODO load dialogue
+        string path = "Assets/DialoguesData/" + UID + ".xml";
+        XmlDocument doc = new XmlDocument();
+        doc.Load(path);
+        XmlNode root = doc.DocumentElement.SelectSingleNode("/conversation");
+
+        speakerName = root.SelectSingleNode("fullName").InnerText;
+
+        XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
+        XmlNode xmlLines = root.SelectSingleNode("lines");
+        foreach(XmlNode lineData in xmlLines.ChildNodes) {
+            lines.Add(nodeSerializer.Deserialize(new XmlNodeReader(lineData)) as GUIDialogueNode);
+        }
     }
 
     void SaveDialogue() {
-        string path = "Assets/DialoguesData/" + speakerUID + ".xml";        
+        string path = "Assets/DialoguesData/" + speakerUID + ".xml";
         XmlDocument doc = new XmlDocument();
         XmlElement root = doc.CreateElement("conversation");
         doc.AppendChild(root);
@@ -382,7 +393,7 @@ public class DialogueEditor : EditorWindow {
         using (XmlWriter writer = xmlLines.CreateNavigator().AppendChild()) {
             writer.WriteWhitespace("");
             XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
-            foreach (GUIDialogueNode node in nodes) {
+            foreach (GUIDialogueNode node in lines) {
                 nodeSerializer.Serialize(writer, node);
             }
         }
