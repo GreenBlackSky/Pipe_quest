@@ -37,7 +37,8 @@ public class SpeakerUIDPrompt : EditorWindow {
 
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
-    // TODO output panel
+    // TODO output into console
+    // TODO position shift on load
 
     public string speakerUID = "new speaker";
     public string speakerName = "";
@@ -319,7 +320,14 @@ public class DialogueEditor : EditorWindow {
         connection.Destroy();
     }
  
-    private void CreateConnection() {
+    private void CreateConnection(ConnectionPoint inPoint=null, ConnectionPoint outPoint=null) {
+        if(inPoint == null) {
+            inPoint = selectedInPoint;
+        }
+        if(outPoint == null) {
+            outPoint = selectedOutPoint;
+        }
+        
         // TODO optimize checking connections
         foreach(Connection connection in connections) {
             if (connection.outPoint == selectedOutPoint) {
@@ -327,7 +335,7 @@ public class DialogueEditor : EditorWindow {
                 return;
             }
         }
-        connections.Add(new Connection(selectedInPoint, selectedOutPoint, OnClickRemoveConnection));
+        connections.Add(new Connection(inPoint, outPoint, OnClickRemoveConnection));
     }
  
     private void ClearConnectionSelection() {
@@ -361,6 +369,7 @@ public class DialogueEditor : EditorWindow {
 
     void LoadDialogue(string UID) {
         ClearEditor();
+        this.speakerUID = UID;
         string path = "Assets/DialoguesData/" + UID + ".xml";
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
@@ -371,7 +380,17 @@ public class DialogueEditor : EditorWindow {
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
         XmlNode xmlLines = root.SelectSingleNode("lines");
         foreach(XmlNode lineData in xmlLines.ChildNodes) {
-            lines.Add(nodeSerializer.Deserialize(new XmlNodeReader(lineData)) as GUIDialogueNode);
+            GUIDialogueNode line = nodeSerializer.Deserialize(new XmlNodeReader(lineData)) as GUIDialogueNode;
+            line.Init(this);
+            lines.Add(line);
+        }
+        foreach(GUIDialogueNode node in lines) {
+            foreach(GUIDialogueReply reply in node.replies) {
+                int lineID = reply.nextLineID;
+                if(lineID != -1) {
+                    CreateConnection(lines[lineID].inPoint, reply.outPoint);
+                }
+            }
         }
     }
 

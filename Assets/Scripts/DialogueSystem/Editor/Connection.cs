@@ -9,11 +9,12 @@ public class Connection {
  
     public Connection(ConnectionPoint inPoint, ConnectionPoint outPoint, Action<Connection> OnClickRemoveConnection) {
         this.inPoint = inPoint;
-        inPoint.connections.Add(this);
         this.outPoint = outPoint;
-        outPoint.connections.Add(this);
         this.OnClickRemoveConnection = OnClickRemoveConnection;
-        outPoint.replyParent.nextLineUID = inPoint.parent.lineUID;
+        // TODO remove from here
+        inPoint.connections.Add(this);
+        outPoint.connections.Add(this);
+        outPoint.replyParent.nextLineID = inPoint.parent.lineID;
     }
  
     public void Draw() {
@@ -36,6 +37,6 @@ public class Connection {
 
     public void Destroy() {
         inPoint.connections.Remove(this);
-        outPoint.replyParent.nextLineUID = -1;
+        outPoint.replyParent.nextLineID = -1;
     }
 }

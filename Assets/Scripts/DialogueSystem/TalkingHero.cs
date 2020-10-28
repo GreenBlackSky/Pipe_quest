@@ -45,13 +45,13 @@ public class TalkingHero : MonoBehaviour, InteractionListener
                 position.z
             );
             replayButtonInstance.GetComponentInChildren<Text>().text = reply.text;
-            if(reply.nextLineUID == -1) {
+            if(reply.nextLineID == -1) {
                 replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
                     UIManager.Instance.SwitchState(State.GAMEPLAY);
                 }); 
             } else {
                 replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
-                    nextLine(reply.nextLineUID);
+                    nextLine(reply.nextLineID);
                 }); 
             }
             i++;

@@ -15,23 +15,17 @@ public class GUIDialogueReply : DialogueReply {
     public GUIDialogueReply() {}
 
     public GUIDialogueReply(GUIDialogueNode parent, int verticalPos, int replyID) {
-        rect = new Rect(
-            parent.rect.x + GUIDialogueNode.padding,
-            parent.rect.y + GUIDialogueNode.mainBlockHeight + (GUIDialogueNode.textHeight + GUIDialogueNode.padding) * verticalPos,
-            GUIDialogueNode.textWidth - GUIDialogueNode.buttonWidth,
-            GUIDialogueNode.textHeight
-        );
-        removeButtonRect = new Rect(
-            parent.rect.x + GUIDialogueNode.padding + rect.width,
-            rect.y,
-            GUIDialogueNode.buttonWidth,
-            GUIDialogueNode.textHeight
-        );
-        outPoint = new ConnectionPoint(parent, ConnectionPointType.Out, this, verticalPos);
-        this.parent = parent;
-
+        nextLineID = -1;
         this.replyID = replyID;
-        nextLineUID = -1;
+        Init(parent, verticalPos);
+    }
+
+    public void Init(GUIDialogueNode parent, int verticalPos=-1) {
+        this.parent = parent;
+        outPoint = new ConnectionPoint(parent, ConnectionPointType.Out, this, verticalPos);
+        if(verticalPos != -1) { 
+            UpdateVerticalPos(verticalPos);
+        }
     }
 
     public void UpdateVerticalPos(int verticalPos) {
@@ -70,8 +64,6 @@ public class GUIDialogueNode : DialogueNode {
     [XmlIgnore] public static float padding;
     [XmlIgnore] public static float mainBlockHeight;
 
-    private bool initialized = false;
-
     public Vector2 position;
     [XmlIgnore] public Rect rect;
     [XmlIgnore] public Rect nameLabelRect;
@@ -109,17 +101,15 @@ public class GUIDialogueNode : DialogueNode {
 
     }
 
-    public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineUID) {
-        this.lineUID = lineUID;
+    public GUIDialogueNode(DialogueEditor parentEditor, Vector2 position, int lineID) {
+        this.lineID = lineID;
         this.speakerUID = parentEditor.speakerUID;
         this.position = position;
-
-        editor = parentEditor;
-        Init();
+        Init(parentEditor);
     }
  
-    private void Init() {
-        Debug.Log("INIT");
+    public void Init(DialogueEditor parentEditor) {
+        editor = parentEditor;
         nameLabelRect = new Rect(
             position.x + padding, position.y + padding,
             textWidth, nameHeight
@@ -138,14 +128,17 @@ public class GUIDialogueNode : DialogueNode {
         );
         rect = new Rect(
             position.x, position.y,
-            textWidth + padding * 2.0f, mainBlockHeight
+            textWidth + padding * 2.0f, mainBlockHeight + (textHeight + padding) * replies.Count
         );
 
         style = defaultNodeStyle;
 
+        foreach(GUIDialogueReply reply in replies) {
+            reply.Init(this);
+        }
+
         inPoint = new ConnectionPoint(this, ConnectionPointType.In);
         repliesToRemove = new List<GUIDialogueReply>();
-        initialized = true;
     }
 
     public void Drag(Vector2 delta) {
@@ -161,10 +154,6 @@ public class GUIDialogueNode : DialogueNode {
     }
  
     public void Draw() {
-        if(!initialized) {
-            Init();
-        }
-
         inPoint.Draw();
         foreach(GUIDialogueReply reply in replies) {
             reply.outPoint.Draw();

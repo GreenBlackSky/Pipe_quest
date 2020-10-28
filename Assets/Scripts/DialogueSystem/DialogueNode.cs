@@ -6,17 +6,17 @@ using UnityEngine;
 [XmlRoot("reply")]
 public class DialogueReply {
     [XmlElement("text")]        public string text;
-    [XmlElement("nextLineUID")] public int nextLineUID;
+    [XmlElement("nextLineID")] public int nextLineID;
 
     public DialogueReply() {
         text = "";
-        nextLineUID = -1;
+        nextLineID = -1;
     }
 }
 
 [XmlRoot("line")]
 public class DialogueNode {
-    [XmlElement("uid")]         public int lineUID;
+    [XmlElement("uid")]         public int lineID;
     [XmlElement("speakerUID")]  public string speakerUID;
     [XmlElement("text")]        public string text;
 
