@@ -8,28 +8,28 @@ public class SpeakerManager : MonoBehaviour
 {
     static public SpeakerManager instance;
 
-    Dictionary<string, Talkable> speakers;
+    Dictionary<string, Speaker> speakers;
 
     void Start()
     {
-        speakers = new Dictionary<string, Talkable>();
-        Talkable[] foundSpeakers = FindObjectsOfType<Talkable>();
+        speakers = new Dictionary<string, Speaker>();
+        Speaker[] foundSpeakers = FindObjectsOfType<Speaker>();
 
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
-        foreach(Talkable speaker in foundSpeakers) {
+        foreach(Speaker speaker in foundSpeakers) {
             LoadSpeaker(speaker, nodeSerializer);
             speakers[speaker.speakerUID] = speaker;
         }
         instance = this;
     }
 
-    private void LoadSpeaker(Talkable speaker, XmlSerializer nodeSerializer) {
+    private void LoadSpeaker(Speaker speaker, XmlSerializer nodeSerializer) {
         string path = "Assets/DialoguesData/" + speaker.speakerUID + ".xml";        
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
         XmlNode root = doc.DocumentElement.SelectSingleNode("/conversation");
 
-        speaker.initialNodeUID = Int32.Parse(root.SelectSingleNode("initialLineUID").InnerText);
+        speaker.initialNodeID = Int32.Parse(root.SelectSingleNode("initialLineID").InnerText);
         speaker.speakerFullName = root.SelectSingleNode("fullName").InnerText;
 
         XmlNode xmlLines = root.SelectSingleNode("lines");
@@ -39,7 +39,7 @@ public class SpeakerManager : MonoBehaviour
         }
     }
 
-    public Talkable GetSpeaker(string name) {
+    public Speaker GetSpeaker(string name) {
         return speakers[name];
     }
 }

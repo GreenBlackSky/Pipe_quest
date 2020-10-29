@@ -1,5 +1,5 @@
 <conversation>
-    <initialLineUID>0</initialLineUID>
+    <initialLineID>0</initialLineID>
     <fullName>Professor</fullName>
     <lines>
         <line>
@@ -9,11 +9,11 @@
             <replies>
                 <reply>
                     <text>Greetings, Doctor!</text>
-                    <nextLineUID>1</nextLineUID>
+                    <nextLineID>1</nextLineID>
                 </reply>
                 <reply>
                     <text>Yo! Sup?</text>
-                    <nextLineUID>1</nextLineUID>
+                    <nextLineID>1</nextLineID>
                 </reply>
             </replies>
         </line>
@@ -24,11 +24,11 @@
             <replies>
                 <reply>
                     <text>I would!</text>
-                    <nextLineUID>2</nextLineUID>
+                    <nextLineID>2</nextLineID>
                 </reply>
                 <reply>
                     <text>I don't think so.</text>
-                    <nextLineUID>3</nextLineUID>
+                    <nextLineID>3</nextLineID>
                 </reply>
             </replies>
         </line>
@@ -39,7 +39,7 @@
             <replies>
                 <reply>
                     <text>See you soon!</text>
-                    <nextLineUID>-1</nextLineUID>
+                    <nextLineID>-1</nextLineID>
                 </reply>
             </replies>
         </line>
@@ -50,11 +50,11 @@
             <replies>
                 <reply>
                     <text>I don't have time!</text>
-                    <nextLineUID>4</nextLineUID>
+                    <nextLineID>4</nextLineID>
                 </reply>
                 <reply>
                     <text>I don't want to.</text>
-                    <nextLineUID>5</nextLineUID>
+                    <nextLineID>5</nextLineID>
                 </reply>
             </replies>
         </line>
@@ -65,7 +65,7 @@
             <replies>            
                 <reply>
                     <text>What a creep..</text>
-                    <nextLineUID>-1</nextLineUID>
+                    <nextLineID>-1</nextLineID>
                 </reply>
             </replies>
         </line>
@@ -76,7 +76,7 @@
             <replies>            
                 <reply>
                     <text>Whatev..</text>
-                    <nextLineUID>-1</nextLineUID>
+                    <nextLineID>-1</nextLineID>
                 </reply>
             </replies>
         </line>

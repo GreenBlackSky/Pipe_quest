@@ -65,7 +65,9 @@ public class GUIDialogueNode : DialogueNode {
     [XmlIgnore] public static float mainBlockHeight;
 
     public Vector2 position;
+    [XmlIgnore] public bool isInitialLine;
     [XmlIgnore] public Rect rect;
+    [XmlIgnore] public Rect initialLineToggleRect;
     [XmlIgnore] public Rect nameLabelRect;
     [XmlIgnore] public Rect nameRect;
     [XmlIgnore] public Rect textLabelRect;
@@ -94,7 +96,7 @@ public class GUIDialogueNode : DialogueNode {
         nameHeight = 20;
         padding = 10;
         buttonWidth = 20;
-        mainBlockHeight = padding * 4.0f + nameHeight * 3.0f + textHeight;
+        mainBlockHeight = padding * 4.0f + nameHeight * 4.0f + textHeight;
     }
 
     public GUIDialogueNode() {
@@ -110,6 +112,7 @@ public class GUIDialogueNode : DialogueNode {
  
     public void Init(DialogueEditor parentEditor) {
         editor = parentEditor;
+        isInitialLine = (parentEditor.initialLineID == this.lineID);
         nameLabelRect = new Rect(
             position.x + padding, position.y + padding,
             textWidth, nameHeight
@@ -118,12 +121,16 @@ public class GUIDialogueNode : DialogueNode {
             position.x + padding, position.y + padding + nameHeight,
             textWidth, nameHeight
         );
-        textLabelRect = new Rect(
+        initialLineToggleRect = new Rect(
             position.x + padding, position.y + padding + nameHeight * 2.0f,
+            textWidth, nameHeight
+        );
+        textLabelRect = new Rect(
+            position.x + padding, position.y + padding + nameHeight * 3.0f,
             textWidth, textHeight
         );
         textRect = new Rect(
-            position.x + padding, position.y + padding * 2.0f + nameHeight * 3.0f,
+            position.x + padding, position.y + padding * 2.0f + nameHeight * 4.0f,
             textWidth, textHeight
         );
         rect = new Rect(
@@ -143,6 +150,7 @@ public class GUIDialogueNode : DialogueNode {
 
     public void Drag(Vector2 delta) {
         rect.position += delta;
+        initialLineToggleRect.position += delta;
         nameLabelRect.position += delta;
         nameRect.position += delta;
         textLabelRect.position += delta;
@@ -160,6 +168,9 @@ public class GUIDialogueNode : DialogueNode {
         }
         GUI.Box(rect, "", style);
 
+        if(EditorGUI.Toggle(initialLineToggleRect, "Is first line", isInitialLine) != isInitialLine) {
+            editor.SetInitialLine(lineID);
+        }
         EditorGUI.LabelField(nameLabelRect, "Name:");
         if(GUI.Button(nameRect, speakerUID)) {
             GenericMenu toolsMenu = new GenericMenu();

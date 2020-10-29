@@ -1,14 +1,14 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-public class Talkable : MonoBehaviour, Interactable
+public class Speaker : MonoBehaviour, Interactable
 {
     public string speakerUID;
     public GameObject icon;
 
     public string speakerFullName;
 
-    public int initialNodeUID;
+    public int initialNodeID;
 
     public List<DialogueNode> lines;
 }

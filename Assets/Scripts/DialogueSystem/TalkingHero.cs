@@ -16,13 +16,13 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     GameObject speakerIcon;
     
     
-    Talkable talkable;
+    Speaker speaker;
     string currentSpeakerName = "";
 
     void setSpeaker(DialogueNode node) {
         if(currentSpeakerName != node.speakerUID) {
-            Talkable speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
-            speakerNameArea.text = talkable.speakerFullName;
+            Speaker speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
+            speakerNameArea.text = this.speaker.speakerFullName;
 
             Destroy(speakerIcon);
             speakerIcon = Instantiate(speaker.icon, iconSlot.transform, false);
@@ -65,7 +65,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         // TODO scrolling
         // TODO Sounds
         // TODO resize replies area
-        DialogueNode node = talkable.lines[nodeID];
+        DialogueNode node = speaker.lines[nodeID];
         setSpeaker(node);
         textPanel.text = node.text;
         setReplies(node);
@@ -73,12 +73,12 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
     public void interact(GameObject interactable)
     {
-        talkable = interactable.GetComponent<Talkable>();
-        if (talkable is null) {
+        speaker = interactable.GetComponent<Speaker>();
+        if (speaker is null) {
             return;
         }
         UIManager.Instance.SwitchState(State.DIALOG);
-        nextLine(talkable.initialNodeUID);
+        nextLine(speaker.initialNodeID);
     }
 
     void Start() {

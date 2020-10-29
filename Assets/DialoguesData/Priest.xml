@@ -1,5 +1,5 @@
 <conversation>
-    <initialLineUID>0</initialLineUID>
+    <initialLineID>0</initialLineID>
     <fullName>Professor</fullName>
     <lines>
         <line>
@@ -9,7 +9,7 @@
             <replies>            
                 <reply>
                     <text>Ok..</text>
-                    <nextLineUID>-1</nextLineUID>
+                    <nextLineID>-1</nextLineID>
                 </reply>
             </replies>
         </line>

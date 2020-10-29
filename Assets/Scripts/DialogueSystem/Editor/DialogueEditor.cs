@@ -47,6 +47,7 @@ public class DialogueEditor : EditorWindow {
     private Rect menuBar;
     private float menuBarHeight = 20f;
 
+    public int initialLineID = 0;
     private List<GUIDialogueNode> lines;
     private List<Connection> connections;
     
@@ -400,8 +401,8 @@ public class DialogueEditor : EditorWindow {
         XmlElement root = doc.CreateElement("conversation");
         doc.AppendChild(root);
 
-        XmlElement xmlinitialLineUID = doc.CreateElement("initialLineUID");
-        xmlinitialLineUID.InnerText = "0";
+        XmlElement xmlinitialLineUID = doc.CreateElement("initialLineID");
+        xmlinitialLineUID.InnerText = initialLineID.ToString();
         root.AppendChild(xmlinitialLineUID);
     
         XmlElement xmlSpeakerFullName = doc.CreateElement("fullName");
@@ -419,5 +420,11 @@ public class DialogueEditor : EditorWindow {
         root.AppendChild(xmlLines);
         doc.Save(path);
         ReadSpeakers();
+    }
+
+    public void SetInitialLine(int lineID) {
+        lines[initialLineID].isInitialLine = false;
+        lines[lineID].isInitialLine = true;
+        initialLineID = lineID;
     }
 }
