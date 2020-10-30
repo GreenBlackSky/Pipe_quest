@@ -5,6 +5,8 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
+namespace DialogueEditorSpace {
+
 public class SpeakerUIDPrompt : EditorWindow {
     public static string speakerUID;
     private string newSpeakerUID = "";
@@ -414,6 +416,7 @@ public class DialogueEditor : EditorWindow {
             writer.WriteWhitespace("");
             XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
             foreach (GUIDialogueNode node in lines) {
+                // Save with no type
                 nodeSerializer.Serialize(writer, node);
             }
         }
@@ -427,4 +430,6 @@ public class DialogueEditor : EditorWindow {
         lines[lineID].isInitialLine = true;
         initialLineID = lineID;
     }
+}
+
 }

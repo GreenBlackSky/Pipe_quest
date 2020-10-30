@@ -4,7 +4,9 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
+namespace DialogueEditorSpace {
 
+[XmlType("DialogueReply")]
 public class GUIDialogueReply : DialogueReply {
     [XmlIgnore] public ConnectionPoint outPoint;
     [XmlIgnore] public Rect removeButtonRect;
@@ -111,6 +113,7 @@ public class GUIDialogueNode : DialogueNode {
     }
  
     public void Init(DialogueEditor parentEditor) {
+        // TODO need at least one reply
         editor = parentEditor;
         isInitialLine = (parentEditor.initialLineID == this.lineID);
         nameLabelRect = new Rect(
@@ -268,4 +271,6 @@ public class GUIDialogueNode : DialogueNode {
         }
         return false;
     }
+}
+
 }
