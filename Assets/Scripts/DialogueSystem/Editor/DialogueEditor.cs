@@ -251,7 +251,7 @@ public class DialogueEditor : EditorWindow {
 
     private void ProcessContextMenu(Vector2 mousePosition) {
         GenericMenu genericMenu = new GenericMenu();
-        genericMenu.AddItem(new GUIContent("Add node"), false, () => OnClickAddNode(mousePosition)); 
+        genericMenu.AddItem(new GUIContent("Add node"), false, () => AddNode(mousePosition)); 
         genericMenu.ShowAsContext();
     }
  
@@ -267,12 +267,12 @@ public class DialogueEditor : EditorWindow {
         GUI.changed = true;
     }
 
-    public void OnClickAddNode(Vector2 mousePosition) {
+    public void AddNode(Vector2 mousePosition) {
         if (lines == null) {
             lines = new List<GUIDialogueNode>();
         }
- 
-        lines.Add(new GUIDialogueNode(this, mousePosition, lines.Count));
+
+        lines.Add(new GUIDialogueNode(this, new DialogueNode(lines.Count, mousePosition)));
     }
 
     public void OnClickInPoint(ConnectionPoint inPoint) {
@@ -301,7 +301,7 @@ public class DialogueEditor : EditorWindow {
         }
     }
 
-    public void OnClickRemoveNode(GUIDialogueNode node) {
+    public void RemoveNode(GUIDialogueNode node) {
         List<Connection> connectionsToRemove = new List<Connection>();
         // TODO optimize removing connections
         foreach (Connection connection in connections) {
@@ -316,7 +316,7 @@ public class DialogueEditor : EditorWindow {
         lines.Remove(node);
     }
 
-    public void OnClickRemoveConnection(Connection connection) {
+    public void RemoveConnection(Connection connection) {
         connections.Remove(connection);
         connection.Destroy();
     }
@@ -336,7 +336,7 @@ public class DialogueEditor : EditorWindow {
                 return;
             }
         }
-        connections.Add(new Connection(inPoint, outPoint, OnClickRemoveConnection));
+        connections.Add(new Connection(inPoint, outPoint, RemoveConnection));
     }
  
     private void ClearConnectionSelection() {
@@ -378,12 +378,12 @@ public class DialogueEditor : EditorWindow {
 
         speakerName = root.SelectSingleNode("fullName").InnerText;
 
-        XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
+        XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
         XmlNode xmlLines = root.SelectSingleNode("lines");
-        foreach(XmlNode lineData in xmlLines.ChildNodes) {
-            GUIDialogueNode line = nodeSerializer.Deserialize(new XmlNodeReader(lineData)) as GUIDialogueNode;
-            line.Init(this);
-            lines.Add(line);
+        foreach(XmlNode lineXmlData in xmlLines.ChildNodes) {
+            DialogueNode lineData = nodeSerializer.Deserialize(new XmlNodeReader(lineXmlData)) as DialogueNode;
+            GUIDialogueNode node = new GUIDialogueNode(this, lineData);
+            lines.Add(node);
         }
         foreach(GUIDialogueNode node in lines) {
             foreach(GUIDialogueReply reply in node.replies) {
@@ -412,10 +412,9 @@ public class DialogueEditor : EditorWindow {
         XmlElement xmlLines = doc.CreateElement("lines");
         using (XmlWriter writer = xmlLines.CreateNavigator().AppendChild()) {
             writer.WriteWhitespace("");
-            XmlSerializer nodeSerializer = new XmlSerializer(typeof(GUIDialogueNode));
+            XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
             foreach (GUIDialogueNode node in lines) {
-                // Save with no type
-                nodeSerializer.Serialize(writer, node);
+                nodeSerializer.Serialize(writer, node.nodeData);
             }
         }
         root.AppendChild(xmlLines);

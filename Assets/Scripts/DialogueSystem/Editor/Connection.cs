@@ -6,12 +6,12 @@ using UnityEngine;
 public class Connection {
     public ConnectionPoint inPoint;
     public ConnectionPoint outPoint;
-    public Action<Connection> OnClickRemoveConnection;
+    public Action<Connection> RemoveConnection;
  
-    public Connection(ConnectionPoint inPoint, ConnectionPoint outPoint, Action<Connection> OnClickRemoveConnection) {
+    public Connection(ConnectionPoint inPoint, ConnectionPoint outPoint, Action<Connection> RemoveConnection) {
         this.inPoint = inPoint;
         this.outPoint = outPoint;
-        this.OnClickRemoveConnection = OnClickRemoveConnection;
+        this.RemoveConnection = RemoveConnection;
         // TODO remove from here
         inPoint.connections.Add(this);
         outPoint.connections.Add(this);
@@ -30,8 +30,8 @@ public class Connection {
         );
  
         if (Handles.Button((inPoint.rect.center + outPoint.rect.center) * 0.5f, Quaternion.identity, 4, 8, Handles.RectangleHandleCap)) {
-            if (OnClickRemoveConnection != null) {
-                OnClickRemoveConnection(this);
+            if (RemoveConnection != null) {
+                RemoveConnection(this);
             }
         }
     }
