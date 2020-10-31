@@ -2,7 +2,6 @@
 using UnityEditor;
 using UnityEngine;
  
-namespace DialogueEditorSpace {
 
 public class Connection {
     public ConnectionPoint inPoint;
@@ -41,6 +40,4 @@ public class Connection {
         inPoint.connections.Remove(this);
         outPoint.replyParent.nextLineID = -1;
     }
-}
-
 }

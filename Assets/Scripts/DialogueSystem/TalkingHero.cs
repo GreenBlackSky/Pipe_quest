@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using static UIManager;
 
+
 public class TalkingHero : MonoBehaviour, InteractionListener
 {
     public GameObject heroIcon;
@@ -13,7 +14,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     Image iconSlot;
     Text textPanel;
     GameObject repliesArea;
-    GameObject speakerIcon;
+    Transform speakerIcon;
     
     
     Speaker speaker;
@@ -25,7 +26,8 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             speakerNameArea.text = this.speaker.speakerFullName;
 
             Destroy(speakerIcon);
-            speakerIcon = Instantiate(speaker.icon, iconSlot.transform, false);
+            Transform icon = speaker.transform.Find("Image");
+            speakerIcon = Instantiate(icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;
         }
     }

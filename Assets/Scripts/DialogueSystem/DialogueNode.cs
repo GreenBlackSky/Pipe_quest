@@ -4,6 +4,7 @@ using UnityEngine;
 
 
 [XmlRoot("reply")]
+// [XmlType(Namespace = "Game")]
 public class DialogueReply {
     [XmlElement("text")]        public string text;
     [XmlElement("nextLineID")] public int nextLineID;

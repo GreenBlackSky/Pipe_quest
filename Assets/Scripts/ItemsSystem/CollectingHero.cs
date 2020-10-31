@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using UnityEngine.UIElements;
+
 
 public class CollectingHero : MonoBehaviour, InteractionListener
 {
@@ -18,7 +20,8 @@ public class CollectingHero : MonoBehaviour, InteractionListener
         {
             if(!isFull[i])
             {
-                Instantiate(collectable.icon, slots[i].transform, false);
+                Transform icon = interactable.transform.Find("Image");
+                Instantiate(icon, slots[i].transform, false);
                 isFull[i] = true;
                 Destroy(interactable);
                 // TODO pass info about collected item

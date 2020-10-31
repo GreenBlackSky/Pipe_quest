@@ -5,7 +5,6 @@ using System.IO;
 using UnityEditor;
 using UnityEngine;
 
-namespace DialogueEditorSpace {
 
 public class SpeakerUIDPrompt : EditorWindow {
     public static string speakerUID;
@@ -100,7 +99,6 @@ public class DialogueEditor : EditorWindow {
     }
 
     private void DrawMenuBar() {
-        // TODO InitialNode
         EditorStyles.textField.wordWrap = true;
         menuBar = new Rect(0, 0, position.width, menuBarHeight);
 
@@ -430,6 +428,4 @@ public class DialogueEditor : EditorWindow {
         lines[lineID].isInitialLine = true;
         initialLineID = lineID;
     }
-}
-
 }

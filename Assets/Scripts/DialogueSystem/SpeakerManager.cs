@@ -4,6 +4,7 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class SpeakerManager : MonoBehaviour
 {
     static public SpeakerManager instance;

@@ -4,9 +4,8 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
-namespace DialogueEditorSpace {
 
-[XmlType("DialogueReply")]
+[XmlType("DialogueReply", Namespace = "Editor")]
 public class GUIDialogueReply : DialogueReply {
     [XmlIgnore] public ConnectionPoint outPoint;
     [XmlIgnore] public Rect removeButtonRect;
@@ -113,7 +112,6 @@ public class GUIDialogueNode : DialogueNode {
     }
  
     public void Init(DialogueEditor parentEditor) {
-        // TODO need at least one reply
         editor = parentEditor;
         isInitialLine = (parentEditor.initialLineID == this.lineID);
         nameLabelRect = new Rect(
@@ -146,7 +144,7 @@ public class GUIDialogueNode : DialogueNode {
         foreach(GUIDialogueReply reply in replies) {
             reply.Init(this);
         }
-
+        AddReply();
         inPoint = new ConnectionPoint(this, ConnectionPointType.In);
         repliesToRemove = new List<GUIDialogueReply>();
     }
@@ -188,7 +186,7 @@ public class GUIDialogueNode : DialogueNode {
 
         foreach(GUIDialogueReply reply in replies) {
             reply.text = EditorGUI.TextArea(reply.rect, reply.text);
-            if(GUI.Button(reply.removeButtonRect, "X")) {
+            if(GUI.Button(reply.removeButtonRect, "X") && replies.Count > 1) {
                 repliesToRemove.Add(reply);
             }
         }
@@ -271,6 +269,4 @@ public class GUIDialogueNode : DialogueNode {
         }
         return false;
     }
-}
-
 }
