@@ -89,6 +89,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         textPanel = GameObject.Find("DialogTextArea").GetComponent<Text>();
         iconSlot = GameObject.Find("SpeakerIconSlot").GetComponent<Image>();
         repliesArea = GameObject.Find("RepliesContentArea");
-        GameManager.Instance.SwitchState(State.GAMEPLAY);
+        GameManager.Instance.SwitchState(State.PAUSE_MENU);
     }
 }
