@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using static UIManager;
+using static GameManager;
 
 
 public class TalkingHero : MonoBehaviour, InteractionListener
@@ -49,7 +49,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             replayButtonInstance.GetComponentInChildren<Text>().text = reply.text;
             if(reply.nextLineID == -1) {
                 replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
-                    UIManager.Instance.SwitchState(State.GAMEPLAY);
+                    GameManager.Instance.SwitchState(State.GAMEPLAY);
                 }); 
             } else {
                 replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
@@ -79,16 +79,16 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         if (speaker is null) {
             return;
         }
-        UIManager.Instance.SwitchState(State.DIALOG);
+        GameManager.Instance.SwitchState(State.DIALOG);
         nextLine(speaker.initialNodeID);
     }
 
     void Start() {
-        UIManager.Instance.SwitchState(State.DIALOG);
+        GameManager.Instance.SwitchState(State.DIALOG);
         speakerNameArea = GameObject.Find("SpeakerNameArea").GetComponent<Text>();
         textPanel = GameObject.Find("DialogTextArea").GetComponent<Text>();
         iconSlot = GameObject.Find("SpeakerIconSlot").GetComponent<Image>();
         repliesArea = GameObject.Find("RepliesContentArea");
-        UIManager.Instance.SwitchState(State.GAMEPLAY);
+        GameManager.Instance.SwitchState(State.GAMEPLAY);
     }
 }

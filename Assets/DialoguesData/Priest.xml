@@ -1,17 +1,55 @@
 <conversation>
-    <initialLineID>0</initialLineID>
-    <fullName>Professor</fullName>
-    <lines>
-        <line>
-            <uid>0</uid>
-            <speakerUID>Priest</speakerUID>
-            <text>GO FUN YOURSEKF!</text>
-            <replies>            
-                <reply>
-                    <text>Ok..</text>
-                    <nextLineID>-1</nextLineID>
-                </reply>
-            </replies>
-        </line>
-    </lines>
+  <initialLineID>0</initialLineID>
+  <fullName>sdsddsd</fullName>
+  <lines>
+    <line xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <uid>0</uid>
+      <speakerUID>Priest</speakerUID>
+      <text>Hello</text>
+      <position>
+        <x>57</x>
+        <y>88</y>
+      </position>
+      <replies>
+        <reply>
+          <text>hi</text>
+          <nextLineID>1</nextLineID>
+        </reply>
+        <reply>
+          <text>ff</text>
+          <nextLineID>2</nextLineID>
+        </reply>
+      </replies>
+    </line>
+    <line xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <uid>1</uid>
+      <speakerUID>Priest</speakerUID>
+      <text>yo</text>
+      <position>
+        <x>427</x>
+        <y>51</y>
+      </position>
+      <replies>
+        <reply>
+          <text>...</text>
+          <nextLineID>-1</nextLineID>
+        </reply>
+      </replies>
+    </line>
+    <line xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <uid>2</uid>
+      <speakerUID>Priest</speakerUID>
+      <text>sup</text>
+      <position>
+        <x>619</x>
+        <y>262</y>
+      </position>
+      <replies>
+        <reply>
+          <text>...</text>
+          <nextLineID>-1</nextLineID>
+        </reply>
+      </replies>
+    </line>
+  </lines>
 </conversation>
