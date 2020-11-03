@@ -1,17 +1,14 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
+using static GameManager;
 
 public class PauseMenu : MonoBehaviour
 {
     public void OnContinueClicked() {
         GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
     }
+    // TODO pause menu design
     public void OnExitClicked() {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        GameManager.Instance.SwitchState(GameManager.State.MAIN_MENU);
     }
 }

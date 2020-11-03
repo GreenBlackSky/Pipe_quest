@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+
 
 public class GameManager : MonoBehaviour
 {
-    public GameObject MainMenu;
+    public GameObject MainMenuPanel;
     public GameObject GameplayUI;
     public GameObject PauseMenuPanel;
     public GameObject InventoryPanel;
@@ -13,27 +15,38 @@ public class GameManager : MonoBehaviour
     public GameObject MapMenuPanel;
     public GameObject CombatUI;
     public GameObject QuestsPanel;
+    public GameObject UICamera;
 
+    Dictionary<State, GameObject> _gameMenus;
+    public GameObject[] levels;
+    public GameObject _playerAvatar;
+    GameObject _currentLevel; // TODO choose levels
+    GameObject _currentAvatar;
     public static GameManager Instance { get; private set; }
-
     public enum State { GAMEPLAY, MAIN_MENU, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, QUESTS }
     State _state;
 
-    public void SwitchState(State state)
-    {
+    public void SwitchState(State state) {
         LeaveState(_state);
         _state = state;
         EnterState();
     }
 
-    void Start()
-    {
+    void Start() {
+        _gameMenus = new Dictionary<State, GameObject>() {
+            {State.PAUSE_MENU, PauseMenuPanel},
+            {State.INVENTORY, InventoryPanel},
+            {State.SKILL_MENU, SkillMenuPanel},
+            {State.MAP_MENU, MapMenuPanel},
+            {State.DIALOG, DialogPanel},
+            {State.COMBAT, CombatUI},
+            {State.QUESTS, QuestsPanel},
+        };
         Instance = this;
         SwitchState(State.MAIN_MENU);
     }
 
-    void Update()
-    {
+    void Update() {
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {
@@ -45,73 +58,50 @@ public class GameManager : MonoBehaviour
         } 
     } 
 
-    void LeaveState(State state)
-    {
-        switch (_state)
-        {
+    void LeaveState(State state) {
+        switch (_state) {
             case State.GAMEPLAY:
                 Time.timeScale = 0;
                 GameplayUI.SetActive(false);
                 break;
-            case State.PAUSE_MENU:
-                PauseMenuPanel.SetActive(false);
-                break;
-            case State.INVENTORY:
-                InventoryPanel.SetActive(false);
-                break;
-            case State.SKILL_MENU:
-                SkillMenuPanel.SetActive(false);
-                break;
-            case State.MAP_MENU:
-                MapMenuPanel.SetActive(false);
-                break;
-            case State.DIALOG:
-                DialogPanel.SetActive(false);
-                break;
-            case State.COMBAT:
-                CombatUI.SetActive(false);
-                break;
-            case State.QUESTS:
-                QuestsPanel.SetActive(false);
-                break;
             case State.MAIN_MENU:
-                MainMenu.SetActive(false);
+                UICamera.SetActive(false);
+                MainMenuPanel.SetActive(false);
+                _currentLevel = Instantiate(levels[0]);
+                _currentAvatar = Instantiate(_playerAvatar);
+                LinkAvatar(_currentAvatar);
+                break;
+            default:
+                _gameMenus[_state].SetActive(false);
                 break;
         }
     }
 
-    void EnterState()
-    {
-        switch (_state)
-        {
+    void EnterState() {
+        switch (_state) {
             case State.GAMEPLAY:
                 Time.timeScale = 1;
                 GameplayUI.SetActive(true);
                 break;
-            case State.PAUSE_MENU:
-                PauseMenuPanel.SetActive(true);
-                break;
-            case State.INVENTORY:
-                InventoryPanel.SetActive(true);
-                break;
-            case State.SKILL_MENU:
-                SkillMenuPanel.SetActive(true);
-                break;
-            case State.MAP_MENU:
-                MapMenuPanel.SetActive(true);
-                break;
-            case State.DIALOG:
-                DialogPanel.SetActive(true);
-                break;
-            case State.COMBAT:
-                CombatUI.SetActive(true);
-                break;
-            case State.QUESTS:
-                QuestsPanel.SetActive(true);
-                break;
             case State.MAIN_MENU:
-                MainMenu.SetActive(true);
+                Destroy(_currentLevel);
+                Destroy(_currentAvatar);
+                UICamera.SetActive(true);
+                MainMenuPanel.SetActive(true);
+                break;
+            default:
+                _gameMenus[_state].SetActive(true);
                 break;
         }
+    }
+
+    void LinkAvatar(GameObject avatar) {
+        GameObject interactButton = GameplayUI.transform.Find("InteractButton").gameObject;
+        avatar.GetComponent<InteractingHero>().interactionButton = interactButton;
+        // TODO BUG
+        interactButton.GetComponent<Button>().onClick.AddListener(() => avatar.GetComponent<InteractingHero>().interact());
+
+        avatar.GetComponent<CollectingHero>().InventoryPanel = InventoryPanel;
+        avatar.GetComponent<QuestDoingHero>().QuestsUI = QuestsPanel;
     }
 }

@@ -7,8 +7,8 @@ using UnityEngine.UI;
 public class QuestDoingHero : MonoBehaviour, InteractionListener {
     // TODO pass description and name to ui
     public GameObject QuestsUI;
-    Dictionary<string, HashSet<QuestNode>> _activeQuests;
 
+    Dictionary<string, HashSet<QuestNode>> _activeQuests;
     Dictionary<string, UnityAction> _callbacks;
 
     // TODO scrap
