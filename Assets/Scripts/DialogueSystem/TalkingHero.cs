@@ -9,6 +9,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     public GameObject replyButton;
 
     public int replyButtonDistance = 10;
+    bool initialized = false;
 
     Text speakerNameArea;
     Image iconSlot;
@@ -80,15 +81,17 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             return;
         }
         GameManager.Instance.SwitchState(State.DIALOG);
+        if(!initialized) {
+            Init();
+        }
         nextLine(speaker.initialNodeID);
     }
 
-    void Start() {
-        GameManager.Instance.SwitchState(State.DIALOG);
+    void Init() {
         speakerNameArea = GameObject.Find("SpeakerNameArea").GetComponent<Text>();
         textPanel = GameObject.Find("DialogTextArea").GetComponent<Text>();
         iconSlot = GameObject.Find("SpeakerIconSlot").GetComponent<Image>();
         repliesArea = GameObject.Find("RepliesContentArea");
-        GameManager.Instance.SwitchState(State.PAUSE_MENU);
+        initialized = true;
     }
 }

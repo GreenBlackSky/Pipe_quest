@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public GameObject MainMenu;
     public GameObject GameplayUI;
     public GameObject PauseMenuPanel;
     public GameObject InventoryPanel;
@@ -28,7 +29,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Instance = this;
-        SwitchState(State.GAMEPLAY);
+        SwitchState(State.MAIN_MENU);
     }
 
     void Update()
@@ -73,6 +74,9 @@ public class GameManager : MonoBehaviour
             case State.QUESTS:
                 QuestsPanel.SetActive(false);
                 break;
+            case State.MAIN_MENU:
+                MainMenu.SetActive(false);
+                break;
         }
     }
 
@@ -104,6 +108,9 @@ public class GameManager : MonoBehaviour
                 break;
             case State.QUESTS:
                 QuestsPanel.SetActive(true);
+                break;
+            case State.MAIN_MENU:
+                MainMenu.SetActive(true);
                 break;
         }
     }
