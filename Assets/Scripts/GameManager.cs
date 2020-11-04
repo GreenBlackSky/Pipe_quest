@@ -18,13 +18,19 @@ public class GameManager : MonoBehaviour
     public GameObject UICamera;
 
     Dictionary<State, GameObject> _gameMenus;
+
     public GameObject[] levels;
-    public GameObject _playerAvatar;
     GameObject _currentLevel; // TODO choose levels
+    int _currentLevelID = 0;
+
+    public GameObject[] _playerAvatars;
     GameObject _currentAvatar;
+    int _currentAvatarID = 0;
+
     public static GameManager Instance { get; private set; }
+
     // TODO loading state
-    public enum State { GAMEPLAY, MAIN_MENU, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, QUESTS }
+    public enum State { GAMEPLAY, MAIN_MENU, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, JOURNAL_MENU }
     State _state;
 
     public void SwitchState(State state) {
@@ -41,7 +47,7 @@ public class GameManager : MonoBehaviour
             {State.MAP_MENU, MapMenuPanel},
             {State.DIALOG, DialogPanel},
             {State.COMBAT, CombatUI},
-            {State.QUESTS, QuestsPanel},
+            {State.JOURNAL_MENU, QuestsPanel},
         };
         Instance = this;
         SwitchState(State.MAIN_MENU);
@@ -51,7 +57,7 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {
-            SwitchState(State.QUESTS);
+            SwitchState(State.JOURNAL_MENU);
         } else if (Input.GetKeyDown(KeyCode.Tab)) {
             SwitchState(State.GAMEPLAY);
         } else if (Input.GetKeyDown(KeyCode.Escape)) {
@@ -99,8 +105,8 @@ public class GameManager : MonoBehaviour
     void LeaveMainMenu() {
         UICamera.SetActive(false);
         MainMenuPanel.SetActive(false);
-        _currentLevel = Instantiate(levels[0]);
-        _currentAvatar = Instantiate(_playerAvatar);
+        _currentLevel = Instantiate(levels[_currentLevelID]);
+        _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
         LinkAvatar(_currentAvatar);
         SpeakerManager.instance.LoadAllSpeakers();
     }

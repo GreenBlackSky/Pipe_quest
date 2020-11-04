@@ -16,6 +16,6 @@ public class QuestNode {
     public int targetAmount;
     public int progress = 0;    
 
-    // TODO scrap
+    // TODO rework
     public QuestNode nextNode;
 }

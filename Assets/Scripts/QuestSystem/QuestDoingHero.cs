@@ -11,11 +11,10 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
     Dictionary<string, HashSet<QuestNode>> _activeQuests;
     Dictionary<string, UnityAction> _callbacks;
 
-    // TODO scrap
+    // TODO move to events system
     public void interact(GameObject interactable) {
         QuestGiver questGiver = interactable.GetComponent<QuestGiver>();
-        if (questGiver is null)
-        {
+        if (questGiver is null) {
             return;
         }
 
@@ -70,14 +69,20 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
         Callback("Talk");
     }
 
+    void Reached() {
+        Callback("Reach");
+    }
+
     void Start() {
         _callbacks = new Dictionary<string, UnityAction>() {
             {"Collect", Collected},
-            {"Talk", Talked}
+            {"Talk", Talked},
+            {"Reach", Reached}
         };
         _activeQuests = new Dictionary<string, HashSet<QuestNode>>() {
             {"Collect", new HashSet<QuestNode>()},
-            {"Talk", new HashSet<QuestNode>()}
+            {"Talk", new HashSet<QuestNode>()},
+            {"Reach", new HashSet<QuestNode>()}
         };
     }
 }

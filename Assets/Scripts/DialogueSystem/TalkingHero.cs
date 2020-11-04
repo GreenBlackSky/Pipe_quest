@@ -64,10 +64,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     public void nextLine(int nodeID)
     {
         // TODO events
-        // TODO phasing
-        // TODO scrolling
-        // TODO Sounds
-        // TODO resize replies area
         DialogueNode node = speaker.lines[nodeID];
         setSpeaker(node);
         textPanel.text = node.text;

@@ -12,7 +12,7 @@ public class Connection {
         this.inPoint = inPoint;
         this.outPoint = outPoint;
         this.RemoveConnection = RemoveConnection;
-        // TODO remove from here
+        // HACK remove from here
         inPoint.connections.Add(this);
         outPoint.connections.Add(this);
         outPoint.replyParent.nextLineID = inPoint.parent.lineID;

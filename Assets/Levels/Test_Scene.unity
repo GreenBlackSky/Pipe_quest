@@ -2914,7 +2914,8 @@ MonoBehaviour:
   UICamera: {fileID: 1659544986}
   levels:
   - {fileID: 5679580404948706409, guid: 1d99212570226b24d934326dddb0f5a2, type: 3}
-  _playerAvatar: {fileID: 3771821756157678139, guid: a48579e197d956b43a4edff0cdcaf255, type: 3}
+  _playerAvatars:
+  - {fileID: 3771821756157678139, guid: a48579e197d956b43a4edff0cdcaf255, type: 3}
 --- !u!4 &907418069
 Transform:
   m_ObjectHideFlags: 0
