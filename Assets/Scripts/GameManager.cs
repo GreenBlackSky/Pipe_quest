@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
     GameObject _currentLevel; // TODO choose levels
     GameObject _currentAvatar;
     public static GameManager Instance { get; private set; }
+    // TODO loading state
     public enum State { GAMEPLAY, MAIN_MENU, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, QUESTS }
     State _state;
 
@@ -65,11 +66,7 @@ public class GameManager : MonoBehaviour
                 GameplayUI.SetActive(false);
                 break;
             case State.MAIN_MENU:
-                UICamera.SetActive(false);
-                MainMenuPanel.SetActive(false);
-                _currentLevel = Instantiate(levels[0]);
-                _currentAvatar = Instantiate(_playerAvatar);
-                LinkAvatar(_currentAvatar);
+                LeaveMainMenu();
                 break;
             default:
                 _gameMenus[_state].SetActive(false);
@@ -84,10 +81,7 @@ public class GameManager : MonoBehaviour
                 GameplayUI.SetActive(true);
                 break;
             case State.MAIN_MENU:
-                Destroy(_currentLevel);
-                Destroy(_currentAvatar);
-                UICamera.SetActive(true);
-                MainMenuPanel.SetActive(true);
+                EnterMainMenu();
                 break;
             default:
                 _gameMenus[_state].SetActive(true);
@@ -95,12 +89,26 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    void EnterMainMenu() {
+        Destroy(_currentLevel);
+        Destroy(_currentAvatar);
+        UICamera.SetActive(true);
+        MainMenuPanel.SetActive(true);
+    }
+
+    void LeaveMainMenu() {
+        UICamera.SetActive(false);
+        MainMenuPanel.SetActive(false);
+        _currentLevel = Instantiate(levels[0]);
+        _currentAvatar = Instantiate(_playerAvatar);
+        LinkAvatar(_currentAvatar);
+        SpeakerManager.instance.LoadAllSpeakers();
+    }
+
     void LinkAvatar(GameObject avatar) {
         GameObject interactButton = GameplayUI.transform.Find("InteractButton").gameObject;
         avatar.GetComponent<InteractingHero>().interactionButton = interactButton;
-        // TODO BUG
         interactButton.GetComponent<Button>().onClick.AddListener(() => avatar.GetComponent<InteractingHero>().interact());
-
         avatar.GetComponent<CollectingHero>().InventoryPanel = InventoryPanel;
         avatar.GetComponent<QuestDoingHero>().QuestsUI = QuestsPanel;
     }

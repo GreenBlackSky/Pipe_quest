@@ -11,17 +11,20 @@ public class SpeakerManager : MonoBehaviour
 
     Dictionary<string, Speaker> speakers;
 
-    void Start()
-    {
+    void Start() {
         speakers = new Dictionary<string, Speaker>();
-        Speaker[] foundSpeakers = FindObjectsOfType<Speaker>();
+        instance = this;
+        LoadAllSpeakers();
+    }
 
+    public void LoadAllSpeakers() {
+        speakers.Clear();
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
+        Speaker[] foundSpeakers = FindObjectsOfType<Speaker>();
         foreach(Speaker speaker in foundSpeakers) {
             LoadSpeaker(speaker, nodeSerializer);
             speakers[speaker.speakerUID] = speaker;
         }
-        instance = this;
     }
 
     private void LoadSpeaker(Speaker speaker, XmlSerializer nodeSerializer) {

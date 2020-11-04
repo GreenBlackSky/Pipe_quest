@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class Speaker : MonoBehaviour, Interactable
 {
-    // TODO search for icon
     public string speakerUID;
     
     [HideInInspector]

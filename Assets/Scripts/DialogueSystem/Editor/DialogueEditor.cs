@@ -39,7 +39,6 @@ public class SpeakerUIDPrompt : EditorWindow {
 public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
     // TODO output into console
-    // TODO position shift on load
 
     public string speakerUID = "new speaker";
     public string speakerName = "";

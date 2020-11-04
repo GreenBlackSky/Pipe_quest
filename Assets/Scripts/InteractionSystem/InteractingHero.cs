@@ -31,8 +31,7 @@ public class InteractingHero : MonoBehaviour
         }
     }
 
-    public void interact()
-    {
+    public void interact(Transform t=null) {
         if (_interactable != null)
         {
             foreach(InteractionListener listener in _listeners)
