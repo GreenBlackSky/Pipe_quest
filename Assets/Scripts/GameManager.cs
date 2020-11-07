@@ -29,8 +29,18 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
-    // TODO loading state
-    public enum State { GAMEPLAY, MAIN_MENU, COMBAT, PAUSE_MENU, INVENTORY, DIALOG, SKILL_MENU, MAP_MENU, JOURNAL_MENU }
+    public enum State { 
+        GAMEPLAY,
+        LOADING,
+        MAIN_MENU,
+        COMBAT,
+        PAUSE_MENU,
+        INVENTORY,
+        DIALOG,
+        SKILL_MENU,
+        MAP_MENU,
+        JOURNAL_MENU
+    }
     State _state;
 
     public void SwitchState(State state) {
@@ -106,9 +116,10 @@ public class GameManager : MonoBehaviour
         UICamera.SetActive(false);
         MainMenuPanel.SetActive(false);
         _currentLevel = Instantiate(levels[_currentLevelID]);
+        string current_level_name = levels[_currentLevelID].name;
         _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
         LinkAvatar(_currentAvatar);
-        SpeakerManager.instance.LoadAllSpeakers();
+        SpeakerManager.instance.LoadAllSpeakers(current_level_name);
     }
 
     void LinkAvatar(GameObject avatar) {

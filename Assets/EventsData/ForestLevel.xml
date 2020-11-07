@@ -1,0 +1,87 @@
+<Level>
+    <Listeners>
+        <Listener initial="true" id="0">
+            <Trigger type="dialogue_reply" id="1"/>
+            <Conditions>
+                <Condition type="quest_not_completed">
+                    <arg name="quest_id" type="int" value="0"/>
+                </Condition>
+            </Conditions>
+            <Callbacks>
+                <Callback type="start_quest">
+                    <arg name="quest_id" type="int" val="0"/> 
+                </Callback>
+                <Callback type="start_listener">
+                    <arg name="listener_id" type="int" val="1"/> 
+                </Callback>
+                <Callback type="start_listener">
+                    <arg name="listener_id" type="int" val="2"/> 
+                </Callback>
+                <Callback type="start_listener">
+                    <arg name="listener_id" type="int" val="3"/> 
+                </Callback>
+                <Callback type="stop_listener">
+                    <arg name="listener_id" type="int" val="0"/> 
+                </Callback>
+            </Callbacks>
+        </Listener>
+
+        <Listener id="1">
+            <Trigger type="collect_item" id="mushroom"/>
+            <Conditions>
+                <Condition type="has_item_less_then">
+                    <arg name="item_id" type="string" value="mushroom"/>
+                    <arg name="value" type="int" value="5"/>
+                </Condition>
+            </Conditions>
+            <Callbacks>
+                <Callback type="progress_quest">
+                    <arg name="quest_id" type="int" val="0"/>
+                    <arg name="next_node_id" type="int" val="1"/>
+                </Callback>
+            </Callbacks>
+        </Listener>
+
+        <Listener id="2">
+            <Trigger type="lost_item" id="mushroom"/>
+            <Conditions>
+                <Condition type="has_item_more_then">
+                    <arg name="item_id" type="string" value="mushroom"/>
+                    <arg name="value" type="int" value="0"/>
+                </Condition>
+            </Conditions>
+            <Callbacks>
+                <Callback type="progress_quest">
+                    <arg name="quest_id" type="int" val="0"/>
+                    <arg name="next_node_id" type="int" val="2"/>
+                </Callback>
+            </Callbacks>
+        </Listener>
+
+        <Listener id="3">
+            <Trigger type="dialogue_reply" id="2"/>
+            <Conditions>
+                <Condition type="has_item">
+                    <arg name="item_id" type="string" value="mushroom"/>
+                    <arg name="value" type="int" value="5"/>
+                </Condition>
+            </Conditions>
+            <Callbacks>
+                <Callback type="progress_quest">
+                    <arg name="quest_id" type="int" val="1"/>
+                    <arg name="next_node_id" type="int" val="3"/>
+                </Callback>
+                <Callback type="stop_listener">
+                    <arg name="listener_id" type="int" val="1"/> 
+                </Callback>
+                <Callback type="stop_listener">
+                    <arg name="listener_id" type="int" val="2"/> 
+                </Callback>
+                <Callback type="stop_listener">
+                    <arg name="listener_id" type="int" val="3"/> 
+                </Callback>
+            </Callbacks>
+        </Listener>
+    </Listeners>
+
+</Level>

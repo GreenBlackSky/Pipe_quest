@@ -14,21 +14,21 @@ public class SpeakerManager : MonoBehaviour
     void Start() {
         speakers = new Dictionary<string, Speaker>();
         instance = this;
-        LoadAllSpeakers();
+        // LoadAllSpeakers();
     }
 
-    public void LoadAllSpeakers() {
+    public void LoadAllSpeakers(string level_name) {
         speakers.Clear();
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
         Speaker[] foundSpeakers = FindObjectsOfType<Speaker>();
         foreach(Speaker speaker in foundSpeakers) {
-            LoadSpeaker(speaker, nodeSerializer);
+            LoadSpeaker(level_name, speaker, nodeSerializer);
             speakers[speaker.speakerUID] = speaker;
         }
     }
 
-    private void LoadSpeaker(Speaker speaker, XmlSerializer nodeSerializer) {
-        string path = "Assets/DialoguesData/" + speaker.speakerUID + ".xml";        
+    private void LoadSpeaker(string level_name, Speaker speaker, XmlSerializer nodeSerializer) {
+        string path = "Assets/DialoguesData/" + level_name + "/" + speaker.speakerUID + ".xml";        
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
         XmlNode root = doc.DocumentElement.SelectSingleNode("/conversation");

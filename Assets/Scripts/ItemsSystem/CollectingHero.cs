@@ -16,20 +16,16 @@ public class CollectingHero : MonoBehaviour, InteractionListener
         for(int i = 0; i < shildCount; i++) {
             slots[i] = InventoryPanel.transform.Find("Slot" + i.ToString());
         }
-        
     }
 
     public void interact(GameObject interactable)
     {
         Collectable collectable = interactable.GetComponent<Collectable>();
-        if(collectable is null)
-        {
+        if(collectable is null) {
             return;
         }
-        for(int i = 0; i < slots.Length; i++)
-        {
-            if(!isFull[i])
-            {
+        for(int i = 0; i < slots.Length; i++) {
+            if(!isFull[i]) {
                 Transform icon = interactable.transform.Find("Image");
                 Instantiate(icon, slots[i], false);
                 isFull[i] = true;
