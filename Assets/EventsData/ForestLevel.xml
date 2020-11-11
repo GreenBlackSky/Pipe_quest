@@ -1,11 +1,13 @@
 <Level>
     <Listeners>
         <Listener initial="true" id="0">
-            <Trigger type="dialogue_reply" id="1"/>
+            <Triggers>
+                <Trigger type="dialogue_reply" id="1"/>
+            </Triggers>
             <Conditions>
-                <Condition type="quest_not_completed">
-                    <arg name="quest_id" type="int" value="0"/>
-                </Condition>
+                <Complex_condition type="not">
+                    </Condition id="quest_completed">
+                </Complex_condition>
             </Conditions>
             <Callbacks>
                 <Callback type="start_quest">
@@ -27,12 +29,16 @@
         </Listener>
 
         <Listener id="1">
-            <Trigger type="collect_item" id="mushroom"/>
+            <Triggers>
+                <Trigger type="collect_item" id="mushroom"/>
+            </Triggers>
             <Conditions>
-                <Condition type="has_item_less_then">
-                    <arg name="item_id" type="string" value="mushroom"/>
+                <Complex_condition type="less_then">
+                    <Provider type="items_in_inventory">
+                        <arg name="item_id" type="string" value="mushroom"/>
+                    </Provider>
                     <arg name="value" type="int" value="5"/>
-                </Condition>
+                </Complex_condition type="less_then">
             </Conditions>
             <Callbacks>
                 <Callback type="progress_quest">
@@ -43,12 +49,16 @@
         </Listener>
 
         <Listener id="2">
-            <Trigger type="lost_item" id="mushroom"/>
+            <Triggers>
+                <Trigger type="lost_item" id="mushroom"/>
+            </Triggers>
             <Conditions>
-                <Condition type="has_item_more_then">
-                    <arg name="item_id" type="string" value="mushroom"/>
+                <Complex_condition type="more_then">
+                    <Provider type="items_in_inventory">
+                        <arg name="item_id" type="string" value="mushroom"/>
+                    </Provider>
                     <arg name="value" type="int" value="0"/>
-                </Condition>
+                </Complex_condition>
             </Conditions>
             <Callbacks>
                 <Callback type="progress_quest">
@@ -59,12 +69,16 @@
         </Listener>
 
         <Listener id="3">
-            <Trigger type="dialogue_reply" id="2"/>
+            <Triggers>
+                <Trigger type="dialogue_reply" id="2"/>
+            </Triggers>
             <Conditions>
-                <Condition type="has_item">
-                    <arg name="item_id" type="string" value="mushroom"/>
+                <Complex_condition type="more_then">
+                    <Provider type="items_in_inventory">
+                        <arg name="item_id" type="string" value="mushroom"/>
+                    </Provider>
                     <arg name="value" type="int" value="5"/>
-                </Condition>
+                </Complex_condition>
             </Conditions>
             <Callbacks>
                 <Callback type="progress_quest">
@@ -83,5 +97,4 @@
             </Callbacks>
         </Listener>
     </Listeners>
-
 </Level>
