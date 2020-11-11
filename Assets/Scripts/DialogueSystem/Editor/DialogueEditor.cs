@@ -40,7 +40,10 @@ public class DialogueEditor : EditorWindow {
     // TODO resize text inputs and node itself
     // TODO output into console
 
-    public string speakerUID = "new speaker";
+    public string levelUID = "<choose level>";
+    public List<string> allLevelsUIDs;
+
+    public string speakerUID = "<new speaker>";
     public string speakerName = "";
     public List<string> allSpeakersUIDs;
 
@@ -58,6 +61,7 @@ public class DialogueEditor : EditorWindow {
     private Vector2 offset;
 
     public DialogueEditor() {
+        allLevelsUIDs = new List<string>();
         allSpeakersUIDs = new List<string>();
     }
 
@@ -72,10 +76,11 @@ public class DialogueEditor : EditorWindow {
         GUIDialogueNode.initStylesAndSizes();
         ConnectionPoint.initStyles();
         InitEditor();
-        ReadSpeakers();
+        ReadLevels();
     }
 
     private void InitEditor() {
+        allLevelsUIDs = new List<string>();
         allSpeakersUIDs = new List<string>();
         lines = new List<GUIDialogueNode>();
         connections = new List<Connection>();
@@ -104,10 +109,20 @@ public class DialogueEditor : EditorWindow {
         GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
         GUILayout.BeginHorizontal();
     
+        if(GUILayout.Button(new GUIContent(levelUID), EditorStyles.toolbarButton, GUILayout.Width(100))) {
+            GenericMenu toolsMenu = new GenericMenu();
+            foreach(string uid in allLevelsUIDs) {
+                toolsMenu.AddItem(new GUIContent(uid), false, () => LoadLevel(uid));
+            }
+            toolsMenu.DropDown(new Rect(0, 0, 0, 16));
+        }
+
+        if(!levelChoosen()) {
+            GUI.enabled = false;
+        }
         if(GUILayout.Button(new GUIContent("New"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
             ClearEditor();
         }
-        GUILayout.Space(10);
 
         if(GUILayout.Button(new GUIContent("Open"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
             GenericMenu toolsMenu = new GenericMenu();
@@ -116,7 +131,6 @@ public class DialogueEditor : EditorWindow {
             }
             toolsMenu.DropDown(new Rect(0, 0, 0, 16));
         }
-        GUILayout.Space(10);
 
         if(GUILayout.Button(new GUIContent("Save as"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
             GUILayout.EndHorizontal();
@@ -131,16 +145,12 @@ public class DialogueEditor : EditorWindow {
             GUILayout.BeginArea(menuBar, EditorStyles.toolbar);
             GUILayout.BeginHorizontal();
         }
-        GUILayout.Space(10);
 
-        if (speakerUID == "new speaker") {
+        if (speakerUID == "<new speaker>") {
             GUI.enabled = false;
-            GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60));
-            GUI.enabled = true;
-        } else {
-            if(GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
-                SaveDialogue();
-            }
+        }
+        if(GUILayout.Button(new GUIContent("Save"), EditorStyles.toolbarButton, GUILayout.Width(60))) {
+            SaveDialogue();
         }
  
         GUILayout.Label(speakerUID);
@@ -351,12 +361,23 @@ public class DialogueEditor : EditorWindow {
         connections.Clear();
         lines.Clear();
         speakerName = "";
-        speakerUID = "new speaker";
+        speakerUID = "<new speaker>";
     }
 
-    void ReadSpeakers() {
-        allSpeakersUIDs.Clear();
+    void ReadLevels() {
+        allLevelsUIDs.Clear();        
         string path = @"" + "Assets/DialoguesData/";
+        List<string> levelNames = new List<string>(Directory.GetDirectories(path));
+        foreach(string name in levelNames) {
+            string[] parts = name.Split('/');
+            allLevelsUIDs.Add(parts[parts.Length - 1]);
+        }
+    }
+
+    void LoadLevel(string levelUID) {
+        this.levelUID = levelUID;
+        allSpeakersUIDs.Clear();
+        string path = @"" + "Assets/DialoguesData/" + levelUID + "/";
         List<string> fileNames = new List<string>(Directory.GetFiles(path));
         foreach(string name in fileNames) {
             if(name.EndsWith(".xml")) {
@@ -368,9 +389,12 @@ public class DialogueEditor : EditorWindow {
     }
 
     void LoadDialogue(string UID) {
+        if(!levelChoosen()) {
+            return;
+        }
         ClearEditor();
         this.speakerUID = UID;
-        string path = "Assets/DialoguesData/" + UID + ".xml";
+        string path = "Assets/DialoguesData/" + levelUID + "/" + UID + ".xml";
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
         XmlNode root = doc.DocumentElement.SelectSingleNode("/conversation");
@@ -395,7 +419,10 @@ public class DialogueEditor : EditorWindow {
     }
 
     void SaveDialogue() {
-        string path = "Assets/DialoguesData/" + speakerUID + ".xml";
+        if(!levelChoosen()) {
+            return;
+        }
+        string path = "Assets/DialoguesData/" + levelUID + "/" + speakerUID + ".xml";
         XmlDocument doc = new XmlDocument();
         XmlElement root = doc.CreateElement("conversation");
         doc.AppendChild(root);
@@ -418,12 +445,16 @@ public class DialogueEditor : EditorWindow {
         }
         root.AppendChild(xmlLines);
         doc.Save(path);
-        ReadSpeakers();
+        LoadLevel(levelUID);
     }
 
     public void SetInitialLine(int lineID) {
         lines[initialLineID].isInitialLine = false;
         lines[lineID].isInitialLine = true;
         initialLineID = lineID;
+    }
+
+    public bool levelChoosen() {
+        return levelUID != "<choose level>";
     }
 }
