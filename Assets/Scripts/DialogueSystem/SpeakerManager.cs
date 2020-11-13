@@ -14,7 +14,6 @@ public class SpeakerManager : MonoBehaviour
     void Start() {
         speakers = new Dictionary<string, Speaker>();
         instance = this;
-        // LoadAllSpeakers();
     }
 
     public void LoadAllSpeakers(string level_name) {

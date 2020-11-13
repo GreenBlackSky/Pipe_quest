@@ -1,0 +1,35 @@
+<Level>
+    <Quest id=0 name="Finding mushrooms">
+
+        <Node initial="true" id="0">
+            <Text>
+                Some dude in forest asked me to find 5 magic mushrooms.
+            </Text>
+            <Counter>
+                <Text>Mushrooms found:</Text>
+                <Goal_value>5</Goal_value>
+            </Counter>
+        </Node>
+
+        <Node type="progress_node" id="1">
+            <Parent_node_id>0</Parent_node_id>
+        </Node>
+
+        <Node type="regress_node" id="2">
+            <Parent_node_id>0</Parent_node_id>
+        </Node>
+
+        <Node initial="true" id="3">
+            <Text>
+                I found all mushrooms. Time to talk to dude again.
+            </Text>
+        </Node>
+
+        <Node finish_quest="true" id="4">
+            <Text>
+                I gave wierdo all the mushrooms and left nothing for myself. 
+            </Text>
+        </Node>
+
+    </Quest>
+</Level>

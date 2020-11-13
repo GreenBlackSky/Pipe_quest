@@ -1,6 +1,6 @@
 // lost_item
 // collect_item
-// say_line
+// dialogue_reply
 // arrive_at
 // equip_item
 // enter_battle

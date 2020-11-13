@@ -2,11 +2,11 @@
     <Listeners>
         <Listener initial="true" id="0">
             <Triggers>
-                <Trigger type="dialogue_reply" id="1"/>
+                <Trigger type="dialogue_reply" id="0"/>
             </Triggers>
             <Conditions>
                 <Complex_condition type="not">
-                    </Condition id="quest_completed">
+                    <Condition id="quest_completed"/>
                 </Complex_condition>
             </Conditions>
             <Callbacks>
@@ -41,7 +41,7 @@
                 </Complex_condition type="less_then">
             </Conditions>
             <Callbacks>
-                <Callback type="progress_quest">
+                <Callback type="set_quest_node">
                     <arg name="quest_id" type="int" val="0"/>
                     <arg name="next_node_id" type="int" val="1"/>
                 </Callback>
@@ -61,19 +61,22 @@
                 </Complex_condition>
             </Conditions>
             <Callbacks>
-                <Callback type="progress_quest">
+                <Callback type="set_quest_node">
                     <arg name="quest_id" type="int" val="0"/>
                     <arg name="next_node_id" type="int" val="2"/>
+                </Callback>
+                <Callback type="start_listener">
+                    <arg name="listener_id" type="int" val="1"/> 
                 </Callback>
             </Callbacks>
         </Listener>
 
         <Listener id="3">
             <Triggers>
-                <Trigger type="dialogue_reply" id="2"/>
+                <Trigger type="collect_item" id="mushroom"/>
             </Triggers>
             <Conditions>
-                <Complex_condition type="more_then">
+                <Complex_condition type="is_equal_to">
                     <Provider type="items_in_inventory">
                         <arg name="item_id" type="string" value="mushroom"/>
                     </Provider>
@@ -81,18 +84,41 @@
                 </Complex_condition>
             </Conditions>
             <Callbacks>
-                <Callback type="progress_quest">
-                    <arg name="quest_id" type="int" val="1"/>
+                <Callback type="set_quest_node">
+                    <arg name="quest_id" type="int" val="0"/>
                     <arg name="next_node_id" type="int" val="3"/>
                 </Callback>
                 <Callback type="stop_listener">
                     <arg name="listener_id" type="int" val="1"/> 
+                </Callback>
+            </Callbacks>
+        </Listener>
+
+        <Listener id="4">
+            <Triggers>
+                <Trigger type="dialogue_reply" id="1"/>
+            </Triggers>
+            <Conditions>
+                <Complex_condition type="is_equal_to">
+                    <Provider type="items_in_inventory">
+                        <arg name="item_id" type="string" value="mushroom"/>
+                    </Provider>
+                    <arg name="value" type="int" value="5"/>
+                </Complex_condition>
+            </Conditions>
+            <Callbacks>
+                <Callback type="set_quest_node">
+                    <arg name="quest_id" type="int" val="0"/>
+                    <arg name="next_node_id" type="int" val="4"/>
                 </Callback>
                 <Callback type="stop_listener">
                     <arg name="listener_id" type="int" val="2"/> 
                 </Callback>
                 <Callback type="stop_listener">
                     <arg name="listener_id" type="int" val="3"/> 
+                </Callback>
+                <Callback type="stop_listener">
+                    <arg name="listener_id" type="int" val="4"/> 
                 </Callback>
             </Callbacks>
         </Listener>
