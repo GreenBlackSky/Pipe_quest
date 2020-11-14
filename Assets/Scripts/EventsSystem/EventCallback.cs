@@ -1,3 +1,7 @@
+class EventCallback {
+    
+}
+
 // set_flag
 // unset_flag
 

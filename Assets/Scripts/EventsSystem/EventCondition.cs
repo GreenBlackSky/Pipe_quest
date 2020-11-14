@@ -1,3 +1,7 @@
+class EventCondition {
+    
+}
+
 // complex_condition
 // not
 // and

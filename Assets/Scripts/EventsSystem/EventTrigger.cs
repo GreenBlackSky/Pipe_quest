@@ -1,3 +1,7 @@
+
+class EventTrigger {
+    
+}
 // lost_item
 // collect_item
 // dialogue_reply
