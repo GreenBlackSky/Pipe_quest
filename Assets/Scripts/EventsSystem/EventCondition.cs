@@ -1,5 +1,12 @@
-class EventCondition {
-    
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+public class EventCondition {
+
+    public bool check() {
+        return true;
+    }
 }
 
 // complex_condition

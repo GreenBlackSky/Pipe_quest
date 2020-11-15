@@ -19,6 +19,7 @@ public class InteractingHero : MonoBehaviour
         {
             _interactable = other.gameObject;
             interactionButton.SetActive(true);
+            // TODO pass interaction prompt
         }
     }
 

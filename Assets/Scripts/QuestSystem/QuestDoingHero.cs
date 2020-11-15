@@ -20,7 +20,7 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
 
         QuestNode quest = questGiver.quest.head;
         if(_activeQuests[quest.type].Count == 0) {
-            EventManager.StartListening(quest.type, _callbacks[quest.type]);
+            // EventManager.StartListening(quest.type, _callbacks[quest.type]);
         }
         _activeQuests[quest.type].Add(quest);
         Text[] textFields = QuestsUI.GetComponentsInChildren<Text>();
@@ -48,7 +48,7 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
 
         foreach(QuestNode quest in NewQuests) {
             if(_activeQuests[quest.type].Count == 0) {
-                EventManager.StartListening(quest.type, _callbacks[quest.type]);
+                // EventManager.StartListening(quest.type, _callbacks[quest.type]);
             }
             _activeQuests[quest.type].Add(quest);
         }
@@ -57,7 +57,7 @@ public class QuestDoingHero : MonoBehaviour, InteractionListener {
             _activeQuests[Action].Remove(quest);
         }
         if(_activeQuests[Action].Count == 0) {
-            EventManager.StopListening(Action, _callbacks[Action]);
+            // EventManager.StopListening(Action, _callbacks[Action]);
         }
     }
 

@@ -31,7 +31,7 @@ public class CollectingHero : MonoBehaviour, InteractionListener
                 isFull[i] = true;
                 Destroy(interactable);
                 // TODO pass info about collected item
-                EventManager.TriggerEvent("Collect");
+                // EventManager.TriggerEvent("Collect");
                 break;
             }
         }

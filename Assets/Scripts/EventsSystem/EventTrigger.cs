@@ -1,5 +1,8 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
-class EventTrigger {
+public class EventTrigger {
     
 }
 // lost_item

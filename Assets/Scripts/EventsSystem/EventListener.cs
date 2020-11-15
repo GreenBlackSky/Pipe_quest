@@ -4,7 +4,9 @@ using System.Collections.Generic;
 
 public class EventListener {
     public int id;
-    private List<EventTrigger> triggers;
-    private List<EventCondition> conditions;
-    private List<EventCallback> callbacks;
+    public bool isInitial;
+
+    public List<EventTrigger> triggers;
+    public List<EventCondition> conditions;
+    public List<EventCallback> callbacks;
 }
