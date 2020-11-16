@@ -24,6 +24,11 @@ public enum CallbackType {
 
 public class EventCallback {
     public CallbackType type;
+    public List<(string, string)> args;
+
+    public EventCallback() {
+        args = new List<(string, string)>();
+    }
 
     public void call() {
 
