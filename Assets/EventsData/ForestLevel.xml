@@ -2,7 +2,7 @@
     <listeners>
         <listener initial="true" id="0">
             <triggers>
-                <trigger type="dialogue_reply" id="0"/>
+                <trigger type="dialogue_reply" arg="0"/>
             </triggers>
             <conditions>
                 <complex_condition type="not">
@@ -30,7 +30,7 @@
 
         <listener id="1">
             <triggers>
-                <trigger type="collect_item" id="mushroom"/>
+                <trigger type="collect_item" arg="mushroom"/>
             </triggers>
             <conditions>
                 <complex_condition type="less_then">
@@ -50,7 +50,7 @@
 
         <listener id="2">
             <triggers>
-                <trigger type="lost_item" id="mushroom"/>
+                <trigger type="lost_item" arg="mushroom"/>
             </triggers>
             <conditions>
                 <complex_condition type="more_then">
@@ -73,7 +73,7 @@
 
         <listener id="3">
             <triggers>
-                <trigger type="collect_item" id="mushroom"/>
+                <trigger type="collect_item" arg="mushroom"/>
             </triggers>
             <conditions>
                 <complex_condition type="is_equal_to">
@@ -96,7 +96,7 @@
 
         <listener id="4">
             <triggers>
-                <trigger type="dialogue_reply" id="1"/>
+                <trigger type="dialogue_reply" arg="1"/>
             </triggers>
             <conditions>
                 <complex_condition type="is_equal_to">

@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
     Dictionary<int, EventListener> allListeners;
-    Dictionary<int, EventListener> activeListeners;
+    Dictionary<(EventTriggerType, string), List<EventListener>> activeListeners;
 
     LinkedList<(int, int)> eventsQueue;
 
@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour {
 
     private void Start() {
         allListeners = new Dictionary<int, EventListener>();
-        activeListeners = new Dictionary<int, EventListener>();
+        activeListeners = new Dictionary<(EventTriggerType, string), List<EventListener>>();
         eventsQueue = new LinkedList<(int, int)>();
         Instance = this;
     }
@@ -26,12 +26,12 @@ public class EventManager : MonoBehaviour {
             var (listenerID, arg) = eventsQueue.First.Value;
             eventsQueue.RemoveFirst();
 
-            if(!activeListeners.ContainsKey(listenerID)) {
+            if(!allListeners.ContainsKey(listenerID)) {
                 continue;
             }
 
             bool conditionsSet = true;
-            EventListener listener = activeListeners[listenerID];
+            EventListener listener = allListeners[listenerID];
             foreach(EventCondition condition in listener.conditions) {
                 if(!condition.check()) {
                     conditionsSet = false;
@@ -73,14 +73,22 @@ public class EventManager : MonoBehaviour {
     }
 
     public static void StartListening(int listenerId) {
-        // activate listener
+
+        EventListener listener = Instance.allListeners[listenerId];
+        foreach(EventTrigger trigger in listener.triggers) {
+            (EventTriggerType, string) key = (trigger.type, trigger.agr)
+            if(!Instance.activeListeners.ContainsKey(key)) {
+                Instance.activeListeners[key] = new List<EventListener>();
+            }
+            Instance.activeListeners[key].Add(listener);
+        }
     }
 
     public static void StopListening(int listenerId) {
         // deactivate listener
     }
 
-    public static void TriggerEvent(int listenerID, int arg=0) {
+    public static void TriggerEvent(EventTriggerType type, string arg="") {
         // enque events
     }
 }
