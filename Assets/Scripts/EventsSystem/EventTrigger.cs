@@ -12,10 +12,23 @@ public enum EventTriggerType{
     leave_battle,
 }
 
-public class EventTrigger {
+
+public class  EventTrigger {
+    static Dictionary<(EventTriggerType, string), EventTrigger> triggers;
+    
     public EventTriggerType type;
-    public string agr;
+    public string arg;
 
     public EventTrigger() {}
 
+    public EventTrigger(EventTriggerType type, string arg) {
+        this.type = type;
+        this.arg = arg;
+
+        if(triggers == null) {
+            triggers = new Dictionary<(EventTriggerType, string), EventTrigger>();
+        }
+
+        triggers[(type, arg)] = this;
+    }
 }

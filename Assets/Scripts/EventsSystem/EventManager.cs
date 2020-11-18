@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
     Dictionary<int, EventListener> allListeners;
-    Dictionary<(EventTriggerType, string), List<EventListener>> activeListeners;
+    Dictionary<EventTrigger, List<EventListener>> activeListeners;
 
     LinkedList<(int, int)> eventsQueue;
 
@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour {
 
     private void Start() {
         allListeners = new Dictionary<int, EventListener>();
-        activeListeners = new Dictionary<(EventTriggerType, string), List<EventListener>>();
+        activeListeners = new Dictionary<EventTrigger, List<EventListener>>();
         eventsQueue = new LinkedList<(int, int)>();
         Instance = this;
     }
@@ -73,22 +73,21 @@ public class EventManager : MonoBehaviour {
     }
 
     public static void StartListening(int listenerId) {
-
         EventListener listener = Instance.allListeners[listenerId];
         foreach(EventTrigger trigger in listener.triggers) {
-            (EventTriggerType, string) key = (trigger.type, trigger.agr)
-            if(!Instance.activeListeners.ContainsKey(key)) {
-                Instance.activeListeners[key] = new List<EventListener>();
+            if(!Instance.activeListeners.ContainsKey(trigger)) {
+                Instance.activeListeners[trigger] = new List<EventListener>();
             }
-            Instance.activeListeners[key].Add(listener);
+            Instance.activeListeners[trigger].Add(listener);
         }
     }
 
     public static void StopListening(int listenerId) {
-        // deactivate listener
+        EventListener listener = Instance.allListeners[listenerId];
+        
     }
 
-    public static void TriggerEvent(EventTriggerType type, string arg="") {
+    public static void TriggerEvent(EventTrigger trigger) {
         // enque events
     }
 }
