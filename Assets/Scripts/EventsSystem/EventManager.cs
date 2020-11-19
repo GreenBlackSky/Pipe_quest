@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class EventManager : MonoBehaviour {
     Dictionary<int, EventListener> allListeners;
-    Dictionary<EventTrigger, List<EventListener>> activeListeners;
+    Dictionary<(EventTriggerType, string), List<EventListener>> activeListeners;
 
     LinkedList<(int, int)> eventsQueue;
 
@@ -13,7 +13,7 @@ public class EventManager : MonoBehaviour {
 
     private void Start() {
         allListeners = new Dictionary<int, EventListener>();
-        activeListeners = new Dictionary<EventTrigger, List<EventListener>>();
+        activeListeners = new Dictionary<(EventTriggerType, string), List<EventListener>>();
         eventsQueue = new LinkedList<(int, int)>();
         Instance = this;
     }
@@ -74,7 +74,7 @@ public class EventManager : MonoBehaviour {
 
     public static void StartListening(int listenerId) {
         EventListener listener = Instance.allListeners[listenerId];
-        foreach(EventTrigger trigger in listener.triggers) {
+        foreach((EventTriggerType, string) trigger in listener.triggers) {
             if(!Instance.activeListeners.ContainsKey(trigger)) {
                 Instance.activeListeners[trigger] = new List<EventListener>();
             }
@@ -87,7 +87,7 @@ public class EventManager : MonoBehaviour {
         
     }
 
-    public static void TriggerEvent(EventTrigger trigger) {
+    public static void TriggerEvent(EventTriggerType trigger, string arg) {
         // enque events
     }
 }

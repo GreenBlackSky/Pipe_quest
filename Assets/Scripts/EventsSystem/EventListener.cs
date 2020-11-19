@@ -6,7 +6,7 @@ public class EventListener {
     public int id;
     public bool isInitial;
 
-    public List<EventTrigger> triggers;
+    public List<(EventTriggerType, string)> triggers;
     public List<EventCondition> conditions;
     public List<EventCallback> callbacks;
 }
