@@ -45,9 +45,13 @@ public class EventManager : MonoBehaviour {
 
             foreach(EventCallback callback in listener.callbacks) {
                 if(callback.type == CallbackType.stop_listener) {
-
+                    int listener_id = int.Parse(callback.getArg("listener_id"));
+                    EventListener listenerToRemove = allListeners[listener_id];
+                    listenersToRemove.Add(listenerToRemove);
                 } else if (callback.type == CallbackType.start_listener) {
-
+                    int listener_id = int.Parse(callback.getArg("listener_id"));
+                    EventListener listenerToAdd = allListeners[listener_id];
+                    listenersToAdd.Add(listenerToAdd);
                 } else {
                     callback.call();
                 }

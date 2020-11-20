@@ -24,10 +24,19 @@ public enum CallbackType {
 
 public class EventCallback {
     public CallbackType type;
-    public List<(string, string)> args;
+    public List<(string, string, string)> args;
 
     public EventCallback() {
-        args = new List<(string, string)>();
+        args = new List<(string, string, string)>();
+    }
+
+    public string getArg(string argName) {
+        foreach((string, string, string) arg in args) {
+            if(arg.Item1 == argName) {
+                return arg.Item3;
+            }
+        }
+        return null;
     }
 
     public void call() {
