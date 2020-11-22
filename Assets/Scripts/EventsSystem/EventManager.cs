@@ -4,18 +4,17 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour {
-    Dictionary<int, EventListener> allListeners;
-    Dictionary<(EventTriggerType, string), List<EventListener>> activeListeners;
+    static Dictionary<int, EventListener> allListeners;
+    static Dictionary<(EventTriggerType, string), List<EventListener>> activeTriggers;
+    static Dictionary<int, List<(EventTriggerType, string)>> activeListeneresIDs;
 
-    LinkedList<(int, int)> eventsQueue;
-
-    public static EventManager Instance { get; private set; }
+    static LinkedList<EventListener> eventsQueue;
 
     private void Start() {
         allListeners = new Dictionary<int, EventListener>();
-        activeListeners = new Dictionary<(EventTriggerType, string), List<EventListener>>();
-        eventsQueue = new LinkedList<(int, int)>();
-        Instance = this;
+        activeTriggers = new Dictionary<(EventTriggerType, string), List<EventListener>>();
+        activeListeneresIDs = new Dictionary<int, List<(EventTriggerType, string)>>();
+        eventsQueue = new LinkedList<EventListener>();
     }
 
     private void Update() {
@@ -23,15 +22,10 @@ public class EventManager : MonoBehaviour {
         List<EventListener> listenersToAdd = new List<EventListener>();
         List<EventListener> listenersToRemove = new List<EventListener>();
         while(eventsQueue.Count != 0) {
-            var (listenerID, arg) = eventsQueue.First.Value;
+            EventListener listener = eventsQueue.First.Value;
             eventsQueue.RemoveFirst();
 
-            if(!allListeners.ContainsKey(listenerID)) {
-                continue;
-            }
-
             bool conditionsSet = true;
-            EventListener listener = allListeners[listenerID];
             foreach(EventCondition condition in listener.conditions) {
                 if(!condition.check()) {
                     conditionsSet = false;
@@ -56,12 +50,21 @@ public class EventManager : MonoBehaviour {
                     callback.call();
                 }
             }
+
+            foreach(EventListener listenerToRemove in listenersToRemove) {
+                StopListening(listener.id);
+            }
+
+            foreach(EventListener listenerToAdd in listenersToAdd) {
+                StartListening(listener.id);
+            }
+
         }
     }
 
-    public void LoadAllListeners(string level_name) {
-        allListeners.Clear();
-        activeListeners.Clear();
+    public static void LoadAllListeners(string level_name) {
+        ClearListeners();
+
         string path = @"" + "Assets/EventsData/" + level_name + ".xml";
         XmlSerializer listenerSerializer = new XmlSerializer(typeof(EventListener));
         XmlDocument doc = new XmlDocument();
@@ -76,22 +79,50 @@ public class EventManager : MonoBehaviour {
         }
     }
 
+    public static void ClearListeners() {
+        allListeners.Clear();
+
+        foreach(List<EventListener> listeners in activeTriggers.Values) {
+            listeners.Clear();
+        }
+        activeTriggers.Clear();
+
+        foreach(List<(EventTriggerType, string)> listeners in activeListeneresIDs.Values) {
+            listeners.Clear();
+        }
+        activeListeneresIDs.Clear();
+    }
+
     public static void StartListening(int listenerId) {
-        EventListener listener = Instance.allListeners[listenerId];
+        EventListener listener = allListeners[listenerId];
         foreach((EventTriggerType, string) trigger in listener.triggers) {
-            if(!Instance.activeListeners.ContainsKey(trigger)) {
-                Instance.activeListeners[trigger] = new List<EventListener>();
+            if(!activeTriggers.ContainsKey(trigger)) {
+                activeTriggers[trigger] = new List<EventListener>();
             }
-            Instance.activeListeners[trigger].Add(listener);
+            activeTriggers[trigger].Add(listener);
+            
+            if(!activeListeneresIDs.ContainsKey(listener.id)) {
+                activeListeneresIDs[listener.id] = new List<(EventTriggerType, string)>();
+            }
+            activeListeneresIDs[listener.id].Add(trigger);
         }
     }
 
     public static void StopListening(int listenerId) {
-        EventListener listener = Instance.allListeners[listenerId];
-        
+        EventListener listener = allListeners[listenerId];
+        foreach((EventTriggerType, string) trigger in listener.triggers) {
+            if(activeTriggers.ContainsKey(trigger)) {
+                activeTriggers[trigger].Remove(listener);
+            }
+            if(activeListeneresIDs.ContainsKey(listener.id)) {
+                activeListeneresIDs[listener.id].Remove(trigger);
+            }
+        }
     }
 
-    public static void TriggerEvent(EventTriggerType trigger, string arg) {
-        // enque events
+    public static void TriggerEvent(EventTriggerType trigger, string triggerArg, int arg) {
+        foreach(EventListener listener in activeTriggers[(trigger, triggerArg)]) {
+            eventsQueue.AddLast(listener);
+        }
     }
 }
