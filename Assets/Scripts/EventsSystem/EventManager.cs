@@ -4,37 +4,42 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour {
+    static Dictionary<string, int> flags;
+
     static Dictionary<int, EventListener> allListeners;
     static Dictionary<(EventTriggerType, string), List<EventListener>> activeTriggers;
-    static Dictionary<int, List<(EventTriggerType, string)>> activeListeneresIDs;
 
     static LinkedList<EventListener> eventsQueue;
 
+    static bool systemsInitialized = false;
+
     private void Start() {
+        flags = new Dictionary<string, int>();
+
         allListeners = new Dictionary<int, EventListener>();
         activeTriggers = new Dictionary<(EventTriggerType, string), List<EventListener>>();
-        activeListeneresIDs = new Dictionary<int, List<(EventTriggerType, string)>>();
+
         eventsQueue = new LinkedList<EventListener>();
     }
 
     private void Update() {
-        // TODO check time of execution
+        if(!systemsInitialized) {
+            EventCondition.Init();
+            ConditionProvider.Init();
+            EventCallback.Init();
+            systemsInitialized = true;
+        }
+
         List<EventListener> listenersToAdd = new List<EventListener>();
         List<EventListener> listenersToRemove = new List<EventListener>();
-        while(eventsQueue.Count != 0) {
+        List<EventCallback> callbacksToCall = new List<EventCallback>();
+
+        if(eventsQueue.Count != 0) {
             EventListener listener = eventsQueue.First.Value;
             eventsQueue.RemoveFirst();
 
-            bool conditionsSet = true;
-            foreach(EventCondition condition in listener.conditions) {
-                if(!condition.check()) {
-                    conditionsSet = false;
-                    break;
-                }
-            }
-
-            if(!conditionsSet) {
-                continue;
+            if(!listener.CheckConditions()) {
+                return;
             }
 
             foreach(EventCallback callback in listener.callbacks) {
@@ -47,7 +52,7 @@ public class EventManager : MonoBehaviour {
                     EventListener listenerToAdd = allListeners[listener_id];
                     listenersToAdd.Add(listenerToAdd);
                 } else {
-                    callback.call();
+                    callbacksToCall.Add(callback);
                 }
             }
 
@@ -59,6 +64,9 @@ public class EventManager : MonoBehaviour {
                 StartListening(listener.id);
             }
 
+            foreach(EventCallback callback in callbacksToCall) {
+                 callback.call();
+            }
         }
     }
 
@@ -80,17 +88,11 @@ public class EventManager : MonoBehaviour {
     }
 
     public static void ClearListeners() {
-        allListeners.Clear();
-
         foreach(List<EventListener> listeners in activeTriggers.Values) {
             listeners.Clear();
         }
         activeTriggers.Clear();
-
-        foreach(List<(EventTriggerType, string)> listeners in activeListeneresIDs.Values) {
-            listeners.Clear();
-        }
-        activeListeneresIDs.Clear();
+        allListeners.Clear();
     }
 
     public static void StartListening(int listenerId) {
@@ -100,11 +102,6 @@ public class EventManager : MonoBehaviour {
                 activeTriggers[trigger] = new List<EventListener>();
             }
             activeTriggers[trigger].Add(listener);
-            
-            if(!activeListeneresIDs.ContainsKey(listener.id)) {
-                activeListeneresIDs[listener.id] = new List<(EventTriggerType, string)>();
-            }
-            activeListeneresIDs[listener.id].Add(trigger);
         }
     }
 
@@ -113,9 +110,6 @@ public class EventManager : MonoBehaviour {
         foreach((EventTriggerType, string) trigger in listener.triggers) {
             if(activeTriggers.ContainsKey(trigger)) {
                 activeTriggers[trigger].Remove(listener);
-            }
-            if(activeListeneresIDs.ContainsKey(listener.id)) {
-                activeListeneresIDs[listener.id].Remove(trigger);
             }
         }
     }

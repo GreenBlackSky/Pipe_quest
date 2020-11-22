@@ -9,4 +9,13 @@ public class EventListener {
     public List<(EventTriggerType, string)> triggers;
     public List<EventCondition> conditions;
     public List<EventCallback> callbacks;
+
+    public bool CheckConditions() {
+        foreach(EventCondition condition in conditions) {
+            if(!condition.Check()) {
+                return false;
+            }
+        }
+        return true;
+    }
 }

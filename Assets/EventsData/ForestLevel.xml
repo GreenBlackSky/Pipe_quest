@@ -1,13 +1,13 @@
 <level>
     <listeners>
-        <listener initial="true" id="0">
+        <listener initial="true" singleuse="true" id="0">
             <triggers>
                 <trigger type="dialogue_reply" arg="0"/>
             </triggers>
             <conditions>
-                <complex_condition type="not">
+                <condition type="not">
                     <condition id="quest_completed"/>
-                </complex_condition>
+                </condition>
             </conditions>
             <callbacks>
                 <callback type="start_quest">
@@ -22,9 +22,6 @@
                 <callback type="start_listener">
                     <arg name="listener_id" type="int" val="3"/> 
                 </callback>
-                <callback type="stop_listener">
-                    <arg name="listener_id" type="int" val="0"/> 
-                </callback>
             </callbacks>
         </listener>
 
@@ -33,12 +30,12 @@
                 <trigger type="collect_item" arg="mushroom"/>
             </triggers>
             <conditions>
-                <complex_condition type="less_then">
+                <condition type="less_then">
                     <provider type="items_in_inventory">
                         <arg name="item_id" type="string" value="mushroom"/>
                     </provider>
                     <arg name="value" type="int" value="5"/>
-                </complex_condition type="less_then">
+                </condition type="less_then">
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
@@ -53,12 +50,12 @@
                 <trigger type="lost_item" arg="mushroom"/>
             </triggers>
             <conditions>
-                <complex_condition type="more_then">
+                <condition type="more_then">
                     <provider type="items_in_inventory">
                         <arg name="item_id" type="string" value="mushroom"/>
                     </provider>
                     <arg name="value" type="int" value="0"/>
-                </complex_condition>
+                </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
@@ -76,12 +73,12 @@
                 <trigger type="collect_item" arg="mushroom"/>
             </triggers>
             <conditions>
-                <complex_condition type="is_equal_to">
+                <condition type="is_equal_to">
                     <provider type="items_in_inventory">
                         <arg name="item_id" type="string" value="mushroom"/>
                     </provider>
                     <arg name="value" type="int" value="5"/>
-                </complex_condition>
+                </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
@@ -99,12 +96,12 @@
                 <trigger type="dialogue_reply" arg="1"/>
             </triggers>
             <conditions>
-                <complex_condition type="is_equal_to">
+                <condition type="is_equal_to">
                     <provider type="items_in_inventory">
                         <arg name="item_id" type="string" value="mushroom"/>
                     </provider>
                     <arg name="value" type="int" value="5"/>
-                </complex_condition>
+                </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">

@@ -30,6 +30,10 @@ public class EventCallback {
         args = new List<(string, string, string)>();
     }
 
+    public static void Init() {
+
+    }
+
     public string getArg(string argName) {
         foreach((string, string, string) arg in args) {
             if(arg.Item1 == argName) {

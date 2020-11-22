@@ -5,5 +5,15 @@ public enum ConditionProviderType {
 }
 
 public class ConditionProvider {
-    
+    public ConditionProviderType type;
+
+    public ConditionProvider() {}
+
+    public static void Init() {
+
+    }
+
+    public int Provide() {
+        return 0;
+    }
 }
