@@ -6,7 +6,9 @@
             </triggers>
             <conditions>
                 <condition type="not">
-                    <condition id="quest_completed"/>
+                    <condition type="quest_completed">
+                        <arg name="quest_id" type="int" value="0"/>
+                    </condition>
                 </condition>
             </conditions>
             <callbacks>

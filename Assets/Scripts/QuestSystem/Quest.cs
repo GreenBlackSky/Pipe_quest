@@ -1,21 +1,15 @@
-﻿
+﻿using System.Collections.Generic;
 
-[System.Serializable]
 public class Quest {
+    public int id;
     public string name;
     public string description;
-
-    public QuestNode head;
+    public List<QuestNode> nodes;
 }
 
-[System.Serializable]
 public class QuestNode {
     public string description;
-    public string type;
     public int targetItem;
     public int targetAmount;
-    public int progress = 0;    
-
-    // TODO rework
-    public QuestNode nextNode;
+    public int progress = 0;
 }

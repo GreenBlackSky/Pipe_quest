@@ -4,7 +4,8 @@ using System.Collections.Generic;
 
 public class EventListener {
     public int id;
-    public bool isInitial;
+    public bool initial;
+    public bool singleuse;
 
     public List<(EventTriggerType, string)> triggers;
     public List<EventCondition> conditions;

@@ -17,14 +17,16 @@ public class EventCondition {
     public EventConditionType type;
     public List<EventCondition> innerConditions;
     public ConditionProvider provider;
-    public int value;
+    public int intValue;
+    public string strValue;
+    static QuestDoingHero questHero;
 
     public EventCondition() {
         innerConditions = new List<EventCondition>();
     }
 
-    public static void Init() {
-
+    public static void Init(QuestDoingHero hero) {
+        questHero = hero;
     }
 
     public bool Check() {
@@ -46,17 +48,15 @@ public class EventCondition {
                 }
                 return false;
             case EventConditionType.more_than:
-                return provider.Provide() > value;
+                return provider.Provide() > intValue;
             case EventConditionType.less_than:
-                return provider.Provide() < value;
+                return provider.Provide() < intValue;
             case EventConditionType.equal_to:
-                return provider.Provide() == value;
+                return provider.Provide() == intValue;
             case EventConditionType.flag_set:
-
-                break;
+                return (questHero.flags.ContainsKey(strValue) && questHero.flags[strValue] > 0);
             case EventConditionType.quest_completed:
-
-                break;
+                return (questHero.completedQuests.ContainsKey(intValue));
         }
         return true;
     }

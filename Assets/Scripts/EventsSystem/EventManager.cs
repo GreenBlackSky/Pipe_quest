@@ -4,17 +4,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EventManager : MonoBehaviour {
-    static Dictionary<string, int> flags;
 
     static Dictionary<int, EventListener> allListeners;
     static Dictionary<(EventTriggerType, string), List<EventListener>> activeTriggers;
 
     static LinkedList<EventListener> eventsQueue;
 
-    static bool systemsInitialized = false;
-
     private void Start() {
-        flags = new Dictionary<string, int>();
 
         allListeners = new Dictionary<int, EventListener>();
         activeTriggers = new Dictionary<(EventTriggerType, string), List<EventListener>>();
@@ -22,14 +18,13 @@ public class EventManager : MonoBehaviour {
         eventsQueue = new LinkedList<EventListener>();
     }
 
-    private void Update() {
-        if(!systemsInitialized) {
-            EventCondition.Init();
-            ConditionProvider.Init();
-            EventCallback.Init();
-            systemsInitialized = true;
-        }
+    public void Init(QuestDoingHero hero) {
+        EventCondition.Init(hero);
+        ConditionProvider.Init();
+        EventCallback.Init();
+    }
 
+    private void Update() {
         List<EventListener> listenersToAdd = new List<EventListener>();
         List<EventListener> listenersToRemove = new List<EventListener>();
         List<EventCallback> callbacksToCall = new List<EventCallback>();
@@ -65,7 +60,7 @@ public class EventManager : MonoBehaviour {
             }
 
             foreach(EventCallback callback in callbacksToCall) {
-                 callback.call();
+                 callback.Call();
             }
         }
     }
@@ -81,7 +76,7 @@ public class EventManager : MonoBehaviour {
         foreach(XmlNode listenerData in root.ChildNodes) {
             EventListener listener = listenerSerializer.Deserialize(new XmlNodeReader(listenerData)) as EventListener;
             allListeners[listener.id] = listener;
-            if(listener.isInitial) {
+            if(listener.initial) {
                 StartListening(listener.id);
             }
         }

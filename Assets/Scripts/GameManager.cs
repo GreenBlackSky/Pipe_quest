@@ -20,7 +20,7 @@ public class GameManager : MonoBehaviour
     Dictionary<State, GameObject> _gameMenus;
 
     public GameObject[] levels;
-    GameObject _currentLevel; // TODO choose levels
+    GameObject _currentLevel;
     int _currentLevelID = 0;
 
     public GameObject[] _playerAvatars;
@@ -127,6 +127,9 @@ public class GameManager : MonoBehaviour
         avatar.GetComponent<InteractingHero>().interactionButton = interactButton;
         interactButton.GetComponent<Button>().onClick.AddListener(() => avatar.GetComponent<InteractingHero>().interact());
         avatar.GetComponent<CollectingHero>().InventoryPanel = InventoryPanel;
-        avatar.GetComponent<QuestDoingHero>().QuestsUI = QuestsPanel;
+
+        QuestDoingHero questHero = avatar.GetComponent<QuestDoingHero>();
+        questHero.QuestsUI = QuestsPanel;
+        avatar.GetComponent<EventManager>().Init(questHero);
     }
 }
