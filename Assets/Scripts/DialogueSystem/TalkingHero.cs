@@ -26,7 +26,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             Speaker speaker = SpeakerManager.instance.GetSpeaker(node.speakerUID);
             speakerNameArea.text = this.speaker.speakerFullName;
 
-            Destroy(speakerIcon);
+            Destroy(speakerIcon); // BUG can't remove transform becouse script depends on it
             Transform icon = speaker.transform.Find("Image");
             speakerIcon = Instantiate(icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;

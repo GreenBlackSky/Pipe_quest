@@ -16,7 +16,7 @@ public enum EventConditionType {
 public class EventCondition {
     public EventConditionType type;
     public List<EventCondition> innerConditions;
-    public ConditionProvider provider;
+    public EventValueProvider provider;
     public int intValue;
     public string strValue;
     static QuestDoingHero questHero;

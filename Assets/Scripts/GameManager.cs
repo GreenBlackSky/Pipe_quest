@@ -124,12 +124,14 @@ public class GameManager : MonoBehaviour
 
     void LinkAvatar(GameObject avatar) {
         GameObject interactButton = GameplayUI.transform.Find("InteractButton").gameObject;
+        CollectingHero itemsHero = avatar.GetComponent<CollectingHero>();
+        QuestDoingHero questHero = avatar.GetComponent<QuestDoingHero>();
+
         avatar.GetComponent<InteractingHero>().interactionButton = interactButton;
         interactButton.GetComponent<Button>().onClick.AddListener(() => avatar.GetComponent<InteractingHero>().interact());
-        avatar.GetComponent<CollectingHero>().InventoryPanel = InventoryPanel;
-
-        QuestDoingHero questHero = avatar.GetComponent<QuestDoingHero>();
+        itemsHero.InventoryPanel = InventoryPanel;
         questHero.QuestsUI = QuestsPanel;
-        avatar.GetComponent<EventManager>().Init(questHero);
+
+        avatar.GetComponent<EventManager>().Init(questHero, itemsHero);
     }
 }

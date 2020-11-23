@@ -18,9 +18,9 @@ public class EventManager : MonoBehaviour {
         eventsQueue = new LinkedList<EventListener>();
     }
 
-    public void Init(QuestDoingHero hero) {
-        EventCondition.Init(hero);
-        ConditionProvider.Init();
+    public void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
+        EventCondition.Init(questHero);
+        EventValueProvider.Init(itemsHero);
         EventCallback.Init();
     }
 
