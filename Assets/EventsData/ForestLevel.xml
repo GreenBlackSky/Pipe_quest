@@ -7,22 +7,20 @@
             <conditions>
                 <condition type="not">
                     <condition type="quest_completed">
-                        <arg name="quest_id" type="int" value="0"/>
-                    </condition>
                 </condition>
             </conditions>
             <callbacks>
                 <callback type="start_quest">
-                    <arg name="quest_id" type="int" val="0"/> 
+                    <intArg>0</intArg>
                 </callback>
                 <callback type="start_listener">
-                    <arg name="listener_id" type="int" val="1"/> 
+                    <intArg>1</intArg>
                 </callback>
                 <callback type="start_listener">
-                    <arg name="listener_id" type="int" val="2"/> 
+                    <intArg>2</intArg>
                 </callback>
                 <callback type="start_listener">
-                    <arg name="listener_id" type="int" val="3"/> 
+                    <intArg>3</intArg>
                 </callback>
             </callbacks>
         </listener>
@@ -34,15 +32,15 @@
             <conditions>
                 <condition type="less_then">
                     <provider type="items_in_inventory">
-                        <arg name="item_id" type="string" value="mushroom"/>
+                        <strArg>mushroom</strArg>
                     </provider>
-                    <arg name="value" type="int" value="5"/>
+                    <intArg>5</intArg>
                 </condition type="less_then">
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
-                    <arg name="quest_id" type="int" val="0"/>
-                    <arg name="next_node_id" type="int" val="1"/>
+                    <intArg1> 0 </intArg1>
+                    <intArg2> 1 </intArg2>
                 </callback>
             </callbacks>
         </listener>
@@ -54,18 +52,18 @@
             <conditions>
                 <condition type="more_then">
                     <provider type="items_in_inventory">
-                        <arg name="item_id" type="string" value="mushroom"/>
+                        <strArg>mushroom</strArg>
                     </provider>
-                    <arg name="value" type="int" value="0"/>
+                   <intArg>0</intArg>
                 </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
-                    <arg name="quest_id" type="int" val="0"/>
-                    <arg name="next_node_id" type="int" val="2"/>
+                    <intArg1> 0 </intArg1>
+                    <intArg2> 2 </intArg2>
                 </callback>
                 <callback type="start_listener">
-                    <arg name="listener_id" type="int" val="1"/> 
+                    <intArg> 1 </intArg>
                 </callback>
             </callbacks>
         </listener>
@@ -77,18 +75,18 @@
             <conditions>
                 <condition type="is_equal_to">
                     <provider type="items_in_inventory">
-                        <arg name="item_id" type="string" value="mushroom"/>
+                        <strArg>mushroom</strArg>
                     </provider>
-                    <arg name="value" type="int" value="5"/>
+                    <intArg>5</intArg>
                 </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
-                    <arg name="quest_id" type="int" val="0"/>
-                    <arg name="next_node_id" type="int" val="3"/>
+                    <intArg1>0</intArg1>
+                    <intArg2>3</intArg2>
                 </callback>
                 <callback type="stop_listener">
-                    <arg name="listener_id" type="int" val="1"/> 
+                    <intArg>1</intArg>
                 </callback>
             </callbacks>
         </listener>
@@ -100,24 +98,22 @@
             <conditions>
                 <condition type="is_equal_to">
                     <provider type="items_in_inventory">
-                        <arg name="item_id" type="string" value="mushroom"/>
+                        <strArg>mushroom</strArg>
                     </provider>
-                    <arg name="value" type="int" value="5"/>
+                    <intArg>5</intArg>
                 </condition>
             </conditions>
             <callbacks>
                 <callback type="set_quest_node">
-                    <arg name="quest_id" type="int" val="0"/>
-                    <arg name="next_node_id" type="int" val="4"/>
                 </callback>
                 <callback type="stop_listener">
-                    <arg name="listener_id" type="int" val="2"/> 
+                    <intArg>2</intArg>
                 </callback>
                 <callback type="stop_listener">
-                    <arg name="listener_id" type="int" val="3"/> 
+                    <intArg>3</intArg>
                 </callback>
                 <callback type="stop_listener">
-                    <arg name="listener_id" type="int" val="4"/> 
+                    <intArg>4</intArg>
                 </callback>
             </callbacks>
 

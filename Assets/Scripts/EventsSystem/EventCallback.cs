@@ -2,48 +2,47 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum CallbackType {
-    set_flag,
-    unset_flag,
-
-    start_listener,
-    stop_listener,
-
-    start_quest,
-    progress_quest,
-    end_quest,
-
-    change_dialogue_initial_node,
-    change_dialoge_connection,
-
-    get_item,
-    remove_item,
-
-    load_level,
-}
-
-public class EventCallback {
-    public CallbackType type;
-    public List<(string, string, string)> args;
-
-    public EventCallback() {
-        args = new List<(string, string, string)>();
-    }
+// TODO create common base classes
+public class BaseEventCallback {
 
     public static void Init() {
 
     }
 
-    public string getArg(string argName) {
-        foreach((string, string, string) arg in args) {
-            if(arg.Item1 == argName) {
-                return arg.Item3;
-            }
-        }
-        return null;
-    }
-
-    public void Call() {
-
+    public virtual void Call() {
+        throw new Exception("not implementerd");
     }
 }
+
+    public class SetFlagCallback: BaseEventCallback {} 
+    public class UnsetFlagCallback: BaseEventCallback {} 
+
+    public class StartListenerCallback: BaseEventCallback {
+        public int intArg;
+
+        public int getIntArg() {
+            return intArg;
+        }
+    } 
+    public class StopListenerCallback: BaseEventCallback {
+        public int intArg;
+
+        public int getIntArg() {
+            return intArg;
+        }
+    } 
+
+    public class StartQuestCallback: BaseEventCallback {
+        public int intArg;
+
+    } 
+    public class ProgressQuestCallback: BaseEventCallback {} 
+
+    public class ChangeDialogueInitialNodeCallback: BaseEventCallback {} 
+    public class ChangeDialogeConnectionCallback: BaseEventCallback {} 
+
+    public class GetItemCallback: BaseEventCallback {} 
+    public class RemoveItemCallback: BaseEventCallback {} 
+
+    public class LoadLevelCallback: BaseEventCallback {} 
+

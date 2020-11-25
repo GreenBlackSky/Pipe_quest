@@ -6,28 +6,29 @@ using UnityEngine;
 public class EventManager : MonoBehaviour {
 
     static Dictionary<int, EventListener> allListeners;
-    static Dictionary<(EventTriggerType, string), List<EventListener>> activeTriggers;
+    static Dictionary<BaseEventTrigger, List<EventListener>> activeTriggers;
 
     static LinkedList<EventListener> eventsQueue;
 
     private void Start() {
 
         allListeners = new Dictionary<int, EventListener>();
-        activeTriggers = new Dictionary<(EventTriggerType, string), List<EventListener>>();
+        activeTriggers = new Dictionary<BaseEventTrigger, List<EventListener>>();
 
         eventsQueue = new LinkedList<EventListener>();
     }
 
     public void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
+        BaseEventTrigger.Init(this);
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
-        EventCallback.Init();
+        BaseEventCallback.Init();
     }
 
     private void Update() {
-        List<EventListener> listenersToAdd = new List<EventListener>();
-        List<EventListener> listenersToRemove = new List<EventListener>();
-        List<EventCallback> callbacksToCall = new List<EventCallback>();
+        List<int> listenersToAdd = new List<int>();
+        List<int> listenersToRemove = new List<int>();
+        List<BaseEventCallback> callbacksToCall = new List<BaseEventCallback>();
 
         if(eventsQueue.Count != 0) {
             EventListener listener = eventsQueue.First.Value;
@@ -37,30 +38,32 @@ public class EventManager : MonoBehaviour {
                 return;
             }
 
-            foreach(EventCallback callback in listener.callbacks) {
-                if(callback.type == CallbackType.stop_listener) {
-                    int listener_id = int.Parse(callback.getArg("listener_id"));
-                    EventListener listenerToRemove = allListeners[listener_id];
-                    listenersToRemove.Add(listenerToRemove);
-                } else if (callback.type == CallbackType.start_listener) {
-                    int listener_id = int.Parse(callback.getArg("listener_id"));
-                    EventListener listenerToAdd = allListeners[listener_id];
-                    listenersToAdd.Add(listenerToAdd);
+            foreach(BaseEventCallback callback in listener.callbacks) {
+                if(callback is StopListenerCallback) {
+                    int listenerID = ((StopListenerCallback)callback).getIntArg();
+                    listenersToRemove.Add(listenerID);
+                } else if (callback is StartListenerCallback) {
+                    int listenerID = ((StartListenerCallback)callback).getIntArg();
+                    listenersToAdd.Add(listenerID);
                 } else {
                     callbacksToCall.Add(callback);
                 }
             }
 
-            foreach(EventListener listenerToRemove in listenersToRemove) {
-                StopListening(listener.id);
+            foreach(int listenerID in listenersToRemove) {
+                StopListening(listenerID);
             }
 
-            foreach(EventListener listenerToAdd in listenersToAdd) {
-                StartListening(listener.id);
+            foreach(int listenerID in listenersToAdd) {
+                StartListening(listenerID);
             }
 
-            foreach(EventCallback callback in callbacksToCall) {
+            foreach(BaseEventCallback callback in callbacksToCall) {
                  callback.Call();
+            }
+
+            if(listener.singleuse) {
+                StopListening(listener.id);
             }
         }
     }
@@ -92,7 +95,7 @@ public class EventManager : MonoBehaviour {
 
     public static void StartListening(int listenerId) {
         EventListener listener = allListeners[listenerId];
-        foreach((EventTriggerType, string) trigger in listener.triggers) {
+        foreach(BaseEventTrigger trigger in listener.triggers) {
             if(!activeTriggers.ContainsKey(trigger)) {
                 activeTriggers[trigger] = new List<EventListener>();
             }
@@ -102,15 +105,18 @@ public class EventManager : MonoBehaviour {
 
     public static void StopListening(int listenerId) {
         EventListener listener = allListeners[listenerId];
-        foreach((EventTriggerType, string) trigger in listener.triggers) {
+        foreach(BaseEventTrigger trigger in listener.triggers) {
             if(activeTriggers.ContainsKey(trigger)) {
                 activeTriggers[trigger].Remove(listener);
             }
         }
     }
 
-    public static void TriggerEvent(EventTriggerType trigger, string triggerArg, int arg) {
-        foreach(EventListener listener in activeTriggers[(trigger, triggerArg)]) {
+    public static void TriggerEvent(BaseEventTrigger trigger) {
+        if(!activeTriggers.ContainsKey(trigger)) {
+            return;
+        }
+        foreach(EventListener listener in activeTriggers[trigger]) {
             eventsQueue.AddLast(listener);
         }
     }

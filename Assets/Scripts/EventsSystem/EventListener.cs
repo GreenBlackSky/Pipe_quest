@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
 using System.Collections.Generic;
 
 public class EventListener {
@@ -7,9 +6,9 @@ public class EventListener {
     public bool initial;
     public bool singleuse;
 
-    public List<(EventTriggerType, string)> triggers;
+    public List<BaseEventTrigger> triggers;
     public List<BaseEventCondition> conditions;
-    public List<EventCallback> callbacks;
+    public List<BaseEventCallback> callbacks;
 
     public bool CheckConditions() {
         foreach(BaseEventCondition condition in conditions) {

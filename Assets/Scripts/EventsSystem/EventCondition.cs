@@ -58,43 +58,43 @@ public class EventConditionOr : BaseEventCondition {
 
 public class EventConditionMoreThan : BaseEventCondition {
     public BaseEventValueProvider provider;
-    public int intValue;
+    public int intArg;
 
     public override bool Check() {
-        return provider.Provide() > intValue;
+        return provider.Provide() > intArg;
     }
 }
 
 public class EventConditionLessThan : BaseEventCondition {
     public BaseEventValueProvider provider;
-    public int intValue;
+    public int intArg;
 
     public override bool Check() {
-        return provider.Provide() < intValue;
+        return provider.Provide() < intArg;
     }
 }
 
 public class EventConditionEqualTo : BaseEventCondition {
     public BaseEventValueProvider provider;
-    public int intValue;
+    public int intArg;
 
     public override bool Check() {
-        return provider.Provide() == intValue;
+        return provider.Provide() == intArg;
     }
 }
-
+// TODO move to providers
 public class EventConditionFlagSet : BaseEventCondition {
-    public string strValue;
+    public string strArg;
 
     public override bool Check() {
-        return (questHero.flags.ContainsKey(strValue) && questHero.flags[strValue] > 0);
+        return (questHero.flags.ContainsKey(strArg) && questHero.flags[strArg] > 0);
     }
 }
 
 public class EventConditionQuestCompleted : BaseEventCondition {
-    public int intValue;
+    public int intArg;
 
     public override bool Check() {
-        return questHero.completedQuests.ContainsKey(intValue);
+        return questHero.completedQuests.ContainsKey(intArg);
     }
 }

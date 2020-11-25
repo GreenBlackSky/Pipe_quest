@@ -2,7 +2,7 @@ using System;
 
 public class  BaseEventValueProvider {
     protected static CollectingHero currentHero;
-    public string val;
+    public string strArg;
     
     public static void Init(CollectingHero hero) {
         currentHero = hero;
@@ -18,8 +18,8 @@ public class  BaseEventValueProvider {
 public class ItemsInInventoryProvider : BaseEventValueProvider {
 
     public override int Provide() {
-        if(currentHero.items.ContainsKey(val)) {
-            return currentHero.items[val];
+        if(currentHero.items.ContainsKey(strArg)) {
+            return currentHero.items[strArg];
         }
         return 0;
     }
