@@ -8,11 +8,11 @@ public class EventListener {
     public bool singleuse;
 
     public List<(EventTriggerType, string)> triggers;
-    public List<EventCondition> conditions;
+    public List<BaseEventCondition> conditions;
     public List<EventCallback> callbacks;
 
     public bool CheckConditions() {
-        foreach(EventCondition condition in conditions) {
+        foreach(BaseEventCondition condition in conditions) {
             if(!condition.Check()) {
                 return false;
             }

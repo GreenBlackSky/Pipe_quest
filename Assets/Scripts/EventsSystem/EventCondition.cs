@@ -2,62 +2,99 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public enum EventConditionType {
-    not,
-    and,
-    or,
-    more_than,
-    less_than,
-    equal_to,
-    flag_set,
-    quest_completed,
-}
-
-public class EventCondition {
-    public EventConditionType type;
-    public List<EventCondition> innerConditions;
-    public EventValueProvider provider;
-    public int intValue;
-    public string strValue;
-    static QuestDoingHero questHero;
-
-    public EventCondition() {
-        innerConditions = new List<EventCondition>();
-    }
+public class BaseEventCondition {
+    protected static QuestDoingHero questHero;
 
     public static void Init(QuestDoingHero hero) {
         questHero = hero;
     }
 
-    public bool Check() {
-        switch(type) {
-            case EventConditionType.not:
-                return !innerConditions[0].Check();
-            case EventConditionType.and:
-                foreach(EventCondition innerCondition in innerConditions) {
-                    if(!innerCondition.Check()) {
-                        return false;
-                    }
-                }
-                return true;
-            case EventConditionType.or:
-                foreach(EventCondition innerCondition in innerConditions) {
-                    if(innerCondition.Check()) {
-                        return true;
-                    }
-                }
+    public virtual bool Check() {
+        throw new Exception("not implementerd");
+    }
+}
+
+public class EventConditionNot : BaseEventCondition {
+    public BaseEventCondition innerCondition;
+
+    public override bool Check() {
+        return !innerCondition.Check();
+    }
+}
+
+public class EventConditionAnd : BaseEventCondition {
+    public List<BaseEventCondition> innerConditions;
+
+    public EventConditionAnd() {
+        innerConditions = new List<BaseEventCondition>();
+    }
+
+    public override bool Check() {
+        foreach(BaseEventCondition innerCondition in innerConditions) {
+            if(!innerCondition.Check()) {
                 return false;
-            case EventConditionType.more_than:
-                return provider.Provide() > intValue;
-            case EventConditionType.less_than:
-                return provider.Provide() < intValue;
-            case EventConditionType.equal_to:
-                return provider.Provide() == intValue;
-            case EventConditionType.flag_set:
-                return (questHero.flags.ContainsKey(strValue) && questHero.flags[strValue] > 0);
-            case EventConditionType.quest_completed:
-                return (questHero.completedQuests.ContainsKey(intValue));
+            }
         }
         return true;
+    }
+}
+
+public class EventConditionOr : BaseEventCondition {
+    public List<BaseEventCondition> innerConditions;
+
+    public EventConditionOr() {
+        innerConditions = new List<BaseEventCondition>();
+    }
+
+    public override bool Check() {
+        foreach(BaseEventCondition innerCondition in innerConditions) {
+            if(innerCondition.Check()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
+
+public class EventConditionMoreThan : BaseEventCondition {
+    public BaseEventValueProvider provider;
+    public int intValue;
+
+    public override bool Check() {
+        return provider.Provide() > intValue;
+    }
+}
+
+public class EventConditionLessThan : BaseEventCondition {
+    public BaseEventValueProvider provider;
+    public int intValue;
+
+    public override bool Check() {
+        return provider.Provide() < intValue;
+    }
+}
+
+public class EventConditionEqualTo : BaseEventCondition {
+    public BaseEventValueProvider provider;
+    public int intValue;
+
+    public override bool Check() {
+        return provider.Provide() == intValue;
+    }
+}
+
+public class EventConditionFlagSet : BaseEventCondition {
+    public string strValue;
+
+    public override bool Check() {
+        return (questHero.flags.ContainsKey(strValue) && questHero.flags[strValue] > 0);
+    }
+}
+
+public class EventConditionQuestCompleted : BaseEventCondition {
+    public int intValue;
+
+    public override bool Check() {
+        return questHero.completedQuests.ContainsKey(intValue);
     }
 }

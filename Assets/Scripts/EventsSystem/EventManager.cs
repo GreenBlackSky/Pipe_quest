@@ -19,8 +19,8 @@ public class EventManager : MonoBehaviour {
     }
 
     public void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
-        EventCondition.Init(questHero);
-        EventValueProvider.Init(itemsHero);
+        BaseEventCondition.Init(questHero);
+        BaseEventValueProvider.Init(itemsHero);
         EventCallback.Init();
     }
 
