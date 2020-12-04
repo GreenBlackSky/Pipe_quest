@@ -22,7 +22,7 @@ public class EventManager : MonoBehaviour {
         BaseEventTrigger.Init(this);
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
-        BaseEventCallback.Init();
+        BaseEventCallback.Init(questHero);
     }
 
     private void Update() {
@@ -70,7 +70,7 @@ public class EventManager : MonoBehaviour {
 
     public static void LoadAllListeners(string level_name) {
         ClearListeners();
-
+        // TODO load from xml
         string path = @"" + "Assets/EventsData/" + level_name + ".xml";
         XmlSerializer listenerSerializer = new XmlSerializer(typeof(EventListener));
         XmlDocument doc = new XmlDocument();

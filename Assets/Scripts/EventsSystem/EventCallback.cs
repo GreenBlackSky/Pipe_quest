@@ -1,12 +1,11 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 
-// TODO create common base classes
+
 public class BaseEventCallback {
+    protected static QuestDoingHero questHero;
 
-    public static void Init() {
-
+    public static void Init(QuestDoingHero hero) {
+        questHero = hero;
     }
 
     public virtual void Call() {
@@ -14,35 +13,45 @@ public class BaseEventCallback {
     }
 }
 
-    public class SetFlagCallback: BaseEventCallback {} 
-    public class UnsetFlagCallback: BaseEventCallback {} 
+public class IntEventCallback : BaseEventCallback {
+    public int intArg;
+}
 
-    public class StartListenerCallback: BaseEventCallback {
-        public int intArg;
+public class StrEventCallback : BaseEventCallback {
+    public string strArg;
+}
 
-        public int getIntArg() {
-            return intArg;
-        }
-    } 
-    public class StopListenerCallback: BaseEventCallback {
-        public int intArg;
+public class SetFlagCallback: StrEventCallback {
+    public override void Call() {
+        questHero.SetFlag(strArg);
+    }
+} 
 
-        public int getIntArg() {
-            return intArg;
-        }
-    } 
+public class UnsetFlagCallback: StrEventCallback {
+    public override void Call() {
+        questHero.UnsetFlag(strArg);
+    }    
+} 
 
-    public class StartQuestCallback: BaseEventCallback {
-        public int intArg;
+public class StartListenerCallback: IntEventCallback {
+    public int getIntArg() {
+        return intArg;
+    }
+} 
+public class StopListenerCallback: IntEventCallback {
+    public int getIntArg() {
+        return intArg;
+    }
+} 
 
-    } 
-    public class ProgressQuestCallback: BaseEventCallback {} 
+public class StartQuestCallback: IntEventCallback {} 
+public class ProgressQuestCallback: BaseEventCallback {} 
 
-    public class ChangeDialogueInitialNodeCallback: BaseEventCallback {} 
-    public class ChangeDialogeConnectionCallback: BaseEventCallback {} 
+public class ChangeDialogueInitialNodeCallback: BaseEventCallback {} 
+public class ChangeDialogeConnectionCallback: BaseEventCallback {} 
 
-    public class GetItemCallback: BaseEventCallback {} 
-    public class RemoveItemCallback: BaseEventCallback {} 
+public class GetItemCallback: BaseEventCallback {} 
+public class RemoveItemCallback: BaseEventCallback {} 
 
-    public class LoadLevelCallback: BaseEventCallback {} 
+public class LoadLevelCallback: BaseEventCallback {} 
 

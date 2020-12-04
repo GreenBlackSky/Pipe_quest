@@ -1,5 +1,4 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 
 public class BaseEventCondition {
@@ -82,7 +81,6 @@ public class EventConditionEqualTo : BaseEventCondition {
         return provider.Provide() == intArg;
     }
 }
-// TODO move to providers
 public class EventConditionFlagSet : BaseEventCondition {
     public string strArg;
 

@@ -6,12 +6,10 @@ public class MainMenu : MonoBehaviour {
     public void OnNewGameClicked() {
         GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
     }
-    public void OnLoadGameClicked() {
-        // TODO load game menu
-    }
-    public void OnPreferencesClicked() {
-        // TODO preferences menu
-    }
+    public void OnLoadGameClicked() {}
+
+    public void OnPreferencesClicked() {}
+
     public void OnExitClicked() {
         #if UNITY_EDITOR
             UnityEditor.EditorApplication.isPlaying = false;
