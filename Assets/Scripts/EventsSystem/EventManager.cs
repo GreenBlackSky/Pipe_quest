@@ -6,14 +6,14 @@ using UnityEngine;
 public class EventManager : MonoBehaviour {
 
     static Dictionary<int, EventListener> allListeners;
-    static Dictionary<BaseEventTrigger, List<EventListener>> activeTriggers;
+    static Dictionary<(string, string), List<EventListener>> activeTriggers;
 
     static LinkedList<EventListener> eventsQueue;
 
     private void Start() {
 
         allListeners = new Dictionary<int, EventListener>();
-        activeTriggers = new Dictionary<BaseEventTrigger, List<EventListener>>();
+        activeTriggers = new Dictionary<(string, string), List<EventListener>>();
 
         eventsQueue = new LinkedList<EventListener>();
     }
@@ -96,27 +96,29 @@ public class EventManager : MonoBehaviour {
     public static void StartListening(int listenerId) {
         EventListener listener = allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
-            if(!activeTriggers.ContainsKey(trigger)) {
-                activeTriggers[trigger] = new List<EventListener>();
+            (string, string) key = (trigger.GetType().Name, trigger.argument);
+            if(!activeTriggers.ContainsKey(key)) {
+                activeTriggers[key] = new List<EventListener>();
             }
-            activeTriggers[trigger].Add(listener);
+            activeTriggers[key].Add(listener);
         }
     }
 
     public static void StopListening(int listenerId) {
         EventListener listener = allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
-            if(activeTriggers.ContainsKey(trigger)) {
-                activeTriggers[trigger].Remove(listener);
+            (string, string) key = (trigger.GetType().Name, trigger.argument);
+            if(activeTriggers.ContainsKey(key)) {
+                activeTriggers[key].Remove(listener);
             }
         }
     }
 
-    public static void TriggerEvent(BaseEventTrigger trigger) {
-        if(!activeTriggers.ContainsKey(trigger)) {
+    public void Trigger((string, string) triggerKey) {
+        if(!activeTriggers.ContainsKey(triggerKey)) {
             return;
         }
-        foreach(EventListener listener in activeTriggers[trigger]) {
+        foreach(EventListener listener in activeTriggers[triggerKey]) {
             eventsQueue.AddLast(listener);
         }
     }
