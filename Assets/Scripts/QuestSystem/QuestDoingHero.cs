@@ -6,16 +6,13 @@ using UnityEngine.UI;
 public class QuestDoingHero : MonoBehaviour {
     public GameObject QuestsUI;
     public Dictionary<string, int> flags;
-    public Dictionary<int, Quest> allQuests;
     public Dictionary<int, Quest> activeQuests;
     public Dictionary<int, Quest> completedQuests;
 
     private void Start() {
         flags = new Dictionary<string, int>();
-        allQuests = new Dictionary<int, Quest>();
         activeQuests = new Dictionary<int, Quest>();
         completedQuests = new Dictionary<int, Quest>();
-        // TODO load quests from xml
     }
 
     public void SetFlag(string flagName) {
@@ -33,5 +30,17 @@ public class QuestDoingHero : MonoBehaviour {
         if(flags[flagName] == 0) {
             flags.Remove(flagName);
         }
+    }
+
+    public void StartQuest(Quest quest) {
+
+    }
+
+    public void ProgressQuestNode(int questId, int value) {
+
+    }
+
+    public void SwitchQuestNode(int questId, int newNodeId) {
+        
     }
 }

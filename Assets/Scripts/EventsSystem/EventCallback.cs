@@ -15,6 +15,10 @@ public class BaseEventCallback {
 
 public class IntEventCallback : BaseEventCallback {
     public int intArg;
+
+    public int getIntArg() {
+        return intArg;
+    }
 }
 
 public class StrEventCallback : BaseEventCallback {
@@ -33,25 +37,18 @@ public class UnsetFlagCallback: StrEventCallback {
     }    
 } 
 
-public class StartListenerCallback: IntEventCallback {
-    public int getIntArg() {
-        return intArg;
-    }
-} 
-public class StopListenerCallback: IntEventCallback {
-    public int getIntArg() {
-        return intArg;
-    }
-} 
+public class StartListenerCallback: IntEventCallback {}
+public class StopListenerCallback: IntEventCallback {}
 
-public class StartQuestCallback: IntEventCallback {} 
-public class ProgressQuestCallback: BaseEventCallback {} 
+public class StartQuestCallback: IntEventCallback {}
+public class ProgressQuestNodeCallback: IntEventCallback {}
+public class SwitchQuestNodeCallback: IntEventCallback {}
 
-public class ChangeDialogueInitialNodeCallback: BaseEventCallback {} 
-public class ChangeDialogeConnectionCallback: BaseEventCallback {} 
+public class ChangeDialogueInitialNodeCallback: BaseEventCallback {}
+public class ChangeDialogeConnectionCallback: BaseEventCallback {}
 
-public class GetItemCallback: BaseEventCallback {} 
-public class RemoveItemCallback: BaseEventCallback {} 
+public class GetItemCallback: BaseEventCallback {}
+public class RemoveItemCallback: BaseEventCallback {}
 
-public class LoadLevelCallback: BaseEventCallback {} 
+public class LoadLevelCallback: BaseEventCallback {}
 

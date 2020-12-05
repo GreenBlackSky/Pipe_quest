@@ -1,15 +1,18 @@
 ﻿using System.Collections.Generic;
 
 public class Quest {
-    public int id;
+    public string id;
     public string name;
-    public string description;
     public List<QuestNode> nodes;
 }
 
 public class QuestNode {
     public string description;
-    public int targetItem;
+    public List<QuestNode> childrenNodes;
+}
+
+public class CounterQuestNode : QuestNode {
+    public string text;
     public int targetAmount;
-    public int progress = 0;
+    public int progress;
 }

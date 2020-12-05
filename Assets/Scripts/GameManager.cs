@@ -19,6 +19,7 @@ public class GameManager : MonoBehaviour
 
     Dictionary<State, GameObject> _gameMenus;
 
+    // TODO load levels from directory, use name as id
     public GameObject[] levels;
     GameObject _currentLevel;
     int _currentLevelID = 0;
@@ -119,7 +120,7 @@ public class GameManager : MonoBehaviour
         string current_level_name = levels[_currentLevelID].name;
         _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
         LinkAvatar(_currentAvatar);
-        SpeakerManager.instance.LoadAllSpeakers(current_level_name);
+        DialogueManager.instance.LoadAllSpeakers(current_level_name);
     }
 
     void LinkAvatar(GameObject avatar) {

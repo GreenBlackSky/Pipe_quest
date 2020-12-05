@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class SpeakerManager : MonoBehaviour
+public class DialogueManager : MonoBehaviour
 {
-    static public SpeakerManager instance;
+    static public DialogueManager instance;
 
     Dictionary<string, Speaker> speakers;
 

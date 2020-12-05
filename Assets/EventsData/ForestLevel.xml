@@ -38,7 +38,7 @@
                 </condition type="less_then">
             </conditions>
             <callbacks>
-                <callback type="set_quest_node">
+                <callback type="progress_quest_node">
                     <intArg1> 0 </intArg1>
                     <intArg2> 1 </intArg2>
                 </callback>
@@ -58,9 +58,9 @@
                 </condition>
             </conditions>
             <callbacks>
-                <callback type="set_quest_node">
+                <callback type="progress_quest_node">
                     <intArg1> 0 </intArg1>
-                    <intArg2> 2 </intArg2>
+                    <intArg2> -1 </intArg2>
                 </callback>
                 <callback type="start_listener">
                     <intArg> 1 </intArg>
