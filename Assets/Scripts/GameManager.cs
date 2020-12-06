@@ -83,7 +83,7 @@ public class GameManager : MonoBehaviour
                 GameplayUI.SetActive(false);
                 break;
             case State.MAIN_MENU:
-                LeaveMainMenu();
+                LoadLevel();
                 break;
             default:
                 _gameMenus[_state].SetActive(false);
@@ -113,7 +113,7 @@ public class GameManager : MonoBehaviour
         MainMenuPanel.SetActive(true);
     }
 
-    void LeaveMainMenu() {
+    void LoadLevel() {
         UICamera.SetActive(false);
         MainMenuPanel.SetActive(false);
         _currentLevel = Instantiate(levels[_currentLevelID]);
@@ -121,6 +121,7 @@ public class GameManager : MonoBehaviour
         _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
         LinkAvatar(_currentAvatar);
         DialogueManager.instance.LoadAllSpeakers(current_level_name);
+        QuestManager.Init(current_level_name);
     }
 
     void LinkAvatar(GameObject avatar) {

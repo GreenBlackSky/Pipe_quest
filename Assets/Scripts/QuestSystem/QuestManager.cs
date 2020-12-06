@@ -4,25 +4,25 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class QuestManager : MonoBehaviour {
+public class QuestManager {
     public static Dictionary<string, Quest> allQuests;
 
-    void Start() {
-        allQuests = new Dictionary<string, Quest>();
-    }
+    public static void Init(string level_name) {
+        if(allQuests == null) {
+            allQuests = new Dictionary<string, Quest>();
+        } else {
+            allQuests.Clear();
+        }
 
-    public void LoadAllQuests(string level_name) {
-        allQuests.Clear();
         string path = "Assets/QuestData/" + level_name + ".xml";
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
-        XmlNode root = doc.DocumentElement.SelectSingleNode("/Level");
+        XmlNode root = doc.DocumentElement.SelectSingleNode("/level");
 
-        XmlSerializer nodeSerializer = new XmlSerializer(typeof(Quest));
+        XmlSerializer questSerializer = new XmlSerializer(typeof(Quest));
         foreach(XmlNode questData in root.ChildNodes) {
-            Quest quest = nodeSerializer.Deserialize(new XmlNodeReader(questData)) as Quest;
+            Quest quest = questSerializer.Deserialize(new XmlNodeReader(questData)) as Quest;
             allQuests[quest.id] = quest;
         }
-        // TODO link nodes
     }
 }

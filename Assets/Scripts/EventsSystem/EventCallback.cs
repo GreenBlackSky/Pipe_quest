@@ -43,6 +43,7 @@ public class StopListenerCallback: IntEventCallback {}
 public class StartQuestCallback: IntEventCallback {}
 public class ProgressQuestNodeCallback: IntEventCallback {}
 public class SwitchQuestNodeCallback: IntEventCallback {}
+public class FinishQuestCallback: IntEventCallback {}
 
 public class ChangeDialogueInitialNodeCallback: BaseEventCallback {}
 public class ChangeDialogeConnectionCallback: BaseEventCallback {}
