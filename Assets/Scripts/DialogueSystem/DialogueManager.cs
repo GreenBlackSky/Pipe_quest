@@ -5,19 +5,15 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class DialogueManager : MonoBehaviour
-{
-    static public DialogueManager instance;
+public class DialogueManager : MonoBehaviour {
+    static Dictionary<string, Speaker> speakers;
 
-    Dictionary<string, Speaker> speakers;
-
-    void Start() {
-        speakers = new Dictionary<string, Speaker>();
-        instance = this;
-    }
-
-    public void LoadAllSpeakers(string level_name) {
-        speakers.Clear();
+    public static void LoadAllSpeakers(string level_name) {
+        if(speakers == null) {
+            speakers = new Dictionary<string, Speaker>();
+        } else {
+            speakers.Clear();
+        }
         XmlSerializer nodeSerializer = new XmlSerializer(typeof(DialogueNode));
         Speaker[] foundSpeakers = FindObjectsOfType<Speaker>();
         foreach(Speaker speaker in foundSpeakers) {
@@ -26,7 +22,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    private void LoadSpeaker(string level_name, Speaker speaker, XmlSerializer nodeSerializer) {
+    private static void LoadSpeaker(string level_name, Speaker speaker, XmlSerializer nodeSerializer) {
         string path = "Assets/DialoguesData/" + level_name + "/" + speaker.speakerUID + ".xml";        
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
@@ -42,7 +38,7 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public Speaker GetSpeaker(string name) {
+    public static Speaker GetSpeaker(string name) {
         return speakers[name];
     }
 }

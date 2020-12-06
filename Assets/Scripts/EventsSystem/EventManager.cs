@@ -3,23 +3,19 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EventManager : MonoBehaviour {
+public class EventManager {
 
     static Dictionary<int, EventListener> allListeners;
     static Dictionary<(string, string), List<EventListener>> activeTriggers;
-
     static LinkedList<EventListener> eventsQueue;
 
-    private void Start() {
-
-        allListeners = new Dictionary<int, EventListener>();
-        activeTriggers = new Dictionary<(string, string), List<EventListener>>();
-
-        eventsQueue = new LinkedList<EventListener>();
-    }
-
-    public void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
-        BaseEventTrigger.Init(this);
+    public static void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
+        if(allListeners == null) {
+            allListeners = new Dictionary<int, EventListener>();
+            activeTriggers = new Dictionary<(string, string), List<EventListener>>();
+            eventsQueue = new LinkedList<EventListener>();
+        }
+        BaseEventTrigger.Init();
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
         BaseEventCallback.Init(questHero);
@@ -114,7 +110,7 @@ public class EventManager : MonoBehaviour {
         }
     }
 
-    public void Trigger((string, string) triggerKey) {
+    public static void Trigger((string, string) triggerKey) {
         if(!activeTriggers.ContainsKey(triggerKey)) {
             return;
         }

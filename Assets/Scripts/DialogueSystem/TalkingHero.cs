@@ -23,7 +23,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
     void setSpeaker(DialogueNode node) {
         if(currentSpeakerName != node.speakerUID) {
-            Speaker speaker = DialogueManager.instance.GetSpeaker(node.speakerUID);
+            Speaker speaker = DialogueManager.GetSpeaker(node.speakerUID);
             speakerNameArea.text = this.speaker.speakerFullName;
 
             Destroy(speakerIcon); // BUG can't remove transform becouse script depends on it

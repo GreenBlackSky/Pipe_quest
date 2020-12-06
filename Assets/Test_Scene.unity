@@ -4036,7 +4036,7 @@ GameObject:
   - component: {fileID: 1359210489}
   - component: {fileID: 1359210488}
   m_Layer: 0
-  m_Name: SpeakerManager
+  m_Name: DialogueManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -5,8 +5,7 @@ public class BaseEventTrigger {
     static EventManager eventManager;
     public string argument;
 
-    public static void Init(EventManager manager) {
-        eventManager = manager;
+    public static void Init() {
     }
 
     public void Trigger(string argument) {
@@ -14,7 +13,7 @@ public class BaseEventTrigger {
         if(triggerName == "BaseEventTrigger") {
             throw new Exception("not implementerd");
         }
-        eventManager.Trigger((triggerName, argument));
+        EventManager.Trigger((triggerName, argument));
     }
 }
 

@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
-
+    
 public class GameManager : MonoBehaviour
 {
     public GameObject MainMenuPanel;
@@ -120,7 +119,7 @@ public class GameManager : MonoBehaviour
         string current_level_name = levels[_currentLevelID].name;
         _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
         LinkAvatar(_currentAvatar);
-        DialogueManager.instance.LoadAllSpeakers(current_level_name);
+        DialogueManager.LoadAllSpeakers(current_level_name);
         QuestManager.Init(current_level_name);
     }
 
@@ -134,6 +133,6 @@ public class GameManager : MonoBehaviour
         itemsHero.InventoryPanel = InventoryPanel;
         questHero.QuestsUI = QuestsPanel;
 
-        avatar.GetComponent<EventManager>().Init(questHero, itemsHero);
+        EventManager.Init(questHero, itemsHero);
     }
 }
