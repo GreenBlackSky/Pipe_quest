@@ -9,7 +9,7 @@ public class EventManager {
     static Dictionary<(string, string), List<EventListener>> activeTriggers;
     static LinkedList<EventListener> eventsQueue;
 
-    public static void Init(QuestDoingHero questHero, CollectingHero itemsHero) {
+    public static void Init(string level_name, QuestDoingHero questHero, CollectingHero itemsHero) {
         if(allListeners == null) {
             allListeners = new Dictionary<int, EventListener>();
             activeTriggers = new Dictionary<(string, string), List<EventListener>>();
@@ -19,6 +19,8 @@ public class EventManager {
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
         BaseEventCallback.Init(questHero);
+
+        LoadAllListeners(level_name);
     }
 
     private void Update() {
@@ -66,7 +68,6 @@ public class EventManager {
 
     public static void LoadAllListeners(string level_name) {
         ClearListeners();
-        // TODO load from xml
         string path = @"" + "Assets/EventsData/" + level_name + ".xml";
         XmlSerializer listenerSerializer = new XmlSerializer(typeof(EventListener));
         XmlDocument doc = new XmlDocument();

@@ -1,122 +1,120 @@
 <level>
-    <listeners>
-        <listener initial="true" singleuse="true" id="0">
-            <triggers>
-                <trigger type="dialogue_reply" arg="0"/>
-            </triggers>
-            <conditions>
-                <condition type="not">
-                    <condition type="quest_completed">
-                </condition>
-            </conditions>
-            <callbacks>
-                <callback type="start_quest">
-                    <intArg>0</intArg>
-                </callback>
-                <callback type="start_listener">
-                    <intArg>1</intArg>
-                </callback>
-                <callback type="start_listener">
-                    <intArg>2</intArg>
-                </callback>
-                <callback type="start_listener">
-                    <intArg>3</intArg>
-                </callback>
-            </callbacks>
-        </listener>
+    <listener initial="true" singleuse="true" id="0">
+        <triggers>
+            <trigger type="dialogue_reply" arg="0"/>
+        </triggers>
+        <conditions>
+            <condition type="not">
+                <condition type="quest_completed"/>
+            </condition>
+        </conditions>
+        <callbacks>
+            <callback type="start_quest">
+                <intArg>0</intArg>
+            </callback>
+            <callback type="start_listener">
+                <intArg>1</intArg>
+            </callback>
+            <callback type="start_listener">
+                <intArg>2</intArg>
+            </callback>
+            <callback type="start_listener">
+                <intArg>3</intArg>
+            </callback>
+        </callbacks>
+    </listener>
 
-        <listener id="1">
-            <triggers>
-                <trigger type="collect_item" arg="mushroom"/>
-            </triggers>
-            <conditions>
-                <condition type="less_then">
-                    <provider type="items_in_inventory">
-                        <strArg>mushroom</strArg>
-                    </provider>
-                    <intArg>5</intArg>
-                </condition type="less_then">
-            </conditions>
-            <callbacks>
-                <callback type="progress_quest_node">
-                    <intArg1> 0 </intArg1>
-                    <intArg2> 1 </intArg2>
-                </callback>
-            </callbacks>
-        </listener>
+    <listener id="1">
+        <triggers>
+            <trigger type="collect_item" arg="mushroom"/>
+        </triggers>
+        <conditions>
+            <condition type="less_then">
+                <provider type="items_in_inventory">
+                    <strArg>mushroom</strArg>
+                </provider>
+                <intArg>5</intArg>
+            </condition>
+        </conditions>
+        <callbacks>
+            <callback type="progress_quest_node">
+                <intArg1> 0 </intArg1>
+                <intArg2> 1 </intArg2>
+            </callback>
+        </callbacks>
+    </listener>
 
-        <listener id="2">
-            <triggers>
-                <trigger type="lost_item" arg="mushroom"/>
-            </triggers>
-            <conditions>
-                <condition type="more_then">
-                    <provider type="items_in_inventory">
-                        <strArg>mushroom</strArg>
-                    </provider>
-                   <intArg>0</intArg>
-                </condition>
-            </conditions>
-            <callbacks>
-                <callback type="progress_quest_node">
-                    <intArg1> 0 </intArg1>
-                    <intArg2> -1 </intArg2>
-                </callback>
-                <callback type="start_listener">
-                    <intArg> 1 </intArg>
-                </callback>
-            </callbacks>
-        </listener>
+    <listener id="2">
+        <triggers>
+            <trigger type="lost_item" arg="mushroom"/>
+        </triggers>
+        <conditions>
+            <condition type="more_then">
+                <provider type="items_in_inventory">
+                    <strArg>mushroom</strArg>
+                </provider>
+                <intArg>0</intArg>
+            </condition>
+        </conditions>
+        <callbacks>
+            <callback type="progress_quest_node">
+                <intArg1> 0 </intArg1>
+                <intArg2> -1 </intArg2>
+            </callback>
+            <callback type="start_listener">
+                <intArg> 1 </intArg>
+            </callback>
+        </callbacks>
+    </listener>
 
-        <listener id="3">
-            <triggers>
-                <trigger type="collect_item" arg="mushroom"/>
-            </triggers>
-            <conditions>
-                <condition type="is_equal_to">
-                    <provider type="items_in_inventory">
-                        <strArg>mushroom</strArg>
-                    </provider>
-                    <intArg>5</intArg>
-                </condition>
-            </conditions>
-            <callbacks>
-                <callback type="set_quest_node">
-                    <intArg1>0</intArg1>
-                    <intArg2>3</intArg2>
-                </callback>
-                <callback type="stop_listener">
-                    <intArg>1</intArg>
-                </callback>
-            </callbacks>
-        </listener>
+    <listener id="3">
+        <triggers>
+            <trigger type="collect_item" arg="mushroom"/>
+        </triggers>
+        <conditions>
+            <condition type="is_equal_to">
+                <provider type="items_in_inventory">
+                    <strArg>mushroom</strArg>
+                </provider>
+                <intArg>5</intArg>
+            </condition>
+        </conditions>
+        <callbacks>
+            <callback type="set_quest_node">
+                <intArg1>0</intArg1>
+                <intArg2>3</intArg2>
+            </callback>
+            <callback type="stop_listener">
+                <intArg>1</intArg>
+            </callback>
+        </callbacks>
+    </listener>
 
-        <listener id="4">
-            <triggers>
-                <trigger type="dialogue_reply" arg="1"/>
-            </triggers>
-            <conditions>
-                <condition type="is_equal_to">
-                    <provider type="items_in_inventory">
-                        <strArg>mushroom</strArg>
-                    </provider>
-                    <intArg>5</intArg>
-                </condition>
-            </conditions>
-            <callbacks>
-                <callback type="set_quest_node">
-                </callback>
-                <callback type="stop_listener">
-                    <intArg>2</intArg>
-                </callback>
-                <callback type="stop_listener">
-                    <intArg>3</intArg>
-                </callback>
-                <callback type="stop_listener">
-                    <intArg>4</intArg>
-                </callback>
-            </callbacks>
+    <listener id="4">
+        <triggers>
+            <trigger type="dialogue_reply" arg="1"/>
+        </triggers>
+        <conditions>
+            <condition type="is_equal_to">
+                <provider type="items_in_inventory">
+                    <strArg>mushroom</strArg>
+                </provider>
+                <intArg>5</intArg>
+            </condition>
+        </conditions>
+        <callbacks>
+            <callback type="set_quest_node">
+            </callback>
+            <callback type="stop_listener">
+                <intArg>2</intArg>
+            </callback>
+            <callback type="stop_listener">
+                <intArg>3</intArg>
+            </callback>
+            <callback type="stop_listener">
+                <intArg>4</intArg>
+            </callback>
+        </callbacks>
 
-        </listener>
-    </listeners>
+    </listener>
 </level>

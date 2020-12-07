@@ -63,7 +63,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
     public void nextLine(int nodeID)
     {
-        // TODO events
+        // TODO trigger event
         DialogueNode node = speaker.lines[nodeID];
         setSpeaker(node);
         textPanel.text = node.text;

@@ -1,39 +1,34 @@
-﻿using System.Collections;
+﻿using System.IO;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
+
     
 public class GameManager : MonoBehaviour
 {
-    public GameObject MainMenuPanel;
-    public GameObject GameplayUI;
-    public GameObject PauseMenuPanel;
-    public GameObject InventoryPanel;
-    public GameObject DialogPanel;
-    public GameObject SkillMenuPanel;
-    public GameObject MapMenuPanel;
-    public GameObject CombatUI;
-    public GameObject QuestsPanel;
     public GameObject UICamera;
+    public GameObject UICanvas;
 
     Dictionary<State, GameObject> _gameMenus;
+    Dictionary<string, GameObject> _allUIMenus;
 
-    // TODO load levels from directory, use name as id
-    public GameObject[] levels;
+    Dictionary<string, GameObject> _allLevels;
     GameObject _currentLevel;
-    int _currentLevelID = 0;
+    public string currentLevelID;
 
-    public GameObject[] _playerAvatars;
+    Dictionary<string, GameObject> _allAvatars;
     GameObject _currentAvatar;
-    int _currentAvatarID = 0;
+    public string currentAvatarID;
 
     public static GameManager Instance { get; private set; }
 
-    public enum State { 
+    public enum State {
         GAMEPLAY,
         LOADING,
         MAIN_MENU,
         COMBAT,
+        PUZZLE,
         PAUSE_MENU,
         INVENTORY,
         DIALOG,
@@ -41,29 +36,25 @@ public class GameManager : MonoBehaviour
         MAP_MENU,
         JOURNAL_MENU
     }
-    State _state;
+    State _state = State.GAMEPLAY;
 
     public void SwitchState(State state) {
-        LeaveState(_state);
+        LeaveState();
         _state = state;
         EnterState();
     }
 
     void Start() {
-        _gameMenus = new Dictionary<State, GameObject>() {
-            {State.PAUSE_MENU, PauseMenuPanel},
-            {State.INVENTORY, InventoryPanel},
-            {State.SKILL_MENU, SkillMenuPanel},
-            {State.MAP_MENU, MapMenuPanel},
-            {State.DIALOG, DialogPanel},
-            {State.COMBAT, CombatUI},
-            {State.JOURNAL_MENU, QuestsPanel},
-        };
+        PrepareUI();
+        PrepareLevels();
+        PrepareAvatars();
+
         Instance = this;
         SwitchState(State.MAIN_MENU);
     }
 
     void Update() {
+        // BUG keys in main menu
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {
@@ -75,14 +66,15 @@ public class GameManager : MonoBehaviour
         } 
     } 
 
-    void LeaveState(State state) {
+    void LeaveState() {
         switch (_state) {
             case State.GAMEPLAY:
-                Time.timeScale = 0;
-                GameplayUI.SetActive(false);
+                LeaveGameplay();
                 break;
             case State.MAIN_MENU:
+                LeaveMainMenu();
                 LoadLevel();
+                LoadAvatar();
                 break;
             default:
                 _gameMenus[_state].SetActive(false);
@@ -94,7 +86,7 @@ public class GameManager : MonoBehaviour
         switch (_state) {
             case State.GAMEPLAY:
                 Time.timeScale = 1;
-                GameplayUI.SetActive(true);
+                _allUIMenus["GameplayUI"].SetActive(true);
                 break;
             case State.MAIN_MENU:
                 EnterMainMenu();
@@ -105,34 +97,87 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void EnterMainMenu() {
-        Destroy(_currentLevel);
-        Destroy(_currentAvatar);
+    void PrepareResource(string resourcePath, Dictionary<string, GameObject> container, bool instantiate=false) {
+        List<string> paths = new List<string>(Directory.GetFiles(@"" + resourcePath));
+        foreach(string path in paths) {
+            if(path.EndsWith("meta")) {
+                continue;
+            }
+            UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
+            string[] pathParts = path.Split('/');
+            string name = pathParts[pathParts.Length - 1].Split('.')[0];
+            if(instantiate) {
+                container[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
+            } else {
+                container[name] = prefab as GameObject;  
+            }
+        }
+    }
+
+    void PrepareUI() {
+        _allUIMenus = new Dictionary<string, GameObject>();
+        PrepareResource("Assets/UI/", _allUIMenus, true);
+
+        _gameMenus = new Dictionary<State, GameObject>() {
+            {State.PAUSE_MENU, _allUIMenus["PauseMenuPanel"]},
+            {State.INVENTORY, _allUIMenus["InventoryPanel"]},
+            {State.SKILL_MENU, _allUIMenus["SkillMenuPanel"]},
+            {State.MAP_MENU, _allUIMenus["MapMenuPanel"]},
+            {State.DIALOG, _allUIMenus["DialogPanel"]},
+            {State.COMBAT, _allUIMenus["CombatUI"]},
+            {State.JOURNAL_MENU, _allUIMenus["QuestsPanel"]},
+        };
+    }
+
+    void PrepareLevels() {
+        _allLevels = new Dictionary<string, GameObject>();
+        PrepareResource("Assets/Levels/", _allLevels);
+    }
+
+    void PrepareAvatars() {
+        _allAvatars = new Dictionary<string, GameObject>();
+        PrepareResource("Assets/Avatars/", _allAvatars);
+    }
+
+    void LeaveGameplay() {
+        Time.timeScale = 0;
+        _allUIMenus["GameplayUI"].SetActive(false);
+        if(_currentLevel != null) {
+            Destroy(_currentLevel);
+        }
+        if(_currentAvatar != null) {
+            Destroy(_currentAvatar);
+        }
+    }
+
+    void EnterMainMenu() {        
         UICamera.SetActive(true);
-        MainMenuPanel.SetActive(true);
+        _allUIMenus["MainMenuPanel"].SetActive(true);
+    }
+
+    void LeaveMainMenu() {
+        UICamera.SetActive(false);
+        _allUIMenus["MainMenuPanel"].SetActive(false);
     }
 
     void LoadLevel() {
-        UICamera.SetActive(false);
-        MainMenuPanel.SetActive(false);
-        _currentLevel = Instantiate(levels[_currentLevelID]);
-        string current_level_name = levels[_currentLevelID].name;
-        _currentAvatar = Instantiate(_playerAvatars[_currentAvatarID]);
-        LinkAvatar(_currentAvatar);
-        DialogueManager.LoadAllSpeakers(current_level_name);
-        QuestManager.Init(current_level_name);
+        _currentLevel = Instantiate(_allLevels[currentLevelID]);
+        DialogueManager.LoadAllSpeakers(currentLevelID);
+        QuestManager.Init(currentLevelID);
     }
 
-    void LinkAvatar(GameObject avatar) {
-        GameObject interactButton = GameplayUI.transform.Find("InteractButton").gameObject;
-        CollectingHero itemsHero = avatar.GetComponent<CollectingHero>();
-        QuestDoingHero questHero = avatar.GetComponent<QuestDoingHero>();
+    void LoadAvatar() {
+        _currentAvatar = Instantiate(_allAvatars[currentAvatarID]);
 
-        avatar.GetComponent<InteractingHero>().interactionButton = interactButton;
-        interactButton.GetComponent<Button>().onClick.AddListener(() => avatar.GetComponent<InteractingHero>().interact());
-        itemsHero.InventoryPanel = InventoryPanel;
-        questHero.QuestsUI = QuestsPanel;
+        GameObject interactButton = _allUIMenus["GameplayUI"].transform.Find("InteractButton").gameObject;
+        CollectingHero itemsHero = _currentAvatar.GetComponent<CollectingHero>();
+        QuestDoingHero questHero = _currentAvatar.GetComponent<QuestDoingHero>();
 
-        EventManager.Init(questHero, itemsHero);
+        _currentAvatar.GetComponent<InteractingHero>().interactionButton = interactButton;
+        interactButton.GetComponent<Button>().onClick.AddListener(() => _currentAvatar.GetComponent<InteractingHero>().interact());
+        itemsHero.InventoryPanel = _allUIMenus["InventoryPanel"];
+        questHero.QuestsUI = _allUIMenus["QuestsPanel"];
+
+        EventManager.Init(currentLevelID, questHero, itemsHero);
     }
 }
