@@ -13,11 +13,11 @@ public class GameManager : MonoBehaviour
     Dictionary<State, GameObject> _gameMenus;
     Dictionary<string, GameObject> _allUIMenus;
 
-    Dictionary<string, GameObject> _allLevels;
+    Dictionary<string, string> _allLevels;
     GameObject _currentLevel;
     public string currentLevelID;
 
-    Dictionary<string, GameObject> _allAvatars;
+    Dictionary<string, string> _allAvatars;
     GameObject _currentAvatar;
     public string currentAvatarID;
 
@@ -25,7 +25,7 @@ public class GameManager : MonoBehaviour
 
     public enum State {
         GAMEPLAY,
-        LOADING,
+        LOADING,  // TODO async loading
         MAIN_MENU,
         COMBAT,
         PUZZLE,
@@ -46,9 +46,8 @@ public class GameManager : MonoBehaviour
 
     void Start() {
         PrepareUI();
-        PrepareLevels();
-        PrepareAvatars();
-
+        _allLevels = GetResourcesPaths("Assets/Levels/");
+        _allAvatars = GetResourcesPaths("Assets/Avatars/");
         Instance = this;
         SwitchState(State.MAIN_MENU);
     }
@@ -69,7 +68,8 @@ public class GameManager : MonoBehaviour
     void LeaveState() {
         switch (_state) {
             case State.GAMEPLAY:
-                LeaveGameplay();
+                Time.timeScale = 0;
+                _allUIMenus["GameplayUI"].SetActive(false);
                 break;
             case State.MAIN_MENU:
                 LeaveMainMenu();
@@ -89,6 +89,8 @@ public class GameManager : MonoBehaviour
                 _allUIMenus["GameplayUI"].SetActive(true);
                 break;
             case State.MAIN_MENU:
+                Destroy(_currentLevel);
+                Destroy(_currentAvatar);
                 EnterMainMenu();
                 break;
             default:
@@ -97,8 +99,23 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    void PrepareResource(string resourcePath, Dictionary<string, GameObject> container, bool instantiate=false) {
+    Dictionary<string, string> GetResourcesPaths(string resourcePath) {
+        Dictionary<string, string> ret = new Dictionary<string, string>();
         List<string> paths = new List<string>(Directory.GetFiles(@"" + resourcePath));
+        foreach(string path in paths) {
+            if(path.EndsWith("meta")) {
+                continue;
+            }
+            string[] pathParts = path.Split('/');
+            string name = pathParts[pathParts.Length - 1].Split('.')[0];
+            ret[name] = path;
+        }
+        return ret;
+    }
+
+    void PrepareUI() {
+        _allUIMenus = new Dictionary<string, GameObject>();
+        List<string> paths = new List<string>(Directory.GetFiles(@"" + "Assets/UI/"));
         foreach(string path in paths) {
             if(path.EndsWith("meta")) {
                 continue;
@@ -106,17 +123,8 @@ public class GameManager : MonoBehaviour
             UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
             string[] pathParts = path.Split('/');
             string name = pathParts[pathParts.Length - 1].Split('.')[0];
-            if(instantiate) {
-                container[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
-            } else {
-                container[name] = prefab as GameObject;  
-            }
+            _allUIMenus[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
         }
-    }
-
-    void PrepareUI() {
-        _allUIMenus = new Dictionary<string, GameObject>();
-        PrepareResource("Assets/UI/", _allUIMenus, true);
 
         _gameMenus = new Dictionary<State, GameObject>() {
             {State.PAUSE_MENU, _allUIMenus["PauseMenuPanel"]},
@@ -127,27 +135,6 @@ public class GameManager : MonoBehaviour
             {State.COMBAT, _allUIMenus["CombatUI"]},
             {State.JOURNAL_MENU, _allUIMenus["QuestsPanel"]},
         };
-    }
-
-    void PrepareLevels() {
-        _allLevels = new Dictionary<string, GameObject>();
-        PrepareResource("Assets/Levels/", _allLevels);
-    }
-
-    void PrepareAvatars() {
-        _allAvatars = new Dictionary<string, GameObject>();
-        PrepareResource("Assets/Avatars/", _allAvatars);
-    }
-
-    void LeaveGameplay() {
-        Time.timeScale = 0;
-        _allUIMenus["GameplayUI"].SetActive(false);
-        if(_currentLevel != null) {
-            Destroy(_currentLevel);
-        }
-        if(_currentAvatar != null) {
-            Destroy(_currentAvatar);
-        }
     }
 
     void EnterMainMenu() {        
@@ -161,13 +148,16 @@ public class GameManager : MonoBehaviour
     }
 
     void LoadLevel() {
-        _currentLevel = Instantiate(_allLevels[currentLevelID]);
+        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(_allLevels[currentLevelID], typeof(GameObject));
+        _currentLevel =  Instantiate(prefab) as GameObject;
         DialogueManager.LoadAllSpeakers(currentLevelID);
         QuestManager.Init(currentLevelID);
     }
 
     void LoadAvatar() {
-        _currentAvatar = Instantiate(_allAvatars[currentAvatarID]);
+        
+        UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(_allAvatars[currentAvatarID], typeof(GameObject));
+        _currentAvatar = Instantiate(prefab) as GameObject;
 
         GameObject interactButton = _allUIMenus["GameplayUI"].transform.Find("InteractButton").gameObject;
         CollectingHero itemsHero = _currentAvatar.GetComponent<CollectingHero>();
