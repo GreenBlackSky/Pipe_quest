@@ -13,6 +13,7 @@ public class MovingHero : MonoBehaviour
     {
         float Vx = Input.GetAxis("Horizontal") * speed;
         float Vz = Input.GetAxis("Vertical") * speed;
+        // TODO remove get component from update
         GetComponent<Rigidbody>().velocity = new Vector3(Vx, GetComponent<Rigidbody>().velocity.y, Vz);
     }
 }

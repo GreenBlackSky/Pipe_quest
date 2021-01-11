@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     GameObject _currentLevel;
     public string currentLevelID;
 
-    Dictionary<string, string> _allAvatars;
+    Dictionary<string, string> _allAvatars; // TODO load level configuration from xml
     GameObject _currentAvatar;
     public string currentAvatarID;
 
