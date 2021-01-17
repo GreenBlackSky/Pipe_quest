@@ -3,16 +3,15 @@ using UnityEngine;
 
 
 public class MovingHero : MonoBehaviour {
-    private Animator animator;
-    private Rigidbody body;
+    public Animator animator;
+    public Rigidbody body;
 
     public float speed;
     private bool movingX;
     private bool movingZ;
-
+    // TODO sprite lighting and shadows
+    // TODO smart camera movement
     void Start() {
-        animator = GetComponent<Animator>();
-        body = GetComponent<Rigidbody>();
         movingX = false;
         movingZ = false;
     }
@@ -28,17 +27,29 @@ public class MovingHero : MonoBehaviour {
         if(!movingX && !movingZ) {
             if(movingXnew && !movingZnew) {
                 movingX = true;
+                if(Vx < 0) {
+                    animator.SetTrigger("WalkLeft");
+                } else {
+                    animator.SetTrigger("WalkRight");
+                }
             } else if (!movingXnew && movingZnew) {
                 movingZ = true;
+                if(Vz < 0) {
+                    animator.SetTrigger("WalkFront");
+                } else {
+                    animator.SetTrigger("WalkBack");
+                }
             }
         // stop moving
         } else if(!movingXnew && !movingZnew) {
             movingX = false;
             movingZ = false;
+            animator.SetTrigger("Stop");
         //change direction
         } else if ((movingX != movingXnew) && (movingZ != movingZnew)) {
             movingX = !movingX;
             movingZ = !movingZ;
+            // TODO envoke animation trigger
         }
 
         if(movingX) {
