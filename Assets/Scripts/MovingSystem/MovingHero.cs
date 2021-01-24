@@ -72,6 +72,7 @@ public class MovingHero : MonoBehaviour {
     void Update() {
         float Vx = Input.GetAxis("Horizontal");
         float Vy = Input.GetAxis("Vertical");
+
         this._updateDirection(Vx, Vy);
         Direction dir = this._getDirection(Vx, Vy);
         animator.SetTrigger(this._directionAnimation[dir]);
