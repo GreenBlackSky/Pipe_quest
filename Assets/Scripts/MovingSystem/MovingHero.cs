@@ -23,6 +23,7 @@ public class MovingHero : MonoBehaviour {
 
     // TODO sprite lighting and shadows
     // TODO smart camera movement
+    // BUG  switch animation delay
 
    Direction _getDirection(float Vx, float Vy) {
         if (_movingX) {

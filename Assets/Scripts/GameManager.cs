@@ -23,6 +23,7 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
+    // TODO cut scene
     public enum State {
         GAMEPLAY,
         LOADING,  // TODO async loading
