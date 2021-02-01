@@ -55,6 +55,7 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         // BUG keys in main menu
+        // TODO separate ui state machine and game state machine again
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {

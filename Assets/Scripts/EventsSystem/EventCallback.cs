@@ -1,4 +1,5 @@
 using System;
+using UnityEngine;
 
 
 public class BaseEventCallback {
@@ -10,6 +11,10 @@ public class BaseEventCallback {
 
     public virtual void Call() {
         throw new Exception("not implementerd");
+    }
+
+    public void devPing() {
+        Debug.Log($"PING CALLBACK {this.GetType()}");
     }
 }
 

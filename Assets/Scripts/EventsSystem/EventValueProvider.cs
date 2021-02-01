@@ -1,4 +1,6 @@
 using System;
+using UnityEngine;
+
 
 public class  BaseEventValueProvider {
     protected static CollectingHero currentHero;
@@ -12,6 +14,10 @@ public class  BaseEventValueProvider {
 
     public virtual int Provide() {
         throw new Exception("not implementerd");
+    }
+
+    public void devPing() {
+        Debug.Log($"PING VALUE PROVIDER {this.GetType()}");
     }
 }
 

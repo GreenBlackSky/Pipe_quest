@@ -3,23 +3,24 @@ using System.Xml.Serialization;
 using System.Collections.Generic;
 using UnityEngine;
 
+
+// TODO test with dialog
 public class EventManager {
 
-    static Dictionary<int, EventListener> allListeners;
-    static Dictionary<(string, string), List<EventListener>> activeTriggers;
-    static LinkedList<EventListener> eventsQueue;
+    static Dictionary<int, EventListener> _allListeners;
+    static Dictionary<(string, string), List<EventListener>> _activeTriggers;
+    static LinkedList<EventListener> _eventsQueue;
 
     public static void Init(string level_name, QuestDoingHero questHero, CollectingHero itemsHero) {
-        if(allListeners == null) {
-            allListeners = new Dictionary<int, EventListener>();
-            activeTriggers = new Dictionary<(string, string), List<EventListener>>();
-            eventsQueue = new LinkedList<EventListener>();
+        if(_allListeners == null) {
+            _allListeners = new Dictionary<int, EventListener>();
+            _activeTriggers = new Dictionary<(string, string), List<EventListener>>();
+            _eventsQueue = new LinkedList<EventListener>();
         }
         BaseEventTrigger.Init();
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
         BaseEventCallback.Init(questHero);
-
         LoadAllListeners(level_name);
     }
 
@@ -28,9 +29,9 @@ public class EventManager {
         List<int> listenersToRemove = new List<int>();
         List<BaseEventCallback> callbacksToCall = new List<BaseEventCallback>();
 
-        if(eventsQueue.Count != 0) {
-            EventListener listener = eventsQueue.First.Value;
-            eventsQueue.RemoveFirst();
+        if(_eventsQueue.Count != 0) {
+            EventListener listener = _eventsQueue.First.Value;
+            _eventsQueue.RemoveFirst();
 
             if(!listener.CheckConditions()) {
                 return;
@@ -75,48 +76,49 @@ public class EventManager {
         XmlNode root = doc.DocumentElement.SelectSingleNode("/level");
         foreach(XmlNode listenerData in root.ChildNodes) {
             EventListener listener = listenerSerializer.Deserialize(new XmlNodeReader(listenerData)) as EventListener;
-            allListeners[listener.id] = listener;
+            _allListeners[listener.id] = listener;
             if(listener.initial) {
                 StartListening(listener.id);
             }
+            // listener.devPing();
         }
     }
 
     public static void ClearListeners() {
-        foreach(List<EventListener> listeners in activeTriggers.Values) {
+        foreach(List<EventListener> listeners in _activeTriggers.Values) {
             listeners.Clear();
         }
-        activeTriggers.Clear();
-        allListeners.Clear();
+        _activeTriggers.Clear();
+        _allListeners.Clear();
     }
 
     public static void StartListening(int listenerId) {
-        EventListener listener = allListeners[listenerId];
+        EventListener listener = _allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
             (string, string) key = (trigger.GetType().Name, trigger.argument);
-            if(!activeTriggers.ContainsKey(key)) {
-                activeTriggers[key] = new List<EventListener>();
+            if(!_activeTriggers.ContainsKey(key)) {
+                _activeTriggers[key] = new List<EventListener>();
             }
-            activeTriggers[key].Add(listener);
+            _activeTriggers[key].Add(listener);
         }
     }
 
     public static void StopListening(int listenerId) {
-        EventListener listener = allListeners[listenerId];
+        EventListener listener = _allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
             (string, string) key = (trigger.GetType().Name, trigger.argument);
-            if(activeTriggers.ContainsKey(key)) {
-                activeTriggers[key].Remove(listener);
+            if(_activeTriggers.ContainsKey(key)) {
+                _activeTriggers[key].Remove(listener);
             }
         }
     }
 
     public static void Trigger((string, string) triggerKey) {
-        if(!activeTriggers.ContainsKey(triggerKey)) {
+        if(!_activeTriggers.ContainsKey(triggerKey)) {
             return;
         }
-        foreach(EventListener listener in activeTriggers[triggerKey]) {
-            eventsQueue.AddLast(listener);
+        foreach(EventListener listener in _activeTriggers[triggerKey]) {
+            _eventsQueue.AddLast(listener);
         }
     }
 }

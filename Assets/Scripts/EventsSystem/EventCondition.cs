@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using UnityEngine;
+
 
 public class BaseEventCondition {
     protected static QuestDoingHero questHero;
@@ -10,6 +12,10 @@ public class BaseEventCondition {
 
     public virtual bool Check() {
         throw new Exception("not implementerd");
+    }
+
+    public void devPing() {
+        Debug.Log($"PING CONDITION {this.GetType()}");
     }
 }
 

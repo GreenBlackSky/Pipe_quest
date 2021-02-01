@@ -1,6 +1,6 @@
 using System.Xml.Serialization;
 using System.Collections.Generic;
-
+using UnityEngine;
 
 [XmlRoot("listener")]
 public class EventListener {
@@ -27,5 +27,18 @@ public class EventListener {
             }
         }
         return true;
+    }
+
+    public void devPing() {
+        Debug.Log($"LISTENER {id} PING");
+        foreach(var trigger in this.triggers) {
+            trigger.devPing();
+        }
+        foreach(var condition in this.conditions) {
+            condition.devPing();
+        }
+        foreach(var callback in this.callbacks) {
+            callback.devPing();
+        }
     }
 }

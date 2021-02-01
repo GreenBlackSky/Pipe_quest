@@ -1,5 +1,5 @@
 using System;
-
+using UnityEngine;
 
 public class BaseEventTrigger {
     static EventManager eventManager;
@@ -14,6 +14,10 @@ public class BaseEventTrigger {
             throw new Exception("not implementerd");
         }
         EventManager.Trigger((triggerName, argument));
+    }
+
+    public void devPing() {
+        Debug.Log($"PING TRIGGER {this.GetType()}");
     }
 }
 
