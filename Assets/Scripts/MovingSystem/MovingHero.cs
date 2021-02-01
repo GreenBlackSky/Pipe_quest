@@ -10,78 +10,91 @@ public class MovingHero : MonoBehaviour {
     public Rigidbody body;
 
     public float speed;
-    private bool _movingX;
-    private bool _movingY;
+
     private Direction _direction;
     private Dictionary<Direction, string> _directionAnimation = new Dictionary<Direction, string> {
-        {Direction.UP, "WalkFront"},
+        {Direction.UP, "WalkBack"},
         {Direction.RIGHT, "WalkRight"},
-        {Direction.DOWN, "WalkBack"},
+        {Direction.DOWN, "WalkFront"},
         {Direction.LEFT, "WalkLeft"},
         {Direction.STOP, "Stop"},
     };
 
     // TODO sprite lighting and shadows
     // TODO smart camera movement
-    // BUG  switch animation delay
 
-   Direction _getDirection(float Vx, float Vy) {
-        if (_movingX) {
-            if (Vx > 0) {
-                return Direction.RIGHT;
-            } else {
-                return Direction.LEFT;
-            }
-        } else if (_movingY) {
-            if (Vy > 0) {
-                return Direction.DOWN;
-            } else {
-                return Direction.UP;
-            }
-        } else {
-            return Direction.STOP;
-        }
-    }
+    void _updateDirection() {
+        bool up = Input.GetKey(KeyCode.W);
+        bool left = Input.GetKey(KeyCode.A);
+        bool down = Input.GetKey(KeyCode.S);
+        bool right = Input.GetKey(KeyCode.D);
+        
+        bool movingXnew = (left || right);
+        bool movingYnew = (up || down);
 
-    void _updateDirection(float Vx, float Vy) {
-        bool movingXnew = (Math.Abs(Vx) > 0.5);
-        bool movingYnew = (Math.Abs(Vy) > 0.5);
-
+        bool movingXcur = (_direction == Direction.LEFT || _direction == Direction.RIGHT);
+        bool movingYcur = (_direction == Direction.UP || _direction == Direction.DOWN);
         // start moving
-        if (!_movingX && !_movingY) {
-            if (movingXnew && !movingYnew) {
-                _movingX = true;
-            } else if (!movingXnew && movingYnew) {
-                _movingY = true;
+        if(_direction == Direction.STOP) {
+            if(movingXnew && !movingYnew) {
+                if(left) {
+                    _direction = Direction.LEFT;
+                }
+                if(right) {
+                    _direction = Direction.RIGHT;
+                }
+            } else if(!movingXnew && movingYnew) {
+                if(up) {
+                    _direction = Direction.UP;
+                }
+                if(down) {
+                    _direction = Direction.DOWN;
+                }
             }
         // stop moving
         } else if (!movingXnew && !movingYnew) {
-            _movingX = false;
-            _movingY = false;
+            _direction = Direction.STOP;
         //change direction
-        } else if ((_movingX != movingXnew) && (_movingY != movingYnew)) {
-            _movingX = !_movingX;
-            _movingY = !_movingY;
+        } else {
+            if(left) {
+                _direction = Direction.LEFT;
+            }
+            if(right) {
+                _direction = Direction.RIGHT;
+            }
+            if(up) {
+                _direction = Direction.UP;
+            }
+            if(down) {
+                _direction = Direction.DOWN;
+            }
+        }
+    }
+
+    void _updateSpeed() {
+        switch(_direction) {
+            case Direction.LEFT:
+                body.velocity = new Vector3(-speed, body.velocity.y, 0);
+                break;
+            case Direction.RIGHT:
+                body.velocity = new Vector3(speed, body.velocity.y, 0);
+                break;
+            case Direction.UP:
+                body.velocity = new Vector3(0, body.velocity.y, speed);
+                break;
+            case Direction.DOWN:
+                body.velocity = new Vector3(0, body.velocity.y, -speed);
+                break;
         }
     }
 
     void Start() {
-        _movingX = false;
-        _movingY = false;
+        _direction = Direction.STOP;
     }
 
     void Update() {
-        float Vx = Input.GetAxis("Horizontal");
-        float Vy = Input.GetAxis("Vertical");
-
-        this._updateDirection(Vx, Vy);
-        Direction dir = this._getDirection(Vx, Vy);
-        animator.SetTrigger(this._directionAnimation[dir]);
-
-        if (_movingX) {
-            body.velocity = new Vector3(speed*Vx, body.velocity.y, 0);
-        } else if (_movingY) {
-            body.velocity = new Vector3(0, body.velocity.y, speed*Vy);
-        }
+        this._updateDirection();
+        animator.SetTrigger(this._directionAnimation[_direction]);
+        this._updateSpeed();
     }
 }
