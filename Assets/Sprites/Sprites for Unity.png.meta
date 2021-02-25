@@ -1,0 +1,586 @@
+fileFormatVersion: 2
+guid: 3185dbc0414f1a846ab45b8719a1d296
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -223869736107803744
+    second: Sprites for Unity_0
+  - first:
+      213: 2095487320231012344
+    second: Sprites for Unity_1
+  - first:
+      213: 1834963967059168447
+    second: Sprites for Unity_2
+  - first:
+      213: -1244618020035155662
+    second: Sprites for Unity_3
+  - first:
+      213: 3652015803043101236
+    second: Sprites for Unity_4
+  - first:
+      213: 3499074048048372338
+    second: Sprites for Unity_5
+  - first:
+      213: 112783798434802328
+    second: Sprites for Unity_6
+  - first:
+      213: -7219923141004285111
+    second: Sprites for Unity_7
+  - first:
+      213: -6338341896040836813
+    second: Sprites for Unity_8
+  - first:
+      213: 5920938543316361671
+    second: Sprites for Unity_9
+  - first:
+      213: 7695195843066586608
+    second: Sprites for Unity_10
+  - first:
+      213: 5246314108860680938
+    second: Sprites for Unity_11
+  - first:
+      213: -3962547341808442502
+    second: Sprites for Unity_12
+  - first:
+      213: -407879595355910721
+    second: Sprites for Unity_13
+  - first:
+      213: -3979665709675057577
+    second: Sprites for Unity_14
+  - first:
+      213: 7546040238412369298
+    second: Sprites for Unity_15
+  - first:
+      213: 6641149301437097594
+    second: Sprites for Unity_16
+  - first:
+      213: -6728445112727750874
+    second: Sprites for Unity_17
+  - first:
+      213: 8628355011060688415
+    second: Sprites for Unity_18
+  - first:
+      213: 4801174524287485443
+    second: Sprites for Unity_19
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sprites for Unity_0
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 169
+        width: 60
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ab755f39a7a4ecf0800000000000000
+      internalID: -223869736107803744
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_1
+      rect:
+        serializedVersion: 2
+        x: 141
+        y: 169
+        width: 54
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f764b98d9aa41d10800000000000000
+      internalID: 2095487320231012344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_2
+      rect:
+        serializedVersion: 2
+        x: 224
+        y: 169
+        width: 54
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbc0438810a177910800000000000000
+      internalID: 1834963967059168447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_3
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 169
+        width: 54
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 23921ca418a3abee0800000000000000
+      internalID: -1244618020035155662
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_4
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 169
+        width: 44
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 43a3f7e06019ea230800000000000000
+      internalID: 3652015803043101236
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_5
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 169
+        width: 48
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 27a16bcce453f8030800000000000000
+      internalID: 3499074048048372338
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_6
+      rect:
+        serializedVersion: 2
+        x: 666
+        y: 169
+        width: 50
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89a20226440b09100800000000000000
+      internalID: 112783798434802328
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_7
+      rect:
+        serializedVersion: 2
+        x: 755
+        y: 169
+        width: 48
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94b21d2f72eadcb90800000000000000
+      internalID: -7219923141004285111
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_8
+      rect:
+        serializedVersion: 2
+        x: 847
+        y: 169
+        width: 50
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3319285a0afa908a0800000000000000
+      internalID: -6338341896040836813
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_9
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 169
+        width: 44
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7c16a431c366b2250800000000000000
+      internalID: 5920938543316361671
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_10
+      rect:
+        serializedVersion: 2
+        x: 60
+        y: 26
+        width: 60
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0f5eb0f29d3daca60800000000000000
+      internalID: 7695195843066586608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_11
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 28
+        width: 54
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aeac2c6c2e6aec840800000000000000
+      internalID: 5246314108860680938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_12
+      rect:
+        serializedVersion: 2
+        x: 227
+        y: 28
+        width: 54
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73e6d5ef243209c0800000000000000
+      internalID: -3962547341808442502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_13
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 30
+        width: 54
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fbd4ea74babe65af0800000000000000
+      internalID: -407879595355910721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_14
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 29
+        width: 44
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 75ee30a4f1365c8c0800000000000000
+      internalID: -3979665709675057577
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_15
+      rect:
+        serializedVersion: 2
+        x: 582
+        y: 25
+        width: 48
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29d8f5fbd9be8b860800000000000000
+      internalID: 7546040238412369298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_16
+      rect:
+        serializedVersion: 2
+        x: 664
+        y: 25
+        width: 50
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a76ed747a1a1a2c50800000000000000
+      internalID: 6641149301437097594
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_17
+      rect:
+        serializedVersion: 2
+        x: 753
+        y: 25
+        width: 48
+        height: 108
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 627362d91d2cf92a0800000000000000
+      internalID: -6728445112727750874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_18
+      rect:
+        serializedVersion: 2
+        x: 844
+        y: 25
+        width: 50
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f16eb36ea231eb770800000000000000
+      internalID: 8628355011060688415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity_19
+      rect:
+        serializedVersion: 2
+        x: 929
+        y: 25
+        width: 44
+        height: 106
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3068fc8cac231a240800000000000000
+      internalID: 4801174524287485443
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: c353bf8d049d9174098615cded4aa14a
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
