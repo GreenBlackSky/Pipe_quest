@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3771821756157678273}
   - component: {fileID: 3771821756157678272}
   m_Layer: 0
-  m_Name: SpriteAvatar
+  m_Name: LidiaAvatar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
