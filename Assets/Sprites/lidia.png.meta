@@ -1,79 +1,67 @@
 fileFormatVersion: 2
-guid: 262dc6c24c6eba24d88c617bd11c21eb
+guid: 3185dbc0414f1a846ab45b8719a1d296
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5827935539512385037
-    second: lidia_front_idle_0
+      213: -223869736107803744
+    second: walk_left_1
   - first:
-      213: 6124094163638051830
-    second: lidia_front_idle_1
+      213: 2095487320231012344
+    second: walk_left_2
   - first:
-      213: 1708421847659420186
-    second: lidia_front_idle_2
+      213: 1834963967059168447
+    second: walk_left_3
   - first:
-      213: 3130727435593402559
-    second: lidia_back_idle_0
+      213: -1244618020035155662
+    second: walk_left_4
   - first:
-      213: 9148723323937354004
-    second: lidia_back_idle_1
+      213: 3652015803043101236
+    second: idle_left_1
   - first:
-      213: -572576342521466100
-    second: lidia_back_idle_2
+      213: 3499074048048372338
+    second: walk_back_1
   - first:
-      213: 7231247316194674397
-    second: lidia_right_idle_0
+      213: 112783798434802328
+    second: walk_back_2
   - first:
-      213: 6487491232248381462
-    second: lidia_right_idle_1
+      213: -7219923141004285111
+    second: walk_back_3
   - first:
-      213: 5053462033697351802
-    second: lidia_right_idle_2
+      213: -6338341896040836813
+    second: walk_back_4
   - first:
-      213: -3849564759900995290
-    second: lidia_left_idle_0
+      213: 5920938543316361671
+    second: idle_back_1
   - first:
-      213: -2767846509116669153
-    second: lidia_left_idle_1
+      213: 7695195843066586608
+    second: walk_right_1
   - first:
-      213: 9119092688310582639
-    second: lidia_left_idle_2
+      213: 5246314108860680938
+    second: walk_right_2
   - first:
-      213: 8729543467765125327
-    second: lidia_front_walk_0
+      213: -3962547341808442502
+    second: walk_right_3
   - first:
-      213: 4113743559651159083
-    second: lidia_front_walk_1
+      213: -407879595355910721
+    second: walk_right_4
   - first:
-      213: -7215415627411861353
-    second: lidia_front_walk_2
+      213: -3979665709675057577
+    second: idle_right_1
   - first:
-      213: 1812843179066348848
-    second: lidia_front_walk_3
+      213: 7546040238412369298
+    second: Sprites for Unity_15
   - first:
-      213: 4020118470531976226
-    second: lidia_back_walk_0
+      213: 6641149301437097594
+    second: Sprites for Unity_16
   - first:
-      213: -3447748881959583296
-    second: lidia_back_walk_1
+      213: -6728445112727750874
+    second: Sprites for Unity_17
   - first:
-      213: -1564455876964908695
-    second: lidia_back_walk_2
+      213: 8628355011060688415
+    second: Sprites for Unity_18
   - first:
-      213: 7497516667797289716
-    second: lidia_back_walk_3
-  - first:
-      213: 2715932954736625535
-    second: lidia_right_walk_0
-  - first:
-      213: -4823396846978192849
-    second: lidia_right_walk_1
-  - first:
-      213: -2282898549823937142
-    second: lidia_left_walk_0
-  - first:
-      213: -4876027988451177466
-    second: lidia_left_walk_1
+      213: 4801174524287485443
+    second: Sprites for Unity_19
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -161,13 +149,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: lidia_front_idle_0
+      name: walk_left_1
       rect:
         serializedVersion: 2
-        x: 168
-        y: 704
-        width: 177
-        height: 509
+        x: 52
+        y: 169
+        width: 60
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -175,20 +163,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d0e9286de7cf0e050800000000000000
-      internalID: 5827935539512385037
+      spriteID: 0ab755f39a7a4ecf0800000000000000
+      internalID: -223869736107803744
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_idle_1
+      name: walk_left_2
       rect:
         serializedVersion: 2
-        x: 364
-        y: 705
-        width: 179
-        height: 508
+        x: 141
+        y: 169
+        width: 54
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -196,20 +184,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f360bae1372df450800000000000000
-      internalID: 6124094163638051830
+      spriteID: 8f764b98d9aa41d10800000000000000
+      internalID: 2095487320231012344
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_idle_2
+      name: walk_left_3
       rect:
         serializedVersion: 2
-        x: 563
-        y: 705
-        width: 175
-        height: 509
+        x: 224
+        y: 169
+        width: 54
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -217,20 +205,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a1a914c6e9885b710800000000000000
-      internalID: 1708421847659420186
+      spriteID: fbc0438810a177910800000000000000
+      internalID: 1834963967059168447
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_idle_0
+      name: walk_left_4
       rect:
         serializedVersion: 2
-        x: 975
-        y: 702
-        width: 179
-        height: 512
+        x: 308
+        y: 169
+        width: 54
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -238,20 +226,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fb84d1fe304927b20800000000000000
-      internalID: 3130727435593402559
+      spriteID: 23921ca418a3abee0800000000000000
+      internalID: -1244618020035155662
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_idle_1
+      name: idle_left_1
       rect:
         serializedVersion: 2
-        x: 1171
-        y: 699
-        width: 176
-        height: 511
+        x: 398
+        y: 169
+        width: 44
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -259,20 +247,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 411fd9f146bc6fe70800000000000000
-      internalID: 9148723323937354004
+      spriteID: 43a3f7e06019ea230800000000000000
+      internalID: 3652015803043101236
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_idle_2
+      name: walk_back_1
       rect:
         serializedVersion: 2
-        x: 1372
-        y: 699
-        width: 179
-        height: 509
+        x: 582
+        y: 169
+        width: 48
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -280,20 +268,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: c033731a9dccd08f0800000000000000
-      internalID: -572576342521466100
+      spriteID: 27a16bcce453f8030800000000000000
+      internalID: 3499074048048372338
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_right_idle_0
+      name: walk_back_2
       rect:
         serializedVersion: 2
-        x: 1793
-        y: 690
-        width: 179
-        height: 517
+        x: 666
+        y: 169
+        width: 50
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -301,20 +289,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: dd6c7cc0f1d8a5460800000000000000
-      internalID: 7231247316194674397
+      spriteID: 89a20226440b09100800000000000000
+      internalID: 112783798434802328
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_right_idle_1
+      name: walk_back_3
       rect:
         serializedVersion: 2
-        x: 1983
-        y: 692
-        width: 178
-        height: 515
+        x: 755
+        y: 169
+        width: 48
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -322,20 +310,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 61040ad47e2380a50800000000000000
-      internalID: 6487491232248381462
+      spriteID: 94b21d2f72eadcb90800000000000000
+      internalID: -7219923141004285111
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_right_idle_2
+      name: walk_back_4
       rect:
         serializedVersion: 2
-        x: 2164
-        y: 691
-        width: 177
-        height: 513
+        x: 847
+        y: 169
+        width: 50
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -343,20 +331,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: a78247cf1f0812640800000000000000
-      internalID: 5053462033697351802
+      spriteID: 3319285a0afa908a0800000000000000
+      internalID: -6338341896040836813
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_left_idle_0
+      name: idle_back_1
       rect:
         serializedVersion: 2
-        x: 2562
-        y: 683
-        width: 175
-        height: 513
+        x: 937
+        y: 169
+        width: 44
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -364,20 +352,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6214d3a2f39939ac0800000000000000
-      internalID: -3849564759900995290
+      spriteID: 7c16a431c366b2250800000000000000
+      internalID: 5920938543316361671
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_left_idle_1
+      name: walk_right_1
       rect:
         serializedVersion: 2
-        x: 2748
-        y: 681
-        width: 175
-        height: 515
+        x: 60
+        y: 26
+        width: 60
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -385,20 +373,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f13cb4fb342a699d0800000000000000
-      internalID: -2767846509116669153
+      spriteID: 0f5eb0f29d3daca60800000000000000
+      internalID: 7695195843066586608
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_left_idle_2
+      name: walk_right_2
       rect:
         serializedVersion: 2
-        x: 2930
-        y: 679
-        width: 176
-        height: 515
+        x: 148
+        y: 28
+        width: 54
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -406,20 +394,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: f6d3d982c768d8e70800000000000000
-      internalID: 9119092688310582639
+      spriteID: aeac2c6c2e6aec840800000000000000
+      internalID: 5246314108860680938
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_walk_0
+      name: walk_right_3
       rect:
         serializedVersion: 2
-        x: 107
-        y: 101
-        width: 178
-        height: 518
+        x: 227
+        y: 28
+        width: 54
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -427,20 +415,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: fc0d8776881952970800000000000000
-      internalID: 8729543467765125327
+      spriteID: a73e6d5ef243209c0800000000000000
+      internalID: -3962547341808442502
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_walk_1
+      name: walk_right_4
       rect:
         serializedVersion: 2
-        x: 293
-        y: 100
-        width: 176
-        height: 516
+        x: 312
+        y: 30
+        width: 54
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -448,20 +436,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b2cee02d8f3f61930800000000000000
-      internalID: 4113743559651159083
+      spriteID: fbd4ea74babe65af0800000000000000
+      internalID: -407879595355910721
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_walk_2
+      name: idle_right_1
       rect:
         serializedVersion: 2
-        x: 485
-        y: 99
-        width: 179
-        height: 516
+        x: 398
+        y: 29
+        width: 44
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -469,20 +457,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 790505d37b1bddb90800000000000000
-      internalID: -7215415627411861353
+      spriteID: 75ee30a4f1365c8c0800000000000000
+      internalID: -3979665709675057577
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_front_walk_3
+      name: Sprites for Unity_15
       rect:
         serializedVersion: 2
-        x: 674
-        y: 98
-        width: 173
-        height: 517
+        x: 582
+        y: 25
+        width: 48
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -490,20 +478,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0355db93443882910800000000000000
-      internalID: 1812843179066348848
+      spriteID: 29d8f5fbd9be8b860800000000000000
+      internalID: 7546040238412369298
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_walk_0
+      name: Sprites for Unity_16
       rect:
         serializedVersion: 2
-        x: 960
-        y: 93
-        width: 175
-        height: 516
+        x: 664
+        y: 25
+        width: 50
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -511,20 +499,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 22c8b0f03745ac730800000000000000
-      internalID: 4020118470531976226
+      spriteID: a76ed747a1a1a2c50800000000000000
+      internalID: 6641149301437097594
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_walk_1
+      name: Sprites for Unity_17
       rect:
         serializedVersion: 2
-        x: 1145
-        y: 93
-        width: 174
-        height: 515
+        x: 753
+        y: 25
+        width: 48
+        height: 108
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -532,20 +520,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0c18c08a8a22720d0800000000000000
-      internalID: -3447748881959583296
+      spriteID: 627362d91d2cf92a0800000000000000
+      internalID: -6728445112727750874
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_walk_2
+      name: Sprites for Unity_18
       rect:
         serializedVersion: 2
-        x: 1336
-        y: 92
-        width: 174
-        height: 516
+        x: 844
+        y: 25
+        width: 50
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -553,20 +541,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9610cb23bafe94ae0800000000000000
-      internalID: -1564455876964908695
+      spriteID: f16eb36ea231eb770800000000000000
+      internalID: 8628355011060688415
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: lidia_back_walk_3
+      name: Sprites for Unity_19
       rect:
         serializedVersion: 2
-        x: 1521
-        y: 91
-        width: 175
-        height: 515
+        x: 929
+        y: 25
+        width: 44
+        height: 106
       alignment: 7
       pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -574,92 +562,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4fab0a19fa78c0860800000000000000
-      internalID: 7497516667797289716
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: lidia_right_walk_0
-      rect:
-        serializedVersion: 2
-        x: 1896
-        y: 93
-        width: 172
-        height: 507
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f778ad8f1aee0b520800000000000000
-      internalID: 2715932954736625535
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: lidia_right_walk_1
-      rect:
-        serializedVersion: 2
-        x: 2072
-        y: 89
-        width: 172
-        height: 511
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: f2a20258f1adf0db0800000000000000
-      internalID: -4823396846978192849
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: lidia_left_walk_0
-      rect:
-        serializedVersion: 2
-        x: 2667
-        y: 78
-        width: 175
-        height: 518
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: a856d7f3dd38150e0800000000000000
-      internalID: -2282898549823937142
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: lidia_left_walk_1
-      rect:
-        serializedVersion: 2
-        x: 2845
-        y: 79
-        width: 174
-        height: 516
-      alignment: 7
-      pivot: {x: 0.5, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 60c4189f06ed45cb0800000000000000
-      internalID: -4876027988451177466
+      spriteID: 3068fc8cac231a240800000000000000
+      internalID: 4801174524287485443
       vertices: []
       indices: 
       edges: []
@@ -667,7 +571,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 52dae02d90ae669499f4f2e5670c7c80
+    spriteID: c353bf8d049d9174098615cded4aa14a
     internalID: 0
     vertices: []
     indices: 
