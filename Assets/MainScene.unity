@@ -155,7 +155,7 @@ MonoBehaviour:
   UICamera: {fileID: 1659544986}
   UICanvas: {fileID: 1326407486}
   currentLevelID: AnorakLevel
-  currentAvatarID: SpriteAvatar
+  currentAvatarID: LidiaAvatar
 --- !u!4 &907418069
 Transform:
   m_ObjectHideFlags: 0
