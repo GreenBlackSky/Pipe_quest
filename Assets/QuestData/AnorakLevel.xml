@@ -1,36 +1,20 @@
 <level>
     <quest>
-        <id>mushrooms_quest</id>
-        <name>Finding mushrooms</name>
+        <id>enter_the_city</id>
+        <name>Enter the city</name>
         <nodes>
             <node id="0">
                 <description>
-                    Some dude in forest asked me to find 5 magic mushrooms.
+                    I must get into the town of Anorak
                 </description>
-                <counter>
-                    <text>Mushrooms found:</text>
-                    <target>5</target>
-                    <value>0</value>
-                </counter>
                 <children>
                     <child_id>1</child_id>
-                    <child_id>2</child_id>
                 </children>
             </node>
 
             <node id="1">
                 <description>
-                    I found all mushrooms. Time to talk to dude again.
-                </description>
-                <children>
-                    <child_id>0</child_id>
-                    <child_id>2</child_id>
-                </children>
-            </node>
-
-            <node id="2">
-                <description>
-                    I gave wierdo all the mushrooms and left nothing for myself. 
+                    I got into the city of Anorak! 
                 </description>
             </node>
         </nodes>

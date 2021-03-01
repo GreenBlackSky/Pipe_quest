@@ -1,0 +1,38 @@
+<level>
+    <quest>
+        <id>mushrooms_quest</id>
+        <name>Finding mushrooms</name>
+        <nodes>
+            <node id="0">
+                <description>
+                    Some dude in forest asked me to find 5 magic mushrooms.
+                </description>
+                <counter>
+                    <text>Mushrooms found:</text>
+                    <target>5</target>
+                    <value>0</value>
+                </counter>
+                <children>
+                    <child_id>1</child_id>
+                    <child_id>2</child_id>
+                </children>
+            </node>
+
+            <node id="1">
+                <description>
+                    I found all mushrooms. Time to talk to dude again.
+                </description>
+                <children>
+                    <child_id>0</child_id>
+                    <child_id>2</child_id>
+                </children>
+            </node>
+
+            <node id="2">
+                <description>
+                    I gave wierdo all the mushrooms and left nothing for myself. 
+                </description>
+            </node>
+        </nodes>
+    </quest>
+</level>

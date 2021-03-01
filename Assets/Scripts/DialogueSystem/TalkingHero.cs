@@ -17,7 +17,6 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     GameObject repliesArea;
     Transform speakerIcon;
     
-    
     Speaker speaker;
     string currentSpeakerName = "";
 

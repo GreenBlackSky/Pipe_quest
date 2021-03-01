@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// TODO test with dialog
 public class EventManager {
 
     static Dictionary<int, EventListener> _allListeners;
@@ -80,7 +79,6 @@ public class EventManager {
             if(listener.initial) {
                 StartListening(listener.id);
             }
-            // listener.devPing();
         }
     }
 

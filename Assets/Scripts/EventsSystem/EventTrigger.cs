@@ -22,6 +22,8 @@ public class BaseEventTrigger {
 }
 
 
+public class LoadLevelTrigger : BaseEventTrigger {}
+public class ReachMarkerTrigger : BaseEventTrigger {}
 public class LostItemTrigger : BaseEventTrigger {}
 public class CollectItemTrigger : BaseEventTrigger {}
 public class EquipItemTrigger : BaseEventTrigger {}
