@@ -15,6 +15,9 @@ public class QuestManager {
         }
 
         string path = "Assets/QuestData/" + level_name + ".xml";
+        if(!System.IO.File.Exists(path)) {
+            return;
+        }
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
         XmlNode root = doc.DocumentElement.SelectSingleNode("/level");

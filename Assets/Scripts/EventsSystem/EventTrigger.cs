@@ -10,6 +10,7 @@ public class BaseEventTrigger {
 
     public void Trigger(string argument) {
         string triggerName = this.GetType().Name;
+        Debug.Log($"BaseEventTrigger.Trigger {triggerName} {argument}");
         if(triggerName == "BaseEventTrigger") {
             throw new Exception("not implementerd");
         }
@@ -22,7 +23,6 @@ public class BaseEventTrigger {
 }
 
 
-public class LoadLevelTrigger : BaseEventTrigger {}
 public class ReachMarkerTrigger : BaseEventTrigger {}
 public class LostItemTrigger : BaseEventTrigger {}
 public class CollectItemTrigger : BaseEventTrigger {}

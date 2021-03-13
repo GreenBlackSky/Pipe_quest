@@ -69,6 +69,9 @@ public class EventManager {
     public static void LoadAllListeners(string level_name) {
         ClearListeners();
         string path = @"" + "Assets/EventsData/" + level_name + ".xml";
+        if(!System.IO.File.Exists(path)) {
+            return;
+        }
         XmlSerializer listenerSerializer = new XmlSerializer(typeof(EventListener));
         XmlDocument doc = new XmlDocument();
         doc.Load(path);
@@ -99,6 +102,10 @@ public class EventManager {
             }
             _activeTriggers[key].Add(listener);
         }
+        Debug.Log(_activeTriggers.Count);
+        foreach((string, string) key in _activeTriggers.Keys){
+            Debug.Log(key);
+        }
     }
 
     public static void StopListening(int listenerId) {
@@ -112,6 +119,7 @@ public class EventManager {
     }
 
     public static void Trigger((string, string) triggerKey) {
+        Debug.Log("EventManager.Trigger");
         if(!_activeTriggers.ContainsKey(triggerKey)) {
             return;
         }

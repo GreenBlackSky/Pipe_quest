@@ -1,0 +1,12 @@
+<level>
+    <listener initial="true" singleuse="true" id="0">
+        <triggers>
+            <trigger type="reach_marker" arg="0"/>
+        </triggers>
+        <callbacks>
+            <callback type="load_level">
+                <intArg>1</intArg>
+            </callback>
+        </callbacks>
+    </listener>
+</level>

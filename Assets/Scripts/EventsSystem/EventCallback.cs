@@ -56,5 +56,8 @@ public class ChangeDialogeConnectionCallback: BaseEventCallback {}
 public class GetItemCallback: BaseEventCallback {}
 public class RemoveItemCallback: BaseEventCallback {}
 
-public class LoadLevelCallback: BaseEventCallback {}
-
+public class LoadLevelCallback: BaseEventCallback {
+    public override void Call() {
+        Debug.Log("!");
+    }
+}
