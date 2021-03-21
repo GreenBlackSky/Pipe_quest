@@ -5,8 +5,9 @@ using UnityEngine;
 public class ReachingHero : MonoBehaviour, InteractionListener {
 
     public void interact(GameObject interactable) {
-        new ReachMarkerTrigger().Trigger(
+        EventManager.Trigger((
+            "reach_marker",
             interactable.GetComponent<MarkerController>().id.ToString()
-        );
+        ));
     }
 }

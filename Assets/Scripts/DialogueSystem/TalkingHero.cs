@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using static GameManager;
 
 
+// TODO partly move to DialogueController
 public class TalkingHero : MonoBehaviour, InteractionListener
 {
     public GameObject heroIcon;
@@ -26,6 +27,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             speakerNameArea.text = this.speaker.speakerFullName;
 
             Destroy(speakerIcon); // BUG can't remove transform becouse script depends on it
+            // TODO animated icons
             Transform icon = speaker.transform.Find("Image");
             speakerIcon = Instantiate(icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;

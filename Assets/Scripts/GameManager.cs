@@ -25,6 +25,7 @@ public class GameManager : MonoBehaviour
 
     // TODO cut scene
     // TODO notifications
+    // TODO separate ui manager from gamemanager
     public enum State {
         GAMEPLAY,
         LOADING,  // TODO async loading
@@ -56,7 +57,6 @@ public class GameManager : MonoBehaviour
 
     void Update() {
         // BUG keys in main menu
-        // TODO separate ui state machine and game state machine again
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {
