@@ -16,7 +16,6 @@ public class EventManager {
             _activeTriggers = new Dictionary<(string, string), List<EventListener>>();
             _eventsQueue = new LinkedList<EventListener>();
         }
-        BaseEventTrigger.Init();
         BaseEventCondition.Init(questHero);
         BaseEventValueProvider.Init(itemsHero);
         BaseEventCallback.Init(questHero);
@@ -78,6 +77,7 @@ public class EventManager {
         XmlNode root = doc.DocumentElement.SelectSingleNode("/level");
         foreach(XmlNode listenerData in root.ChildNodes) {
             EventListener listener = listenerSerializer.Deserialize(new XmlNodeReader(listenerData)) as EventListener;
+            listener.devPing();
             _allListeners[listener.id] = listener;
             if(listener.initial) {
                 StartListening(listener.id);
@@ -96,7 +96,7 @@ public class EventManager {
     public static void StartListening(int listenerId) {
         EventListener listener = _allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
-            (string, string) key = (trigger.GetType().Name, trigger.argument);
+            (string, string) key = (trigger.type, trigger.arg);
             if(!_activeTriggers.ContainsKey(key)) {
                 _activeTriggers[key] = new List<EventListener>();
             }
@@ -111,7 +111,7 @@ public class EventManager {
     public static void StopListening(int listenerId) {
         EventListener listener = _allListeners[listenerId];
         foreach(BaseEventTrigger trigger in listener.triggers) {
-            (string, string) key = (trigger.GetType().Name, trigger.argument);
+            (string, string) key = (trigger.type, trigger.arg);
             if(_activeTriggers.ContainsKey(key)) {
                 _activeTriggers[key].Remove(listener);
             }
