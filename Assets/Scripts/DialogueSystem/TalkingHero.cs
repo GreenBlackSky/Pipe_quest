@@ -28,6 +28,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
 
             Destroy(speakerIcon); // BUG can't remove transform becouse script depends on it
             // TODO animated icons
+            // TODO set in editor
             Transform icon = speaker.transform.Find("Image");
             speakerIcon = Instantiate(icon, iconSlot.transform, false);
             currentSpeakerName = node.speakerUID;
@@ -85,6 +86,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
     }
 
     void Init() {
+        // TODO set in editor
         speakerNameArea = GameObject.Find("SpeakerNameArea").GetComponent<Text>();
         textPanel = GameObject.Find("DialogTextArea").GetComponent<Text>();
         iconSlot = GameObject.Find("SpeakerIconSlot").GetComponent<Image>();

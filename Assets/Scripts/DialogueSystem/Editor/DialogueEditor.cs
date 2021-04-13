@@ -365,7 +365,8 @@ public class DialogueEditor : EditorWindow {
     }
 
     void ReadLevels() {
-        allLevelsUIDs.Clear();        
+        // TODO set in editor
+        allLevelsUIDs.Clear();
         string path = @"" + "Assets/DialoguesData/";
         List<string> levelNames = new List<string>(Directory.GetDirectories(path));
         foreach(string name in levelNames) {
@@ -377,6 +378,7 @@ public class DialogueEditor : EditorWindow {
     void LoadLevel(string levelUID) {
         this.levelUID = levelUID;
         allSpeakersUIDs.Clear();
+        // TODO set in editor
         string path = @"" + "Assets/DialoguesData/" + levelUID + "/";
         List<string> fileNames = new List<string>(Directory.GetFiles(path));
         foreach(string name in fileNames) {

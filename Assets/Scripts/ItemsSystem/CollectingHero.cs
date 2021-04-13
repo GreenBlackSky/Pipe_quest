@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -15,6 +15,7 @@ public class CollectingHero : MonoBehaviour, InteractionListener
         items = new Dictionary<string, int>();
         int shildCount = InventoryPanel.transform.childCount;
         // TODO generate slots in stead of searching for them
+        // TODO set in editor
         slots = new Transform[shildCount];
         for(int i = 0; i < shildCount; i++) {
             slots[i] = InventoryPanel.transform.Find("Slot" + i.ToString());
@@ -34,7 +35,7 @@ public class CollectingHero : MonoBehaviour, InteractionListener
                 }
                 items[collectable.item_uid] += 1;
 
-
+                // TODO set in editor
                 Transform icon = interactable.transform.Find("Image");
                 Instantiate(icon, slots[i], false);
                 isFull[i] = true;

@@ -43,14 +43,14 @@ public class GameManager : MonoBehaviour
 
     public void SwitchState(State state) {
         LeaveState();
-        _state = state;
+        this._state = state;
         EnterState();
     }
 
     void Start() {
         PrepareUI();
-        _allLevels = GetResourcesPaths("Assets/Levels/");
-        _allAvatars = GetResourcesPaths("Assets/Avatars/");
+        this._allLevels = GetResourcesPaths("Assets/Levels/");
+        this._allAvatars = GetResourcesPaths("Assets/Avatars/");
         Instance = this;
         SwitchState(State.MAIN_MENU);
     }
@@ -104,6 +104,7 @@ public class GameManager : MonoBehaviour
 
     Dictionary<string, string> GetResourcesPaths(string resourcePath) {
         Dictionary<string, string> ret = new Dictionary<string, string>();
+        // TODO set in editor
         List<string> paths = new List<string>(Directory.GetFiles(@"" + resourcePath));
         foreach(string path in paths) {
             if(path.EndsWith("meta")) {
@@ -118,7 +119,9 @@ public class GameManager : MonoBehaviour
 
     void PrepareUI() {
         _allUIMenus = new Dictionary<string, GameObject>();
+        // TODO set in editor
         List<string> paths = new List<string>(Directory.GetFiles(@"" + "Assets/UI/"));
+        paths.AddRange(Directory.GetFiles(@"" + "Assets/UI/Menus/"));
         foreach(string path in paths) {
             if(path.EndsWith("meta")) {
                 continue;
@@ -126,9 +129,8 @@ public class GameManager : MonoBehaviour
             UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
             string[] pathParts = path.Split('/');
             string name = pathParts[pathParts.Length - 1].Split('.')[0];
-            _allUIMenus[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
+             _allUIMenus[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
         }
-
         _gameMenus = new Dictionary<State, GameObject>() {
             {State.PAUSE_MENU, _allUIMenus["PauseMenuPanel"]},
             {State.INVENTORY, _allUIMenus["InventoryPanel"]},
@@ -140,9 +142,9 @@ public class GameManager : MonoBehaviour
         };
     }
 
-    void EnterMainMenu() {        
+    void EnterMainMenu() {
         UICamera.SetActive(true);
-        _allUIMenus["MainMenuPanel"].SetActive(true);
+        this._allUIMenus["MainMenuPanel"].SetActive(true);
     }
 
     void LeaveMainMenu() {
@@ -161,7 +163,7 @@ public class GameManager : MonoBehaviour
         
         UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(_allAvatars[currentAvatarID], typeof(GameObject));
         _currentAvatar = Instantiate(prefab) as GameObject;
-
+        // TODO set in editor
         GameObject interactButton = _allUIMenus["GameplayUI"].transform.Find("InteractButton").gameObject;
         CollectingHero itemsHero = _currentAvatar.GetComponent<CollectingHero>();
         QuestDoingHero questHero = _currentAvatar.GetComponent<QuestDoingHero>();
@@ -170,7 +172,5 @@ public class GameManager : MonoBehaviour
         interactButton.GetComponent<Button>().onClick.AddListener(() => _currentAvatar.GetComponent<InteractingHero>().interact());
         itemsHero.InventoryPanel = _allUIMenus["InventoryPanel"];
         questHero.QuestsUI = _allUIMenus["QuestsPanel"];
-
-        EventManager.Init(currentLevelID, questHero, itemsHero);
     }
 }
