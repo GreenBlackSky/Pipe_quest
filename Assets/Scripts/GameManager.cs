@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     public GameObject UICanvas;
 
     Dictionary<State, GameObject> _gameMenus;
+    Dictionary<State, GameObject> _mainMenuMenus;
     Dictionary<string, GameObject> _allUIMenus;
 
     Dictionary<string, string> _allLevels;
@@ -32,10 +33,10 @@ public class GameManager : MonoBehaviour
         MAIN_MENU,
         NEW_GAME_MENU,
         LOAD_GAME_MENU,
-        OPTIONS_MENU,
-        SCREEN_OPTIONS,
-        AUDIO_OPTIONS,
-        CONTROLS_OPTIONS,
+        SETTINGS_MENU,
+        SCREEN_SETTINGS,
+        AUDIO_SETTINGS,
+        CONTROLS_SETTINGS,
         COMBAT,
         PUZZLE,
         PAUSE_MENU,
@@ -57,16 +58,15 @@ public class GameManager : MonoBehaviour
         State.JOURNAL_MENU
     };
     HashSet<State> _mainMenuStates = new HashSet<State>() {
-        State.LOADING,
         State.MAIN_MENU,
         State.NEW_GAME_MENU,
         State.LOAD_GAME_MENU,
-        State.OPTIONS_MENU,
-        State.SCREEN_OPTIONS,
-        State.AUDIO_OPTIONS,
-        State.CONTROLS_OPTIONS,
+        State.SETTINGS_MENU,
+        State.SCREEN_SETTINGS,
+        State.AUDIO_SETTINGS,
+        State.CONTROLS_SETTINGS,
     };
-    State _state = State.GAMEPLAY;
+    State _state = State.MAIN_MENU;
 
     public void SwitchState(State state) {
         bool leavingGamplay = this._gameplayStates.Contains(this._state);
@@ -76,23 +76,23 @@ public class GameManager : MonoBehaviour
         if(leavingGamplay && enteringGameplay) {
             this._leaveGameplayState();
             this._state = state;
-            this._enterGameplayState(state);
+            this._enterGameplayState();
         } else if (leavingMainMenu && enteringMainMenu) {
             this._leaveMainMenuState();
             this._state = state;
-            this._enterMainMenuState(state);
+            this._enterMainMenuState();
         } else if (leavingMainMenu) {
             this._leaveMainMenu();
             this._leaveMainMenuState();
             this._state = state;
             this._enterGameplay();
-            this._enterGameplayState(state);
+            this._enterGameplayState();
         } else if (leavingGamplay) {
             this._leaveGameplay();
             this._leaveGameplayState();
             this._state = state;
             this._enterMainMenu();
-            this._enterMainMenuState(state);
+            this._enterMainMenuState();
         }
     }
 
@@ -105,59 +105,38 @@ public class GameManager : MonoBehaviour
     }
 
     void _enterGameplay() {
-        Time.timeScale = 1;
+        // Time.timeScale = 1;
         LoadLevel();
         LoadAvatar();
     }
 
     void _leaveGameplay() {
-        Time.timeScale = 0;
+        // Time.timeScale = 0;
         Destroy(_currentLevel);
         Destroy(_currentAvatar);
     }
 
     void _leaveGameplayState() {
-        switch (_state) {
-            case State.GAMEPLAY:
-                _allUIMenus["GameplayUI"].SetActive(false);
-                break;
-            default:
-                _gameMenus[_state].SetActive(false);
-                break;
+        if(this._state == State.GAMEPLAY) {
+            Time.timeScale = 0;
         }
+        _gameMenus[_state].SetActive(false);
     }
 
-    void _enterGameplayState(State state) {
-        switch (_state) {
-            case State.GAMEPLAY:
-                _allUIMenus["GameplayUI"].SetActive(true);
-                break;
-            default:
-                _gameMenus[_state].SetActive(true);
-                break;
+    void _enterGameplayState() {
+        if(this._state == State.GAMEPLAY) {
+            Time.timeScale = 1;
         }
+        _gameMenus[this._state].SetActive(true);
     }
 
     void _leaveMainMenuState() {
-        switch (_state) {
-            case State.MAIN_MENU:
-                _allUIMenus["MainMenuPanel"].SetActive(false);
-                break;
-            default:
-                break;
-        }
+        this._mainMenuMenus[this._state].SetActive(false);
     }
 
-    void _enterMainMenuState(State state) {
-        switch (_state) {
-            case State.MAIN_MENU:
-                this._allUIMenus["MainMenuPanel"].SetActive(true);
-                break;
-            default:
-                break;
-        }
+    void _enterMainMenuState() {
+        this._mainMenuMenus[this._state].SetActive(true);
     }
-
 
     void Start() {
         PrepareUI();
@@ -172,8 +151,6 @@ public class GameManager : MonoBehaviour
             this._processManMenuInput();
         } else if (this._gameplayStates.Contains(this._state)) {
             this._processGameplayInput();
-        } else {
-
         }
     }
 
@@ -220,9 +197,10 @@ public class GameManager : MonoBehaviour
             UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(path, typeof(GameObject));
             string[] pathParts = path.Split('/');
             string name = pathParts[pathParts.Length - 1].Split('.')[0];
-             _allUIMenus[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
+            this._allUIMenus[name] = Instantiate(prefab, UICanvas.transform, false) as GameObject;  
         }
-        _gameMenus = new Dictionary<State, GameObject>() {
+        this._gameMenus = new Dictionary<State, GameObject>() {
+            {State.GAMEPLAY, _allUIMenus["GameplayUI"]},
             {State.PAUSE_MENU, _allUIMenus["PauseMenuPanel"]},
             {State.INVENTORY, _allUIMenus["InventoryPanel"]},
             {State.SKILL_MENU, _allUIMenus["SkillMenuPanel"]},
@@ -230,6 +208,15 @@ public class GameManager : MonoBehaviour
             {State.DIALOG, _allUIMenus["DialogPanel"]},
             {State.COMBAT, _allUIMenus["CombatUI"]},
             {State.JOURNAL_MENU, _allUIMenus["QuestsPanel"]},
+        };
+        this._mainMenuMenus = new Dictionary<State, GameObject>() {
+            {State.MAIN_MENU, this._allUIMenus["MainMenuPanel"]},
+            {State.NEW_GAME_MENU, this._allUIMenus["NewGameMenuPanel"]},
+            {State.LOAD_GAME_MENU, this._allUIMenus["LoadGameMenuPanel"]},
+            {State.SETTINGS_MENU, this._allUIMenus["SettingsMenuPanel"]},
+            {State.SCREEN_SETTINGS, this._allUIMenus["ScreenSettingsMenuPanel"]},
+            {State.AUDIO_SETTINGS, this._allUIMenus["AudioSettingsMenuPanel"]},
+            {State.CONTROLS_SETTINGS, this._allUIMenus["ControlsSettingsMenuPanel"]},
         };
     }
 
