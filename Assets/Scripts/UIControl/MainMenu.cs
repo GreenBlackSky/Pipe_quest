@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
     }
     public void OnLoadGameClicked() {}
 
-    public void OnPreferencesClicked() {}
+    public void OnOptionsClicked() {}
 
     public void OnExitClicked() {
         #if UNITY_EDITOR

@@ -1,0 +1,708 @@
+fileFormatVersion: 2
+guid: caa2661b2b499e342adc0f8b5db7e8e1
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -3358372498659397268
+    second: Lydia_FW1
+  - first:
+      213: 5918870125066586987
+    second: Lydia_FW2
+  - first:
+      213: -6693271793651079408
+    second: Lydia_FW3
+  - first:
+      213: -5180891630704635957
+    second: Lydia_FW4
+  - first:
+      213: 7600940983344519071
+    second: Lydia_FI1
+  - first:
+      213: -8367829911823361817
+    second: Lydia_FI2
+  - first:
+      213: 8243950496137632914
+    second: Lydia_LW1
+  - first:
+      213: 6094239896113009122
+    second: Lydia_LW2
+  - first:
+      213: 7604259812915121721
+    second: Lydia_LW3
+  - first:
+      213: -3950141533927208695
+    second: Lydia_LW4
+  - first:
+      213: -7632567647268817716
+    second: Lydia_LI1
+  - first:
+      213: 5036676136465028641
+    second: Lydia_LI2
+  - first:
+      213: 7594045195776877741
+    second: Lydia_RW1
+  - first:
+      213: 6451163836550511908
+    second: Lydia_RW2
+  - first:
+      213: -2577040717232632667
+    second: Lydia_RW3
+  - first:
+      213: -6637709647642007402
+    second: Lydia_RW4
+  - first:
+      213: 4571472270374201340
+    second: Lydia_RI1
+  - first:
+      213: 6272531928415105115
+    second: Lydia_RI2
+  - first:
+      213: -7512974514779994181
+    second: Lydia_BW1
+  - first:
+      213: -7502180507054582918
+    second: Lydia_BW2
+  - first:
+      213: -5450955521812150522
+    second: Lydia_BW3
+  - first:
+      213: -7699816373941929856
+    second: Lydia_BW4
+  - first:
+      213: 5717147878062862353
+    second: Lydia_BI1
+  - first:
+      213: 3170674427390006825
+    second: Lydia_BI2
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Lydia_FW1
+      rect:
+        serializedVersion: 2
+        x: 68
+        y: 524
+        width: 124
+        height: 218
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c6137f1810aa461d0800000000000000
+      internalID: -3358372498659397268
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_FW2
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 528
+        width: 105
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b6b044ce40d042250800000000000000
+      internalID: 5918870125066586987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_FW3
+      rect:
+        serializedVersion: 2
+        x: 410
+        y: 524
+        width: 121
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 017294224c8bc13a0800000000000000
+      internalID: -6693271793651079408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_FW4
+      rect:
+        serializedVersion: 2
+        x: 585
+        y: 527
+        width: 108
+        height: 214
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bcf4e0ce286c918b0800000000000000
+      internalID: -5180891630704635957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_FI1
+      rect:
+        serializedVersion: 2
+        x: 740
+        y: 525
+        width: 100
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9755f68d87fb7960800000000000000
+      internalID: 7600940983344519071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_FI2
+      rect:
+        serializedVersion: 2
+        x: 887
+        y: 528
+        width: 96
+        height: 213
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e851e4a70f7fdb80800000000000000
+      internalID: -8367829911823361817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LW1
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 278
+        width: 125
+        height: 219
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29c50344c45686270800000000000000
+      internalID: 8243950496137632914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LW2
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 279
+        width: 114
+        height: 214
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e154d795e6139450800000000000000
+      internalID: 6094239896113009122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LW3
+      rect:
+        serializedVersion: 2
+        x: 414
+        y: 281
+        width: 117
+        height: 219
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93e8590c202c78960800000000000000
+      internalID: 7604259812915121721
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LW4
+      rect:
+        serializedVersion: 2
+        x: 586
+        y: 284
+        width: 111
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 90980c124374e29c0800000000000000
+      internalID: -3950141533927208695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LI1
+      rect:
+        serializedVersion: 2
+        x: 751
+        y: 286
+        width: 94
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cc43764f92ca31690800000000000000
+      internalID: -7632567647268817716
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_LI2
+      rect:
+        serializedVersion: 2
+        x: 905
+        y: 286
+        width: 95
+        height: 219
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1265faab24ed5e540800000000000000
+      internalID: 5036676136465028641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RW1
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 27
+        width: 122
+        height: 218
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: da4ea8eded7736960800000000000000
+      internalID: 7594045195776877741
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RW2
+      rect:
+        serializedVersion: 2
+        x: 233
+        y: 27
+        width: 112
+        height: 216
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42d70716453278950800000000000000
+      internalID: 6451163836550511908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RW3
+      rect:
+        serializedVersion: 2
+        x: 418
+        y: 29
+        width: 113
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5ac81a51f138c3cd0800000000000000
+      internalID: -2577040717232632667
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RW4
+      rect:
+        serializedVersion: 2
+        x: 591
+        y: 27
+        width: 114
+        height: 219
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6986d1a5e3e12e3a0800000000000000
+      internalID: -6637709647642007402
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RI1
+      rect:
+        serializedVersion: 2
+        x: 750
+        y: 29
+        width: 90
+        height: 219
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cf7e3382fc1217f30800000000000000
+      internalID: 4571472270374201340
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_RI2
+      rect:
+        serializedVersion: 2
+        x: 892
+        y: 29
+        width: 94
+        height: 225
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b507a7b3e828c0750800000000000000
+      internalID: 6272531928415105115
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BW1
+      rect:
+        serializedVersion: 2
+        x: 1200
+        y: 525
+        width: 103
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb7c9f7fb7d8cb790800000000000000
+      internalID: -7512974514779994181
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BW2
+      rect:
+        serializedVersion: 2
+        x: 1355
+        y: 527
+        width: 103
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a73d62cb396e2e790800000000000000
+      internalID: -7502180507054582918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BW3
+      rect:
+        serializedVersion: 2
+        x: 1510
+        y: 522
+        width: 110
+        height: 225
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 607cee355d05a54b0800000000000000
+      internalID: -5450955521812150522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BW4
+      rect:
+        serializedVersion: 2
+        x: 1672
+        y: 527
+        width: 106
+        height: 215
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0887473adc1c42590800000000000000
+      internalID: -7699816373941929856
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BI1
+      rect:
+        serializedVersion: 2
+        x: 1851
+        y: 524
+        width: 90
+        height: 217
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 110b05054b3675f40800000000000000
+      internalID: 5717147878062862353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Lydia_BI2
+      rect:
+        serializedVersion: 2
+        x: 2006
+        y: 524
+        width: 95
+        height: 220
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9261ffeb79f700c20800000000000000
+      internalID: 3170674427390006825
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 6c74098d4db29674694d39a1cdebc963
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

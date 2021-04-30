@@ -30,6 +30,12 @@ public class GameManager : MonoBehaviour
         GAMEPLAY,
         LOADING,  // TODO async loading
         MAIN_MENU,
+        NEW_GAME_MENU,
+        LOAD_GAME_MENU,
+        OPTIONS_MENU,
+        SCREEN_OPTIONS,
+        AUDIO_OPTIONS,
+        CONTROLS_OPTIONS,
         COMBAT,
         PUZZLE,
         PAUSE_MENU,
@@ -39,13 +45,119 @@ public class GameManager : MonoBehaviour
         MAP_MENU,
         JOURNAL_MENU
     }
+    HashSet<State> _gameplayStates = new HashSet<State>() {
+        State.GAMEPLAY,
+        State.COMBAT,
+        State.PUZZLE,
+        State.PAUSE_MENU,
+        State.INVENTORY,
+        State.DIALOG,
+        State.SKILL_MENU,
+        State.MAP_MENU,
+        State.JOURNAL_MENU
+    };
+    HashSet<State> _mainMenuStates = new HashSet<State>() {
+        State.LOADING,
+        State.MAIN_MENU,
+        State.NEW_GAME_MENU,
+        State.LOAD_GAME_MENU,
+        State.OPTIONS_MENU,
+        State.SCREEN_OPTIONS,
+        State.AUDIO_OPTIONS,
+        State.CONTROLS_OPTIONS,
+    };
     State _state = State.GAMEPLAY;
 
     public void SwitchState(State state) {
-        LeaveState();
-        this._state = state;
-        EnterState();
+        bool leavingGamplay = this._gameplayStates.Contains(this._state);
+        bool leavingMainMenu = this._mainMenuStates.Contains(this._state);
+        bool enteringGameplay = this._gameplayStates.Contains(state);
+        bool enteringMainMenu = this._mainMenuStates.Contains(state);
+        if(leavingGamplay && enteringGameplay) {
+            this._leaveGameplayState();
+            this._state = state;
+            this._enterGameplayState(state);
+        } else if (leavingMainMenu && enteringMainMenu) {
+            this._leaveMainMenuState();
+            this._state = state;
+            this._enterMainMenuState(state);
+        } else if (leavingMainMenu) {
+            this._leaveMainMenu();
+            this._leaveMainMenuState();
+            this._state = state;
+            this._enterGameplay();
+            this._enterGameplayState(state);
+        } else if (leavingGamplay) {
+            this._leaveGameplay();
+            this._leaveGameplayState();
+            this._state = state;
+            this._enterMainMenu();
+            this._enterMainMenuState(state);
+        }
     }
+
+    void _enterMainMenu() {
+        UICamera.SetActive(true);
+    }
+
+    void _leaveMainMenu() {
+        UICamera.SetActive(false);
+    }
+
+    void _enterGameplay() {
+        Time.timeScale = 1;
+        LoadLevel();
+        LoadAvatar();
+    }
+
+    void _leaveGameplay() {
+        Time.timeScale = 0;
+        Destroy(_currentLevel);
+        Destroy(_currentAvatar);
+    }
+
+    void _leaveGameplayState() {
+        switch (_state) {
+            case State.GAMEPLAY:
+                _allUIMenus["GameplayUI"].SetActive(false);
+                break;
+            default:
+                _gameMenus[_state].SetActive(false);
+                break;
+        }
+    }
+
+    void _enterGameplayState(State state) {
+        switch (_state) {
+            case State.GAMEPLAY:
+                _allUIMenus["GameplayUI"].SetActive(true);
+                break;
+            default:
+                _gameMenus[_state].SetActive(true);
+                break;
+        }
+    }
+
+    void _leaveMainMenuState() {
+        switch (_state) {
+            case State.MAIN_MENU:
+                _allUIMenus["MainMenuPanel"].SetActive(false);
+                break;
+            default:
+                break;
+        }
+    }
+
+    void _enterMainMenuState(State state) {
+        switch (_state) {
+            case State.MAIN_MENU:
+                this._allUIMenus["MainMenuPanel"].SetActive(true);
+                break;
+            default:
+                break;
+        }
+    }
+
 
     void Start() {
         PrepareUI();
@@ -56,7 +168,20 @@ public class GameManager : MonoBehaviour
     }
 
     void Update() {
-        // BUG keys in main menu
+        if(this._mainMenuStates.Contains(this._state)) {
+            this._processManMenuInput();
+        } else if (this._gameplayStates.Contains(this._state)) {
+            this._processGameplayInput();
+        } else {
+
+        }
+    }
+
+    void _processManMenuInput() {
+
+    }
+
+    void _processGameplayInput() {
         if(Input.GetKeyDown(KeyCode.I)) {
             SwitchState(State.INVENTORY);
         } else if (Input.GetKeyDown(KeyCode.J)) {
@@ -67,40 +192,6 @@ public class GameManager : MonoBehaviour
             SwitchState(State.PAUSE_MENU);
         } 
     } 
-
-    void LeaveState() {
-        switch (_state) {
-            case State.GAMEPLAY:
-                Time.timeScale = 0;
-                _allUIMenus["GameplayUI"].SetActive(false);
-                break;
-            case State.MAIN_MENU:
-                LeaveMainMenu();
-                LoadLevel();
-                LoadAvatar();
-                break;
-            default:
-                _gameMenus[_state].SetActive(false);
-                break;
-        }
-    }
-
-    void EnterState() {
-        switch (_state) {
-            case State.GAMEPLAY:
-                Time.timeScale = 1;
-                _allUIMenus["GameplayUI"].SetActive(true);
-                break;
-            case State.MAIN_MENU:
-                Destroy(_currentLevel);
-                Destroy(_currentAvatar);
-                EnterMainMenu();
-                break;
-            default:
-                _gameMenus[_state].SetActive(true);
-                break;
-        }
-    }
 
     Dictionary<string, string> GetResourcesPaths(string resourcePath) {
         Dictionary<string, string> ret = new Dictionary<string, string>();
@@ -140,16 +231,6 @@ public class GameManager : MonoBehaviour
             {State.COMBAT, _allUIMenus["CombatUI"]},
             {State.JOURNAL_MENU, _allUIMenus["QuestsPanel"]},
         };
-    }
-
-    void EnterMainMenu() {
-        UICamera.SetActive(true);
-        this._allUIMenus["MainMenuPanel"].SetActive(true);
-    }
-
-    void LeaveMainMenu() {
-        UICamera.SetActive(false);
-        _allUIMenus["MainMenuPanel"].SetActive(false);
     }
 
     void LoadLevel() {
