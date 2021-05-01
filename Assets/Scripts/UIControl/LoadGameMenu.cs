@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NewGameMenu : MonoBehaviour {
+public class LoadGameMenu : MonoBehaviour {
     public void OnNewGame1Clicked() {
         GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
     }

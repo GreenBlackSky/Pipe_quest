@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using UnityEditor;
 
     
-public class GameManager : MonoBehaviour
-{
+public class GameManager : MonoBehaviour {
     public GameObject UICamera;
     public GameObject UICanvas;
 
@@ -24,12 +23,15 @@ public class GameManager : MonoBehaviour
 
     public static GameManager Instance { get; private set; }
 
-    // TODO cut scene
+    // TODO cut scenes
     // TODO notifications
-    // TODO separate ui manager from gamemanager
+    // TODO separate menu manager from gamemanager
+    // TODO menu animation
+    // TODO menu keys
+    // TODO async loading
     public enum State {
         GAMEPLAY,
-        LOADING,  // TODO async loading
+        LOADING,
         MAIN_MENU,
         NEW_GAME_MENU,
         LOAD_GAME_MENU,
@@ -105,13 +107,11 @@ public class GameManager : MonoBehaviour
     }
 
     void _enterGameplay() {
-        // Time.timeScale = 1;
         LoadLevel();
         LoadAvatar();
     }
 
     void _leaveGameplay() {
-        // Time.timeScale = 0;
         Destroy(_currentLevel);
         Destroy(_currentAvatar);
     }
