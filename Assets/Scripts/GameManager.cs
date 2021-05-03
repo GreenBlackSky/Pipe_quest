@@ -26,12 +26,15 @@ public class GameManager : MonoBehaviour {
     // TODO cut scenes
     // TODO notifications
     // TODO separate menu manager from gamemanager
-    // TODO menu animation
-    // TODO menu keys
     // TODO async loading
     public enum State {
+        // LOADING,
+        // EXPLORATION,
+        // COMBAT,
+        // PUZZLE,
+        // MAIN_MENU,
+        // CUTSCENE,
         GAMEPLAY,
-        LOADING,
         MAIN_MENU,
         NEW_GAME_MENU,
         LOAD_GAME_MENU,
@@ -228,7 +231,7 @@ public class GameManager : MonoBehaviour {
     }
 
     void LoadAvatar() {
-        
+
         UnityEngine.Object prefab = AssetDatabase.LoadAssetAtPath(_allAvatars[currentAvatarID], typeof(GameObject));
         _currentAvatar = Instantiate(prefab) as GameObject;
         // TODO set in editor
@@ -241,4 +244,31 @@ public class GameManager : MonoBehaviour {
         itemsHero.InventoryPanel = _allUIMenus["InventoryPanel"];
         questHero.QuestsUI = _allUIMenus["QuestsPanel"];
     }
+
+    // void LoadLevel(string levelID) {
+    //     GameObject prefab = null;
+    //     foreach(GameObject level in this.LevelPrefabs) {
+    //         if(level.name == levelID) {
+    //             prefab = level;
+    //             break;
+    //         }
+    //     }
+    //     if(prefab == null) {
+    //         throw new System.Exception($"No level {levelID}");
+    //     }
+    //     this._currentLevel = Instantiate(prefab) as GameObject;
+    //     DialogueManager.LoadAllSpeakers(levelID);
+    //     QuestManager.Init(levelID);
+    // }
+
+    // void LoadAvatar(string avatarType) {
+    //     this._currentAvatar = Instantiate(this.AvatarPrefab) as GameObject;
+    //     CollectingHero itemsHero = _currentAvatar.GetComponent<CollectingHero>();
+    //     QuestDoingHero questHero = _currentAvatar.GetComponent<QuestDoingHero>();
+
+    //     this._currentAvatar.GetComponent<InteractingHero>().interactionButton = this.InteractionButton;
+    //     InteractionButton.GetComponent<Button>().onClick.AddListener(() => _currentAvatar.GetComponent<InteractingHero>().interact());
+    //     itemsHero.InventoryPanel = this.InventoryPanel;
+    //     questHero.QuestsUI = this.QuestsPanel;
+    // }
 }
