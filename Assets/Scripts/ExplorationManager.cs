@@ -15,6 +15,9 @@ public class GameplayManager : MonoBehaviour {
         JOURNAL_MENU
     }
 
+    State _state;
+    State _previousState;
+
     public GameObject[] LevelPrefabs;
     public GameObject AvatarPrefab;
     
@@ -33,9 +36,6 @@ public class GameplayManager : MonoBehaviour {
 
     Dictionary<State, GameObject> _uiPanels;
 
-    State _state;
-    State _previousState;
-
     public void SwitchState(State state) {
         this._leaveState();
         this._previousState = this._state;
@@ -44,11 +44,11 @@ public class GameplayManager : MonoBehaviour {
     }
 
     void _leaveState() {
-
+        this._uiPanels[this._state].SetActive(false);
     }
 
     void _enterState() {
-        
+        this._uiPanels[this._state].SetActive(true);
     }
 
     void Start() {
