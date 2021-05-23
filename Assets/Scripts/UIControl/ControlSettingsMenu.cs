@@ -2,6 +2,6 @@ using UnityEngine;
 
 public class ControlSettingsMenu : MonoBehaviour {
     public void OnBackClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.SETTINGS_MENU);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.SETTINGS_MENU);
     }
 }

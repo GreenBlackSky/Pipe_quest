@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class NewGameMenu : MonoBehaviour {
     public void OnNewGame1Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
+        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
     }
 
     public void OnNewGame2Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
+        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
     }
 
     public void OnNewGame3Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.GAMEPLAY);
+        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
     }
 
     public void OnBackClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.MAIN_MENU);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.MAIN_MENU);
     }
 }

@@ -51,9 +51,9 @@ public class TalkingHero : MonoBehaviour, InteractionListener
             );
             replayButtonInstance.GetComponentInChildren<Text>().text = reply.text;
             if(reply.nextLineID == -1) {
-                replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
-                    GameManager.Instance.SwitchState(State.GAMEPLAY);
-                }); 
+                // replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
+                //     GameManager.Instance.SwitchState(State.GAMEPLAY);
+                // }); 
             } else {
                 replayButtonInstance.GetComponent<Button>().onClick.AddListener(delegate{
                     nextLine(reply.nextLineID);
@@ -78,7 +78,7 @@ public class TalkingHero : MonoBehaviour, InteractionListener
         if (speaker is null) {
             return;
         }
-        GameManager.Instance.SwitchState(State.DIALOG);
+        // GameManager.Instance.SwitchState(State.DIALOG);
         if(!initialized) {
             Init();
         }

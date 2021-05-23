@@ -2,18 +2,18 @@ using UnityEngine;
 
 public class SettingsMenu : MonoBehaviour {
     public void OnScreenClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.SCREEN_SETTINGS);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.SCREEN_SETTINGS);
     }
 
     public void OnAudioClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.AUDIO_SETTINGS);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.AUDIO_SETTINGS);
     }
 
     public void OnControlClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.CONTROLS_SETTINGS);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.CONTROLS_SETTINGS);
     }
 
     public void OnBackClicked() {
-        GameManager.Instance.SwitchState(GameManager.State.MAIN_MENU);
+        MainMenuManager.Instance.SwitchState(MainMenuManager.State.MAIN_MENU);
     }
 }
