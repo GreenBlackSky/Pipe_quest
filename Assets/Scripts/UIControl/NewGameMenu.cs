@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class NewGameMenu : MonoBehaviour {
     public void OnNewGame1Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
+        GameManager.Instance.LoadLevel(GameManager.Level.FOREST_EXPLORATION);
     }
 
     public void OnNewGame2Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
+        GameManager.Instance.LoadLevel(GameManager.Level.FOREST_EXPLORATION);
     }
 
     public void OnNewGame3Clicked() {
-        GameManager.Instance.SwitchState(GameManager.State.EXPLORATION);
+        GameManager.Instance.LoadLevel(GameManager.Level.FOREST_EXPLORATION);
     }
 
     public void OnBackClicked() {
