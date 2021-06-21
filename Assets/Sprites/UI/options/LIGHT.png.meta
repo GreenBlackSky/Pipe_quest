@@ -1,7 +1,22 @@
 fileFormatVersion: 2
 guid: d44d70556a7e4f5409b536848af18593
 TextureImporter:
-  internalIDToNameTable: []
+  internalIDToNameTable:
+  - first:
+      213: 7141214795815122218
+    second: LIGHT_0
+  - first:
+      213: 176519034527475831
+    second: LIGHT_1
+  - first:
+      213: 3713213181697258569
+    second: LIGHT_2
+  - first:
+      213: 4620061623473295303
+    second: LIGHT_3
+  - first:
+      213: -537344647992213234
+    second: LIGHT_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -89,11 +104,116 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: LIGHT_0
+      rect:
+        serializedVersion: 2
+        x: 645
+        y: 614
+        width: 300
+        height: 115
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a25f2516501ba1360800000000000000
+      internalID: 7141214795815122218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LIGHT_1
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 511
+        width: 316
+        height: 98
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 778ea1d602f137200800000000000000
+      internalID: 176519034527475831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LIGHT_2
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 407
+        width: 313
+        height: 101
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 944fc5e17bbf78330800000000000000
+      internalID: 3713213181697258569
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LIGHT_3
+      rect:
+        serializedVersion: 2
+        x: 643
+        y: 297
+        width: 309
+        height: 106
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7cf4a838191cd1040800000000000000
+      internalID: 4620061623473295303
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: LIGHT_4
+      rect:
+        serializedVersion: 2
+        x: 640
+        y: 190
+        width: 312
+        height: 105
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e01877eb3e7fa88f0800000000000000
+      internalID: -537344647992213234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: 68e17e0ea8f7aa74fb906cc1e3436437
     internalID: 0
     vertices: []
     indices: 
