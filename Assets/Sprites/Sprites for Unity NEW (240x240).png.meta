@@ -1,0 +1,828 @@
+fileFormatVersion: 2
+guid: 85331fd64faacf442b9dabacbf8fd1ae
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -5332062540289158745
+    second: Sprites for Unity NEW (240x240)_0
+  - first:
+      213: 1477419364758613071
+    second: Sprites for Unity NEW (240x240)_1
+  - first:
+      213: 1860502039789466
+    second: Sprites for Unity NEW (240x240)_2
+  - first:
+      213: 3325925767056085908
+    second: Sprites for Unity NEW (240x240)_3
+  - first:
+      213: 627288374105131955
+    second: Sprites for Unity NEW (240x240)_4
+  - first:
+      213: -1068725864397409738
+    second: Sprites for Unity NEW (240x240)_5
+  - first:
+      213: 949405235341608081
+    second: Sprites for Unity NEW (240x240)_6
+  - first:
+      213: 793042777974628234
+    second: Sprites for Unity NEW (240x240)_7
+  - first:
+      213: -6618816495871870496
+    second: Sprites for Unity NEW (240x240)_8
+  - first:
+      213: -3986867434540540808
+    second: Sprites for Unity NEW (240x240)_9
+  - first:
+      213: 1347235215176891528
+    second: Sprites for Unity NEW (240x240)_10
+  - first:
+      213: -6739563539584964375
+    second: Sprites for Unity NEW (240x240)_11
+  - first:
+      213: 1222154796324647103
+    second: Sprites for Unity NEW (240x240)_12
+  - first:
+      213: -2496614303751147988
+    second: Sprites for Unity NEW (240x240)_13
+  - first:
+      213: 9055691558321847458
+    second: Sprites for Unity NEW (240x240)_14
+  - first:
+      213: -1620729728889166732
+    second: Sprites for Unity NEW (240x240)_15
+  - first:
+      213: -7467239362444388523
+    second: Sprites for Unity NEW (240x240)_16
+  - first:
+      213: -3263785958596060365
+    second: Sprites for Unity NEW (240x240)_17
+  - first:
+      213: -6945279419784040914
+    second: Sprites for Unity NEW (240x240)_18
+  - first:
+      213: 5930561107242825711
+    second: Sprites for Unity NEW (240x240)_19
+  - first:
+      213: 842403719694261573
+    second: Sprites for Unity NEW (240x240)_20
+  - first:
+      213: -6978945675884500673
+    second: Sprites for Unity NEW (240x240)_21
+  - first:
+      213: -1829079588250673334
+    second: Sprites for Unity NEW (240x240)_22
+  - first:
+      213: 8772448563064592030
+    second: Sprites for Unity NEW (240x240)_23
+  - first:
+      213: 3123370569583735393
+    second: Sprites for Unity NEW (240x240)_24
+  - first:
+      213: 3294718562013670955
+    second: Sprites for Unity NEW (240x240)_25
+  - first:
+      213: -6904976967121720293
+    second: Sprites for Unity NEW (240x240)_26
+  - first:
+      213: -7167621550309035502
+    second: Sprites for Unity NEW (240x240)_27
+  - first:
+      213: 7086596628229122999
+    second: Sprites for Unity NEW (240x240)_28
+  - first:
+      213: -32771059191079166
+    second: Sprites for Unity NEW (240x240)_29
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: -1
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: -1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_0
+      rect:
+        serializedVersion: 2
+        x: 63
+        y: 562
+        width: 110
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a1d5edbe55b006b0800000000000000
+      internalID: -5332062540289158745
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_1
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 559
+        width: 110
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f4c68b4a519d08410800000000000000
+      internalID: 1477419364758613071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_2
+      rect:
+        serializedVersion: 2
+        x: 407
+        y: 568
+        width: 110
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a9f7f23ed1c960000800000000000000
+      internalID: 1860502039789466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_3
+      rect:
+        serializedVersion: 2
+        x: 597
+        y: 562
+        width: 111
+        height: 234
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 49352b61ddf082e20800000000000000
+      internalID: 3325925767056085908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_4
+      rect:
+        serializedVersion: 2
+        x: 759
+        y: 563
+        width: 111
+        height: 231
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3bbc446e37394b800800000000000000
+      internalID: 627288374105131955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_5
+      rect:
+        serializedVersion: 2
+        x: 1106
+        y: 569
+        width: 107
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 632f15a1d7f1b21f0800000000000000
+      internalID: -1068725864397409738
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_6
+      rect:
+        serializedVersion: 2
+        x: 1290
+        y: 572
+        width: 110
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 194ce680807fc2d00800000000000000
+      internalID: 949405235341608081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_7
+      rect:
+        serializedVersion: 2
+        x: 1473
+        y: 571
+        width: 106
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8fddd07434710b00800000000000000
+      internalID: 793042777974628234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_8
+      rect:
+        serializedVersion: 2
+        x: 1657
+        y: 572
+        width: 102
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e9bf0a077d3524a0800000000000000
+      internalID: -6618816495871870496
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_9
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 572
+        width: 102
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 87c53ad013dcba8c0800000000000000
+      internalID: -3986867434540540808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_10
+      rect:
+        serializedVersion: 2
+        x: 57
+        y: 311
+        width: 110
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 88cf38d4a4752b210800000000000000
+      internalID: 1347235215176891528
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_11
+      rect:
+        serializedVersion: 2
+        x: 247
+        y: 305
+        width: 106
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e82dd12ba24872a0800000000000000
+      internalID: -6739563539584964375
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_12
+      rect:
+        serializedVersion: 2
+        x: 428
+        y: 307
+        width: 102
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fb0787fdf47f5f010800000000000000
+      internalID: 1222154796324647103
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_13
+      rect:
+        serializedVersion: 2
+        x: 608
+        y: 311
+        width: 106
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c2ee0c3b48e3a5dd0800000000000000
+      internalID: -2496614303751147988
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_14
+      rect:
+        serializedVersion: 2
+        x: 771
+        y: 309
+        width: 106
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2acf6414e774cad70800000000000000
+      internalID: 9055691558321847458
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_15
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 302
+        width: 106
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 47465a806e20289e0800000000000000
+      internalID: -1620729728889166732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_16
+      rect:
+        serializedVersion: 2
+        x: 1283
+        y: 302
+        width: 111
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55710bcec590f5890800000000000000
+      internalID: -7467239362444388523
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_17
+      rect:
+        serializedVersion: 2
+        x: 1478
+        y: 302
+        width: 107
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 33b59f286f3b4b2d0800000000000000
+      internalID: -3263785958596060365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_18
+      rect:
+        serializedVersion: 2
+        x: 1663
+        y: 307
+        width: 102
+        height: 224
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e2ee0f55a296d9f90800000000000000
+      internalID: -6945279419784040914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_19
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 313
+        width: 103
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: fe7b4f3d7e59d4250800000000000000
+      internalID: 5930561107242825711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_20
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 44
+        width: 107
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 54d18d548b1d0bb00800000000000000
+      internalID: 842403719694261573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_21
+      rect:
+        serializedVersion: 2
+        x: 245
+        y: 48
+        width: 110
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f39e72242edc52f90800000000000000
+      internalID: -6978945675884500673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_22
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 51
+        width: 107
+        height: 227
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4f966c2ecdcd96e0800000000000000
+      internalID: -1829079588250673334
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_23
+      rect:
+        serializedVersion: 2
+        x: 610
+        y: 55
+        width: 102
+        height: 223
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e96d9db5d7ffdb970800000000000000
+      internalID: 8772448563064592030
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_24
+      rect:
+        serializedVersion: 2
+        x: 772
+        y: 57
+        width: 106
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 162b2f51cf0785b20800000000000000
+      internalID: 3123370569583735393
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_25
+      rect:
+        serializedVersion: 2
+        x: 1097
+        y: 56
+        width: 110
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2ee5b3731139bd20800000000000000
+      internalID: 3294718562013670955
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_26
+      rect:
+        serializedVersion: 2
+        x: 1285
+        y: 58
+        width: 110
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1ca47458089c20a0800000000000000
+      internalID: -6904976967121720293
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_27
+      rect:
+        serializedVersion: 2
+        x: 1477
+        y: 55
+        width: 111
+        height: 226
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2123569fc2e778c90800000000000000
+      internalID: -7167621550309035502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_28
+      rect:
+        serializedVersion: 2
+        x: 1659
+        y: 61
+        width: 111
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7bbe3144616a85260800000000000000
+      internalID: 7086596628229122999
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Sprites for Unity NEW (240x240)_29
+      rect:
+        serializedVersion: 2
+        x: 1839
+        y: 62
+        width: 110
+        height: 222
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 20f900235e29b8ff0800000000000000
+      internalID: -32771059191079166
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 1c274cb6f7329b646934e147f1bdeb06
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
